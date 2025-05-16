@@ -17,9 +17,10 @@ const ScrollUs = () => {
 
         <div className="flex flex-col items-center justify-center  text-white h-64 w-full rounded-md">
           <Instagram size={48} className="mt-10 text-[#E2B583]" />
-          <p className="text-center uppercase pt-1 font-opensans text-sm md:text-base font-semibold text-[#E2B583]">
-            @istanbulgrillculcheth
-          </p>
+          <p className="text-center uppercase pt-1 font-opensans text-xs md:text-sm font-semibold text-[#E2B583]">
+  @istanbulgrillculcheth
+</p>
+
         </div>
 
         <img
@@ -30,7 +31,7 @@ const ScrollUs = () => {
         <img
           src="/images/scroll-us/img4.png"
           alt="Image 4"
-          className="w-full h-68 object-cover rotate-10 "
+          className="w-full h-68 object-cover rotate-5 md:rotate-10 "
         />
       </div>
 

@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+.font-italiana {
+  font-family: var(--font-italiana);
+}
+
+.font-oswald {
+  font-family: var(--font-oswald); /* Fix: lowercase "o" to match font config */
+}
+
+.font-inter {
+  font-family: "Inter", sans-serif;
+}
+
+.font-manrope {
+  font-family: "Manrope", sans-serif;
+}
+
+.font-opensans {
+  font-family: "Open Sans", sans-serif;
+}
+
+.embla__slide {
+  flex: 0 0 auto;
+}

@@ -18,9 +18,8 @@ const ScrollUs = () => {
         <div className="flex flex-col items-center justify-center  text-white h-64 w-full rounded-md">
           <Instagram size={48} className="mt-10 text-[#E2B583]" />
           <p className="text-center uppercase pt-1 font-opensans text-xs md:text-sm font-semibold text-[#E2B583]">
-  @istanbulgrillculcheth
-</p>
-
+            @istanbulgrillculcheth
+          </p>
         </div>
 
         <img

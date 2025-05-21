@@ -20,15 +20,15 @@ const SignatureCard: React.FC<SignatureCardProps> = ({
         height={200}
           src={image}
           alt={title}
-          className="w-[320px] h-full object-cover object-center"
-          style={{ objectPosition: "center center" }}
+          className="w-[250px]  md:w-[320px] h-full object-cover object-center"
+          style={{ objectPosition: "center " }}
         />
       </div>
       {/* Price and Title */}
       {/* <div className="absolute top-12 -right-5 bg-yellow-600 text-black font-bold text-sm px-4 py-2 rounded-full shadow-lg">
         € {price}
       </div> */}
-      <h3 className="mt-2 font-serif text-xl font-playfair font-normal whitespace-pre-line">
+      <h3 className="mt-2 font-serif text-sm md:text-xl font-playfair font-normal whitespace-pre-line">
         {title}
       </h3>
     </div>

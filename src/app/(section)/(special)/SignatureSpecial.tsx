@@ -36,11 +36,6 @@ const specials = [
     title: "Garlic \nRibeye Steak",
     price: 35,
   },
-  {
-    image: "/images/signature-specials/steak1.png",
-    title: "Garlic \nLamb Chops",
-    price: 35,
-  },
 ];
 
 const SignatureSpecial = () => {
@@ -48,20 +43,29 @@ const SignatureSpecial = () => {
     loop: false,
     align: "start",
     slidesToScroll: 1,
+    containScroll: "trimSnaps",
   });
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const [visibleSlides, setVisibleSlides] = useState(1);
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const [centerIndex, setCenterIndex] = useState(0);
+
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
+
+  const centerOffset = Math.floor(visibleSlides / 2);
 
   useEffect(() => {
     const updateVisibleSlides = () => {
       const width = window.innerWidth;
       if (width < 640) setVisibleSlides(1);
       else if (width < 768) setVisibleSlides(2);
-      else setVisibleSlides(3);
+      else setVisibleSlides(2);
     };
 
-    updateVisibleSlides(); 
+    updateVisibleSlides();
     window.addEventListener("resize", updateVisibleSlides);
     return () => window.removeEventListener("resize", updateVisibleSlides);
   }, []);
@@ -73,16 +77,28 @@ const SignatureSpecial = () => {
     if (!emblaApi) return;
 
     const onSelect = () => {
-      setSelectedIndex(emblaApi.selectedScrollSnap());
+      const leftMostIndex = emblaApi.selectedScrollSnap();
+
+      let center = leftMostIndex + centerOffset;
+      if (center >= specials.length) center = specials.length - 1;
+      if (center < 0) center = 0;
+
+      setSelectedIndex(leftMostIndex);
+      setCenterIndex(center);
+
+      setPrevBtnEnabled(emblaApi.canScrollPrev());
+      setNextBtnEnabled(emblaApi.canScrollNext());
     };
 
     emblaApi.on("select", onSelect);
+
+    emblaApi.scrollTo(0);
+
     onSelect();
-  }, [emblaApi]);
-  const centerOffset = Math.floor(visibleSlides / 2);
+  }, [emblaApi, centerOffset]);
 
   return (
-    <section className="relative bg-[#121212]  text-gold py-16 px-4 overflow-hidden">
+    <section className="relative bg-[#121212] text-gold py-16 px-4 overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center opacity-50 z-0"
         style={{
@@ -96,21 +112,22 @@ const SignatureSpecial = () => {
       <div className="relative max-w-full mx-auto z-10">
         <h2 className="text-4xl font-serif tracking-wide uppercase text-left md:ml-32 font-normal font-italiana text-transparent bg-clip-text bg-gradient-to-b from-[#CFAC6A] to-[#191616]">
           LAYLA <br />
-          <span className=" font-italina text-transparent  bg-clip-text bg-gradient-to-b from-[#CFAC6A] to-[#191616]">
+          <span className="font-italina text-transparent bg-clip-text bg-gradient-to-b from-[#CFAC6A] to-[#191616]">
             SIGNATURE <br />
             SPECIALS
           </span>
         </h2>
 
-        <div className="overflow-hidden " ref={emblaRef}>
-          <div className="flex">
+        <div className="overflow-x-scroll scrollbar-hide" ref={emblaRef}>
+          <div className="embla__container flex">
             {specials.map((item, index) => {
-              const isActive = index === selectedIndex + centerOffset;
+              const isActive = index === centerIndex;
+
               const base =
                 "flex justify-center items-center transition-all duration-300 ease-in-out";
               const activeStyle = isActive
                 ? "scale-100 brightness-100"
-                : "scale-60 brightness-50 opacity-80 mt-5 sm:mt-8 md:mt-12 lg:mt-20 ";
+                : "scale-60 brightness-50 opacity-80 mt-5 sm:mt-8 md:mt-12 lg:mt-20";
 
               return (
                 <div
@@ -123,24 +140,33 @@ const SignatureSpecial = () => {
             })}
           </div>
         </div>
-        <div className="relative flex justify-end right-16  text-white px-4 md:px-32">
-          <span className="absolute text-gold text-lg md:right-3/12 bottom-5/12">
-            {Math.min(selectedIndex  +centerOffset, specials.length)}/
-            {specials.length}
+
+        <div className="relative flex justify-end right-16 text-white px-4 md:px-32">
+          <span className="absolute text-gold text-lg right-0.5 md:right-3/12 bottom-5/12">
+            {centerIndex + 1} / {specials.length}
           </span>
         </div>
 
         <div className="flex justify-center items-center gap-4 mt-8 text-white">
           <button
             onClick={scrollPrev}
-            className=" p-3 border-[1.5px] border-[#BC995D] rounded-full hover:bg-gold hover:text-black transition"
+            disabled={!prevBtnEnabled}
+            className={`p-3 border-[1.5px] border-[#BC995D] rounded-full transition ${
+              !prevBtnEnabled
+                ? "opacity-30 cursor-not-allowed"
+                : "hover:bg-gold hover:text-black"
+            }`}
           >
-            <ArrowLeft className="w-4 h-4 " />
+            <ArrowLeft className="w-4 h-4" />
           </button>
-
           <button
             onClick={scrollNext}
-            className=" border-[1.5px]   border-[#BC995D] p-3 rounded-full hover:bg-gold hover:text-black transition"
+            disabled={!nextBtnEnabled}
+            className={`p-3 border-[1.5px] border-[#BC995D] rounded-full transition ${
+              !nextBtnEnabled
+                ? "opacity-30 cursor-not-allowed"
+                : "hover:bg-gold hover:text-black"
+            }`}
           >
             <ArrowRight className="w-4 h-4" />
           </button>

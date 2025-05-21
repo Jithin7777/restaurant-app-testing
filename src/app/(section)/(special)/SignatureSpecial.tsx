@@ -47,11 +47,7 @@ const SignatureSpecial = () => {
   });
 
   const [visibleSlides, setVisibleSlides] = useState(1);
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
   const [centerIndex, setCenterIndex] = useState(0);
-
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
 
@@ -83,7 +79,6 @@ const SignatureSpecial = () => {
       if (center >= specials.length) center = specials.length - 1;
       if (center < 0) center = 0;
 
-      setSelectedIndex(leftMostIndex);
       setCenterIndex(center);
 
       setPrevBtnEnabled(emblaApi.canScrollPrev());

@@ -121,7 +121,7 @@ const SignatureSpecial = () => {
               const base =
                 "flex justify-center items-center transition-all duration-300 ease-in-out";
               const activeStyle = isActive
-                ? "scale-100 brightness-100"
+                ? "scale-85 brightness-100"
                 : "scale-60 brightness-50 opacity-80 mt-5 sm:mt-8 md:mt-12 lg:mt-20";
 
               return (

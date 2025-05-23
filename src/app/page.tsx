@@ -26,7 +26,7 @@ const page = () => (
       <Gallery />
       <ScrollUs />
       <Footer />
-      <div className="fixed bottom-10 right-10 hidden md:flex z-50">
+      <div className="fixed right-10 bottom-10 z-50 hidden md:flex">
         <ViewMenu />
       </div>
     </div>

@@ -11,9 +11,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full px-5 flex justify-between items-center bg-transparent fixed -top-10 left-0 z-50">
-      {/* Left Side - Logo or Brand Name */}
-      <div className="md:ml-20 relative w-40 h-40 md:w-60 md:h-60">
+    <nav className="fixed -top-10 left-0 z-50 flex w-full items-center justify-between bg-transparent px-5">
+      <div className="relative h-40 w-40 md:ml-20 md:h-60 md:w-60">
         <Image
           src="/images/nav/logo.png"
           alt="Logo"
@@ -24,7 +23,7 @@ const Navbar = () => {
       </div>
 
       {/* Right Side - Navigation Links + Button */}
-      <div className="hidden md:flex items-center gap-8 space-x-10">
+      <div className="hidden items-center gap-8 space-x-10 md:flex">
         <Link href="/" className="text-white">
           Home
         </Link>
@@ -37,16 +36,16 @@ const Navbar = () => {
         <Link href="/contact" className="text-white">
           Contact
         </Link>
-        <button className="bg-[#CDAE64] text-black rounded-none px-4 py-2 hover:opacity-90 md:mr-20">
+        <button className="rounded-none bg-[#CDAE64] px-4 py-2 text-black hover:opacity-90 md:mr-20">
           ORDER NOW
         </button>
       </div>
 
       {/* Mobile Menu Icon */}
-      <div className="md:hidden flex items-center">
+      <div className="flex items-center md:hidden">
         <button
           onClick={handleSidebarToggle}
-          className="text-white p-2 focus:outline-none"
+          className="p-2 text-white focus:outline-none"
           aria-label="Toggle menu"
           aria-expanded={isSidebarOpen}
         >
@@ -71,14 +70,14 @@ const Navbar = () => {
 
       {/* Sidebar (Right Side Menu) */}
       <div
-        className={`fixed top-0 right-0 w-64 h-full bg-black text-white transition-transform ${
-          isSidebarOpen ? "transform-none" : "transform translate-x-full"
+        className={`fixed top-0 right-0 h-full w-64 bg-black text-white transition-transform ${
+          isSidebarOpen ? "transform-none" : "translate-x-full transform"
         }`}
       >
         <div className="flex justify-end p-4">
           <button
             onClick={handleSidebarToggle}
-            className="text-white p-2"
+            className="p-2 text-white"
             aria-label="Close menu"
           >
             <svg
@@ -103,14 +102,16 @@ const Navbar = () => {
             <Link
               key={idx}
               href={path}
-              className="text-white py-2"
+              className="py-2 text-white"
               onClick={handleSidebarToggle}
             >
-              {path === "/" ? "Home" : path.replace("/", "").charAt(0).toUpperCase() + path.slice(2)}
+              {path === "/"
+                ? "Home"
+                : path.replace("/", "").charAt(0).toUpperCase() + path.slice(2)}
             </Link>
           ))}
           <button
-            className="bg-[#CDAE64] text-black rounded-none px-4 py-2 hover:opacity-90 mt-4"
+            className="mt-4 rounded-none bg-[#CDAE64] px-4 py-2 text-black hover:opacity-90"
             onClick={handleSidebarToggle}
           >
             ORDER NOW

@@ -2,31 +2,31 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <section className="px-4 md:px-10 text-black bg-black">
+    <section className="bg-black px-4 text-black md:px-10">
       <div>
-        <h2 className="text-4xl md:text-[80px]  font-oswald md:pl-36 font-light text-transparent bg-clip-text bg-gradient-to-b from-[#CCAD64] to-[#191616]">
+        <h2 className="font-oswald bg-gradient-to-b from-[#CCAD64] to-[#191616] bg-clip-text text-4xl font-light text-transparent md:pl-36 md:text-[80px]">
           About Us
         </h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-start">
+      <div className="grid grid-cols-1 items-start gap-0 md:grid-cols-2">
         <div className="mb-0 p-0">
-          <h1 className="mx-auto text-[130px] sm:text-[120px] md:text-[200px] lg:text-[300px] xl:text-[320px] font-normal font-italiana text-transparent bg-clip-text bg-gradient-to-b from-[#CCAD64] to-[#191616] ">
+          <h1 className="font-italiana mx-auto bg-gradient-to-b from-[#CCAD64] to-[#191616] bg-clip-text text-[130px] font-normal text-transparent sm:text-[120px] md:text-[200px] lg:text-[300px] xl:text-[320px]">
             Layla
           </h1>
         </div>
 
-        <div className="flex items-start justify-start mb-24 p-0">
+        <div className="mb-24 flex items-start justify-start p-0">
           <img
             src="/images/about-us/img.png"
             alt="About us"
-            className="w-full max-h-[350px] object-cover rounded-lg shadow-lg"
+            className="max-h-[350px] w-full rounded-lg object-cover shadow-lg"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start ">
+      <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-3">
         <div className="">
-          <p className="text-sm leading-[20px] tracking-[0px] font-inter font-light text-[#7E6C53] max-w-lg align-middle ">
+          <p className="font-inter max-w-lg align-middle text-sm leading-[20px] font-light tracking-[0px] text-[#7E6C53]">
             At Layla, our menu is a heartfelt tribute to the rich culinary
             traditions of Lebanon and Syria. Every dish is crafted with
             authenticity, care, and a deep passion for Middle Eastern flavors.
@@ -38,14 +38,14 @@ const AboutUs = () => {
           </p>
         </div>
 
-        <div className="flex justify-start items-center max-w-sm">
+        <div className="flex max-w-sm items-center justify-start">
           <div>
-            <p className=" text-[#7E6C53] leading-[20px]  text-sm align-middle font-inter font-light max-w-lg">
+            <p className="font-inter max-w-lg align-middle text-sm leading-[20px] font-light text-[#7E6C53]">
               From aromatic spices to timeless recipes, every bite captures the
               spirit of our homeland. Come, savor the journey with us at Layla,
               where tradition and flavor come together in every dish.
             </p>
-            <button className="mt-4 text-black uppercase bg-[#CCAD64]  py-2 px-4 text-sm rounded-md hover:bg-[#191616] transition">
+            <button className="mt-4 rounded-md bg-[#CCAD64] px-4 py-2 text-sm text-black uppercase transition hover:bg-[#191616]">
               order now
             </button>
           </div>

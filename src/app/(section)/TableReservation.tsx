@@ -4,22 +4,22 @@ import Image from "next/image";
 
 const TableReservation = () => {
   return (
-    <section className="flex flex-col md:flex-row items-center justify-between bg-black px-4 py-10 md:py-16 gap-10">
-<div className="w-full md:w-1/2 flex justify-center relative h-[350px] sm:h-[400px] md:h-[500px]">
-  <Image
-    src="/images/table-booking/img.png"
-    alt="Table Reservation"
-    className="object-cover"
-    fill
-    sizes="(max-width: 768px) 80vw, 90vw"
-    priority
-  />
-</div>
-      <div className="w-full md:w-1/2 text-center md:text-left md:pl-10 px-2">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl uppercase text-transparent font-oswald font-light mb-4 bg-clip-text bg-gradient-to-b from-[#FFCA4E] to-[#191616]">
+    <section className="flex flex-col items-center justify-between gap-10 bg-black px-4 py-10 md:flex-row md:py-16">
+      <div className="relative flex h-[350px] w-full justify-center sm:h-[400px] md:h-[500px] md:w-1/2">
+        <Image
+          src="/images/table-booking/img.png"
+          alt="Table Reservation"
+          className="object-cover"
+          fill
+          sizes="(max-width: 768px) 80vw, 90vw"
+          priority
+        />
+      </div>
+      <div className="w-full px-2 text-center md:w-1/2 md:pl-10 md:text-left">
+        <h2 className="font-oswald mb-4 bg-gradient-to-b from-[#FFCA4E] to-[#191616] bg-clip-text text-3xl font-light text-transparent uppercase sm:text-4xl md:text-5xl">
           Reserve Table
         </h2>
-        <p className="font-manrope text-[#7E6C53] text-[16px] sm:text-[18px] font-light leading-[1.6] tracking-[0.03em] mb-6 max-w-[90%] mx-auto md:mx-0">
+        <p className="font-manrope mx-auto mb-6 max-w-[90%] text-[16px] leading-[1.6] font-light tracking-[0.03em] text-[#7E6C53] sm:text-[18px] md:mx-0">
           At Layla, our private and group dining options create an intimate
           setting perfect for any occasion, from joyous celebrations to
           meaningful business gatherings. Each space is thoughtfully designed to
@@ -32,10 +32,10 @@ const TableReservation = () => {
         <div className="flex justify-center md:justify-start">
           <button
             style={{ border: "1px solid #D5A859" }}
-            className="bg-gold uppercase text-white px-6 py-3 flex items-center gap-2 hover:bg-yellow-600 transition"
+            className="bg-gold flex items-center gap-2 px-6 py-3 text-white uppercase transition hover:bg-yellow-600"
           >
             Book Now
-            <ArrowRightIcon className="w-5 h-5 text-white" />
+            <ArrowRightIcon className="h-5 w-5 text-white" />
           </button>
         </div>
       </div>

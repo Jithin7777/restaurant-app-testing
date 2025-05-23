@@ -4,43 +4,43 @@ import Image from "next/image";
 
 const Reviews = () => {
   return (
-    <section className="relative bg-black py-16 px-4 md:px-12 overflow-hidden">
+    <section className="relative overflow-hidden bg-black px-4 py-16 md:px-12">
       <div
-        className="absolute left-0 top-0 h-full w-1/3 bg-cover bg-center z-0 rotate-180"
+        className="absolute top-0 left-0 z-0 h-full w-1/3 rotate-180 bg-cover bg-center"
         style={{ backgroundImage: `url('/images/reviews/bg.png')` }}
       ></div>
 
-      <h2 className="relative z-10 text-4xl text-center uppercase font-oswald font-light text-transparent bg-clip-text bg-gradient-to-b from-[#FFCA4E] to-[#191616] mb-20">
+      <h2 className="font-oswald relative z-10 mb-20 bg-gradient-to-b from-[#FFCA4E] to-[#191616] bg-clip-text text-center text-4xl font-light text-transparent uppercase">
         Reviews
       </h2>
 
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-20">
+      <div className="relative z-10 grid grid-cols-1 gap-20 sm:grid-cols-2 md:grid-cols-3">
         {/* Review 1 */}
-        <div className="border bg-black border-[#BC995D] shadow-md p-6 text-white h-[350px]">
-          <div className="flex items-center gap-4 mb-4">
+        <div className="h-[350px] border border-[#BC995D] bg-black p-6 text-white shadow-md">
+          <div className="mb-4 flex items-center gap-4">
             <Image
               src="/images/reviews/user.jpg"
               alt="User 1"
               width={48}
               height={48}
-              className="w-12 h-12 rounded-full object-cover"
+              className="h-12 w-12 rounded-full object-cover"
             />
             <div>
-              <h4 className="text-lg font-normal font-manrope text-[#CDAE64]">
+              <h4 className="font-manrope text-lg font-normal text-[#CDAE64]">
                 Ida Larsson
               </h4>
-              <p className="text-xs text-[#CDAE64] font-normal font-manrope">
+              <p className="font-manrope text-xs font-normal text-[#CDAE64]">
                 One day ago
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 text-[#CDAE64] mb-4 mt-10">
+          <div className="mt-10 mb-4 flex items-center gap-3 text-[#CDAE64]">
             {[...Array(5)].map((_, index) => (
-              <Star key={index} className="w-4 h-4 fill-yellow-500" />
+              <Star key={index} className="h-4 w-4 fill-yellow-500" />
             ))}
           </div>
-          <p className="text-sm text-[#CDAE64] max-w-82 font-inter font-normal">
+          <p className="font-inter max-w-82 text-sm font-normal text-[#CDAE64]">
             The food here is fantastic! I had the chicken doner, which was
             packed with flavor and came in a generous portion. My friends loved
             the mixed meat platter and lamb chop as well. The mocktails,
@@ -50,30 +50,30 @@ const Reviews = () => {
         </div>
 
         {/* Review 2 */}
-        <div className="border bg-black border-[#BC995D] shadow-md p-6 text-white">
-          <div className="flex items-center gap-4 mb-4">
+        <div className="border border-[#BC995D] bg-black p-6 text-white shadow-md">
+          <div className="mb-4 flex items-center gap-4">
             <Image
               src="/images/reviews/user.jpg"
               alt="User 2"
               width={48}
               height={48}
-              className="w-12 h-12 rounded-full object-cover"
+              className="h-12 w-12 rounded-full object-cover"
             />
             <div>
-              <h4 className="text-lg font-normal font-manrope text-[#CDAE64]">
+              <h4 className="font-manrope text-lg font-normal text-[#CDAE64]">
                 Ida Larsson
               </h4>
-              <p className="text-xs font-normal font-manrope text-[#CDAE64]">
+              <p className="font-manrope text-xs font-normal text-[#CDAE64]">
                 One day ago
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3 text-[#CDAE64] mb-4 mt-10">
+          <div className="mt-10 mb-4 flex items-center gap-3 text-[#CDAE64]">
             {[...Array(5)].map((_, index) => (
-              <Star key={index} className="w-4 h-4 fill-yellow-500" />
+              <Star key={index} className="h-4 w-4 fill-yellow-500" />
             ))}
           </div>
-          <p className="text-sm text-[#CDAE64] max-w-82 font-inter font-normal">
+          <p className="font-inter max-w-82 text-sm font-normal text-[#CDAE64]">
             Amazing restaurant if you&apos;re craving something interesting. The
             atmosphere is great with lots of lighting and plants. Food was
             really delicious and the drinks were spot on! I will definitely come
@@ -82,30 +82,30 @@ const Reviews = () => {
         </div>
 
         {/* Review 3 */}
-        <div className="border border-[#BC995D] bg-black shadow-md p-6 text-white">
-          <div className="flex items-center gap-4 mb-4">
+        <div className="border border-[#BC995D] bg-black p-6 text-white shadow-md">
+          <div className="mb-4 flex items-center gap-4">
             <Image
               src="/images/reviews/user.jpg"
               alt="User 3"
               width={48}
               height={48}
-              className="w-12 h-12 rounded-full object-cover"
+              className="h-12 w-12 rounded-full object-cover"
             />
             <div>
-              <h4 className="text-lg font-normal font-manrope text-[#CDAE64]">
+              <h4 className="font-manrope text-lg font-normal text-[#CDAE64]">
                 Ida Larsson
               </h4>
-              <p className="text-xs font-normal font-manrope  text-[#CDAE64]">
+              <p className="font-manrope text-xs font-normal text-[#CDAE64]">
                 One day ago
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3 text-[#CDAE64] mb-4 mt-10">
+          <div className="mt-10 mb-4 flex items-center gap-3 text-[#CDAE64]">
             {[...Array(5)].map((_, index) => (
-              <Star key={index} className="w-4 h-4 fill-yellow-500 " />
+              <Star key={index} className="h-4 w-4 fill-yellow-500" />
             ))}
           </div>
-          <p className="text-sm text-[#CDAE64] max-w-82 font-inter font-normal">
+          <p className="font-inter max-w-82 text-sm font-normal text-[#CDAE64]">
             Tasty food, lovely staff, lovely atmosphere, and considering how
             busy it was, the service was still extremely fast! Had a couple of
             sauce refills and bread with no extra charge, and free Turkish tea

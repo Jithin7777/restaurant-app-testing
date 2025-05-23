@@ -95,7 +95,7 @@ const SignatureSpecial = () => {
   return (
     <section className="relative bg-[#121212] text-gold py-16 px-4 overflow-hidden">
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-50 z-0"
+        className="absolute inset-0  bg-cover bg-center opacity-50 z-0"
         style={{
           backgroundImage: "url('/images/signature-specials/bg.png')",
           backgroundSize: "contain",

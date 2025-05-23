@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Italiana, Manrope, Open_Sans, Oswald } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Inter,
+  Italiana,
+  Manrope,
+  Open_Sans,
+  Oswald,
+} from "next/font/google";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -7,8 +15,6 @@ const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
 });
-
-
 
 const italiana = Italiana({
   weight: "400",
@@ -34,8 +40,6 @@ const openSans = Open_Sans({
   variable: "--font-open-sans",
 });
 
-
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -59,7 +63,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${italiana.variable} ${manrope.variable}   ${oswald.variable} ${inter.variable} ${openSans.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${italiana.variable} ${manrope.variable} ${oswald.variable} ${inter.variable} ${openSans.variable} antialiased`}
       >
         {children}
       </body>

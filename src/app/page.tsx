@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 import Hero from "./(section)/Hero";
 import ExploreMenu from "./(section)/ExploreMenu";
 import AboutUs from "./(section)/AboutUs";
@@ -9,8 +9,8 @@ import TableReservation from "./(section)/TableReservation";
 import Reviews from "./(section)/Reviews";
 import Gallery from "./(section)/Gallery";
 import ScrollUs from "./(section)/ScrollUs";
-import Footer from "./components/Footer";
-import ViewMenu from "./components/floating-buttons/ViewMenu";
+import Footer from "../components/Footer";
+import ViewMenu from "../components/floating-buttons/ViewMenu";
 
 const page = () => (
   <main>

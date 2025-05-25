@@ -2,17 +2,25 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
+import { ShoppingCart } from "lucide-react";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const pathname = usePathname();
 
   const handleSidebarToggle = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  // Decide text color based on pathname
+  const isMenuPage = pathname === "/menu";
+  const textColor = isMenuPage ? "text-black" : "text-white";
+
   return (
     <nav className="fixed -top-10 left-0 z-50 flex w-full items-center justify-between bg-transparent px-5">
-      <div className="relative h-40 w-40 md:ml-20 md:h-60 md:w-60">
+      {/* Logo */}
+<div className={`relative ${isMenuPage ? "h-40 w-40 md:h-44 md:w-44" : "h-40 w-40 md:h-60 md:w-60"} md:ml-20`}>
         <Image
           src="/images/nav/logo.png"
           alt="Logo"
@@ -22,20 +30,28 @@ const Navbar = () => {
         />
       </div>
 
-      {/* Right Side - Navigation Links + Button */}
+      {/* Desktop Nav Links */}
       <div className="hidden items-center gap-8 space-x-10 md:flex">
-        <Link href="/" className="text-white">
+        <Link href="/" className={textColor}>
           Home
         </Link>
-        <Link href="/menu" className="text-white">
+        <Link href="/menu" className={textColor}>
           Menu
         </Link>
-        <Link href="/about" className="text-white">
+        <Link href="/about" className={textColor}>
           About
         </Link>
-        <Link href="/contact" className="text-white">
+        <Link href="/contact" className={textColor}>
           Contact
         </Link>
+
+        {/* Cart Icon only on /menu */}
+        {isMenuPage && (
+          <Link href="/cart" className={`${textColor} hover:text-[#CDAE64]`}>
+            <ShoppingCart className="h-6 w-6" />
+          </Link>
+        )}
+
         <button className="rounded-none bg-[#CDAE64] px-4 py-2 text-black hover:opacity-90 md:mr-20">
           ORDER NOW
         </button>
@@ -45,7 +61,7 @@ const Navbar = () => {
       <div className="flex items-center md:hidden">
         <button
           onClick={handleSidebarToggle}
-          className="p-2 text-white focus:outline-none"
+          className={`p-2 ${textColor} focus:outline-none`}
           aria-label="Toggle menu"
           aria-expanded={isSidebarOpen}
         >
@@ -68,7 +84,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Sidebar (Right Side Menu) */}
+      {/* Mobile Sidebar */}
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-black text-white transition-transform ${
           isSidebarOpen ? "transform-none" : "translate-x-full transform"
@@ -97,6 +113,7 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
+
         <div className="flex flex-col items-center py-3">
           {["/", "/menu", "/about", "/contact"].map((path, idx) => (
             <Link
@@ -107,9 +124,23 @@ const Navbar = () => {
             >
               {path === "/"
                 ? "Home"
-                : path.replace("/", "").charAt(0).toUpperCase() + path.slice(2)}
+                : path.replace("/", "").charAt(0).toUpperCase() +
+                  path.slice(2)}
             </Link>
           ))}
+
+          {/* Cart Icon in Mobile Sidebar (Only on /menu) */}
+          {isMenuPage && (
+            <Link
+              href="/cart"
+              className="py-2 text-white flex items-center gap-2"
+              onClick={handleSidebarToggle}
+            >
+              <ShoppingCart className="h-5 w-5" />
+              Cart
+            </Link>
+          )}
+
           <button
             className="mt-4 rounded-none bg-[#CDAE64] px-4 py-2 text-black hover:opacity-90"
             onClick={handleSidebarToggle}

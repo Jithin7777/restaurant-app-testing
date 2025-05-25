@@ -12,7 +12,7 @@ html, body {
 }
 
 .font-oswald {
-  font-family: var(--font-oswald); /* Fix: lowercase "o" to match font config */
+  font-family: var(--font-oswald); 
 }
 
 .font-inter {
@@ -51,6 +51,17 @@ html, body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* menu */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+
 
 /* @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

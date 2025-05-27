@@ -44,13 +44,6 @@ html, body {
   padding-left: 10px;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
 
 /* menu */
 .hide-scrollbar::-webkit-scrollbar {

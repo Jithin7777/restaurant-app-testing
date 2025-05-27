@@ -25,18 +25,18 @@ const PickupDeliveryInfo = () => {
       </Tabs>
 
       {/* Desktop / Tablet Layout */}
-      <div className="border-muted boder-[rgb(214 214 214)] hidden w-full flex-row gap-8 rounded-xl border p-4 md:flex">
+      <div className="border-muted boder-[rgb(214 214 214)] hidden w-full flex-row gap-8 rounded-xl border border-gray-400 p-4 md:flex">
         {/* Map Image */}
-<div className="rounded-mercury-ui-md h-[166px] w-[256px] shrink-0 overflow-hidden">
-      <Image
-        src="https://static-maps.ordersave.com/?styleKey=202504&width=256&height=166&zoomLevel=14.5&lat=36.0218229&lon=-115.0486843&w=640&q=80"
-        alt="Metro Pizza - Green Valley map"
-        width={256}
-        height={166}
-        className="h-full w-full object-cover"
-        priority={false} // or true if you want it loaded early
-      />
-    </div>
+        <div className="rounded-mercury-ui-md h-[166px] w-[256px] shrink-0 overflow-hidden">
+          <Image
+            src="https://static-maps.ordersave.com/?styleKey=202504&width=256&height=166&zoomLevel=14.5&lat=36.0218229&lon=-115.0486843&w=640&q=80"
+            alt="Metro Pizza - Green Valley map"
+            width={256}
+            height={166}
+            className="h-full w-full object-cover"
+            priority={false} // or true if you want it loaded early
+          />
+        </div>
         {/* Pickup Details */}
         <div className="flex w-full flex-col justify-between">
           <div className="font-opensans flex flex-col">

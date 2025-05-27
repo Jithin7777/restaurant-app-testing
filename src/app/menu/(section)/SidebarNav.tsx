@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import React, { useState, ChangeEvent, FC } from "react";
 
-const categories: string[] = [
+const categories = [
   "Popular",
   "Appetizers",
   "Salads",
@@ -22,11 +22,11 @@ const categories: string[] = [
 ];
 
 const SidebarNav: FC = () => {
-  const [search, setSearch] = useState<string>("");
-  const [activeCategory, setActiveCategory] = useState<string>("Popular");
+  const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState("Popular");
 
-  const filteredCategories = categories.filter((cat) =>
-    cat.toLowerCase().includes(search.toLowerCase()),
+  const filteredCategories = categories.filter(cat =>
+    cat.toLowerCase().includes(search.toLowerCase())
   );
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,24 +34,21 @@ const SidebarNav: FC = () => {
   };
 
   return (
-    <div className="font-inter sticky top-[112px] z-20 w-full pl-4 font-light md:pl-10 xl:h-[calc(100vh-112px)] xl:w-auto xl:bg-transparent xl:px-0 xl:pt-4">
-      <nav
-        aria-label="Category Navigation"
-        className="flex h-full w-full flex-col gap-y-3"
-      >
-        <div className="sticky top-5 z-10 md:top-0">
-          <div className="relative flex justify-center p-2">
+    <div className="font-inter sticky top-[112px] z-20 w-full pl-4 font-light md:pl-10 lg:w-auto lg:bg-transparent lg:px-0 lg:pt-4">
+      <nav className="flex h-full w-full flex-col gap-y-3">
+        {/* Search Input */}
+        <div className="sticky  z-10 bg-white md:top-0">
+          <div className="relative flex justify-center">
             <input
               type="text"
               placeholder="Search"
-              aria-label="Search"
               value={search}
               onChange={handleSearchChange}
               className="w-full max-w-md rounded-xl border border-gray-300 p-2 pl-10 focus:ring-2 focus:outline-none"
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="pointer-events-none absolute top-4 left-5 h-5 w-5 text-gray-400"
+              className="pointer-events-none absolute top-2.5 left-3 h-5 w-5 text-gray-400"
               fill="currentColor"
               viewBox="0 0 256 256"
             >
@@ -60,65 +57,32 @@ const SidebarNav: FC = () => {
           </div>
         </div>
 
-        {/* Scrollable Category List */}
-        <div className="hide-scrollbar mt-5 flex-1 overflow-y-auto md:mt-0 xl:pr-2">
-          {/* Mobile - Horizontal Scroll */}
-          <div className="hide-scrollbar block overflow-x-auto pb-4 md:hidden">
-            <ul className="hide-scrollbar flex w-max gap-x-2 px-2 text-[#4D4D4D]">
-              {filteredCategories.length > 0 ? (
-                filteredCategories.map((category) => (
-                  <li key={category} className="flex-shrink-0">
-                    <Button
-                      variant="ghost"
-                      className={`rounded-xl p-2 whitespace-nowrap transition-colors duration-200 ${
-                        category === activeCategory
-                          ? "bg-gray-200 font-bold text-black"
-                          : "hover:border hover:border-gray-400"
-                      }`}
-                      onClick={() => setActiveCategory(category)}
-                      title={category}
-                    >
-                      {category}
-                      {category === activeCategory && (
-                        <span className="sr-only">Current Category</span>
-                      )}
-                    </Button>
-                  </li>
-                ))
-              ) : (
-                <li className="p-2 text-gray-500">No categories found.</li>
-              )}
-            </ul>
-          </div>
-
-          {/* Desktop - Vertical Scroll */}
-          <div className="hide-scrollbar hidden md:block">
-            <ul className="hide-scrollbar flex flex-col gap-y-2 px-2 text-[#4D4D4D]">
-              {filteredCategories.length > 0 ? (
-                filteredCategories.map((category) => (
-                  <li key={category} className="w-full">
-                    <Button
-                      variant="ghost"
-                      className={`w-full justify-start truncate rounded-xl p-2 text-left transition-colors duration-200 ${
-                        category === activeCategory
-                          ? "bg-gray-200 font-bold text-black"
-                          : "hover:border hover:border-gray-400"
-                      }`}
-                      onClick={() => setActiveCategory(category)}
-                      title={category}
-                    >
-                      {category}
-                      {category === activeCategory && (
-                        <span className="sr-only">Current Category</span>
-                      )}
-                    </Button>
-                  </li>
-                ))
-              ) : (
-                <li className="p-2 text-gray-500">No categories found.</li>
-              )}
-            </ul>
-          </div>
+        {/* Category List */}
+        <div
+          className={`
+            flex gap-2 overflow-x-auto px-2 pb-2 hide-scrollbar
+            md:overflow-x-auto md:whitespace-nowrap
+            lg:flex-col lg:overflow-y-auto lg:px-0
+          `}
+        >
+          {filteredCategories.length > 0 ? (
+            filteredCategories.map((category) => (
+              <Button
+                key={category}
+                variant="ghost"
+                className={`
+                  flex-shrink-0 whitespace-nowrap rounded-xl px-4 py-2 text-sm
+                  ${activeCategory === category ? "bg-gray-200 font-semibold text-black" : "hover:border hover:border-gray-400"}
+                  lg:w-full lg:justify-start
+                `}
+                onClick={() => setActiveCategory(category)}
+              >
+                {category}
+              </Button>
+            ))
+          ) : (
+            <div className="p-2 text-gray-500">No categories found.</div>
+          )}
         </div>
       </nav>
     </div>

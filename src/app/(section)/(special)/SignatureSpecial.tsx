@@ -113,7 +113,7 @@ const SignatureSpecial = () => {
           </span>
         </h2>
 
-        <div className="overflow-x-scroll scrollbar-hide" ref={emblaRef}>
+        <div className="overflow-x-scroll hide-scrollbar" ref={emblaRef}>
           <div className="embla__container flex">
             {specials.map((item, index) => {
               const isActive = index === centerIndex;

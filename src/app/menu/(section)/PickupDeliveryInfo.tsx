@@ -10,7 +10,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
 
 const PickupDeliveryInfo = () => {
   const [selectedTab, setSelectedTab] = useState("pickup");
@@ -186,20 +185,16 @@ const PickupDeliveryInfo = () => {
         </DialogContent>
       </Dialog>
 
-<div className="flex w-full gap-8 rounded-mercury-ui-sm border border-mercury-ui-divider p-4">
+<div className="flex w-full gap-8 rounded-xl border border-gray-400 p-4">
   {/* Map Image - visible on md and up */}
   <div className="bg-transparent overflow-clip rounded-mercury-ui-md relative hidden h-[166px] w-[256px] shrink-0 md:block">
-    <img
-      alt="Metro Pizza - Green Valley map"
-      loading="lazy"
-      width="256"
-      height="166"
-      decoding="async"
-      srcSet="https://static-maps.ordersave.com/?styleKey=202504&width=256&height=166&zoomLevel=14.5&lat=36.0218229&lon=-115.0486843&w=256&q=80 1x, https://static-maps.ordersave.com/?styleKey=202504&width=256&height=166&zoomLevel=14.5&lat=36.0218229&lon=-115.0486843&w=640&q=80 2x"
-      src="https://static-maps.ordersave.com/?styleKey=202504&width=256&height=166&zoomLevel=14.5&lat=36.0218229&lon=-115.0486843&w=640&q=80"
-      style={{ color: "transparent", maxWidth: "100%" }}
-    />
-  </div>
+<Image
+  alt="Metro Pizza - Green Valley map"
+  src="https://static-maps.ordersave.com/?styleKey=202504&width=256&height=166&zoomLevel=14.5&lat=36.0218229&lon=-115.0486843&w=640&q=80"
+  width={256}
+  height={166}
+  className="object-cover w-full h-full"
+/>  </div>
 
   {/* Address and Time Info */}
   <div className="flex w-full">

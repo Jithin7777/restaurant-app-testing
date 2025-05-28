@@ -40,7 +40,7 @@ const items = [
 
 const CardList = () => {
   return (
-    <div id="appetizers"  className="grid grid-cols-1 gap-4 p-4 lg:grid-cols-2">
+    <div id="appetizers"  className="grid grid-cols-1 gap-4 p-4 xl:p-0 lg:grid-cols-2">
       <div className="lg:col-span-2">
         <h2 className="text-xl font-semibold md:text-2xl lg:text-3xl">
           Appetizers

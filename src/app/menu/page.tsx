@@ -21,23 +21,25 @@ const Page = () => {
         </div>
 
         {/* Responsive Desktop Sidebar */}
-        <div className={`
-          hide-scrollbar fixed hidden h-[calc(100dvh-4rem)] overflow-y-auto
-          md:block md:top-20
-          md:w-full md:h-auto md:border-b md:bg-gray-50
-          lg:w-72 lg:h-[calc(100dvh-4rem)] lg:border-b-0 lg:bg-transparent
-        `}>
-          <div className="p-4">
-            <SidebarNav />
-          </div>
-        </div>
+{/* Responsive Desktop Sidebar */}
+<div
+  className={`
+    hide-scrollbar hidden md:block
+    w-full overflow-x-auto 
+    lg:w-72 lg:h-[calc(100dvh-4rem)] lg:border-b-0  lg:overflow-y-auto lg:fixed lg:top-20
+  `}
+>
+  <div className="flex md:flex-row lg:flex-col p-4 w-max lg:w-auto">
+    <SidebarNav />
+  </div>
+</div>
 
         {/* Main Content */}
         <div className={`
           hide-scrollbar mt-8 flex-1 overflow-x-hidden
           md:mt-72
           
-          lg:ml-72 lg:mt-0
+          lg:ml-72  lg:mt-0
         `}>
           <div className="mx-auto max-w-5xl  py-6 md:pt-8">
             <PickupDeliveryInfo />

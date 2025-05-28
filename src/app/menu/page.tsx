@@ -3,7 +3,6 @@ import React from "react";
 import SidebarNav from "./(section)/SidebarNav";
 import PickupDeliveryInfo from "./(section)/PickupDeliveryInfo";
 import Menu from "./(section)/Menu";
-import CardList from "./(section)/CardList";
 
 const Page = () => {
   return (

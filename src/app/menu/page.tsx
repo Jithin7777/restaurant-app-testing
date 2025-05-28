@@ -3,6 +3,7 @@ import React from "react";
 import SidebarNav from "./(section)/SidebarNav";
 import PickupDeliveryInfo from "./(section)/PickupDeliveryInfo";
 import Menu from "./(section)/Menu";
+import CardList from "./(section)/CardList";
 
 const Page = () => {
   return (
@@ -35,13 +36,17 @@ const Page = () => {
         {/* Main Content */}
         <div className={`
           hide-scrollbar mt-8 flex-1 overflow-x-hidden
-          md:mt-16
+          md:mt-72
+          
           lg:ml-72 lg:mt-0
         `}>
-          <div className="mx-auto max-w-5xl px-4 py-6 md:pt-8">
+          <div className="mx-auto max-w-5xl  py-6 md:pt-8">
             <PickupDeliveryInfo />
             <Menu />
+                       
+
           </div>
+          
         </div>
       </div>
     </div>

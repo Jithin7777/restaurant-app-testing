@@ -5,10 +5,10 @@ import Image from "next/image";
 
 const PickupDeliveryInfo = () => {
   return (
-    <div className="flex flex-col gap-4 px-4 sm:px-6 md:px-10 xl:px-0">
+    <div className="flex flex-col gap-4 px-4 sm:px-6 md:px-10 xl:px-0 ">
       {/* Pickup / Delivery Toggle */}
       <Tabs defaultValue="pickup" className="">
-        <TabsList className="bg-muted flex w-full max-w-60 gap-1 rounded-xl bg-[rgb(235,235,236)] p-1 py-6">
+        <TabsList className="bg-muted flex w-full max-w-60   gap-1 rounded-xl bg-[rgb(235,235,236)] p-1 py-6">
           <TabsTrigger
             value="pickup"
             className="flex-1 py-5 text-lg data-[state=active]:bg-white data-[state=active]:text-black data-[state=inactive]:bg-transparent"

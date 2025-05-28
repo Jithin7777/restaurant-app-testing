@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, Plus } from "lucide-react";
+import CardList from "./CardList";
 
 const menuItems = [
   {
@@ -34,7 +35,7 @@ const menuItems = [
 
 const PopularMenu = () => {
   return (
-    <section className="mt-10 flex flex-col gap-10">
+    <section id='popular' className="mt-10 flex flex-col gap-10">
       <div className="flex items-center justify-between gap-3 px-4 md:px-10 xl:px-0">
         <h2 className="text-primary text-xl font-semibold md:text-2xl lg:text-3xl">
           Popular
@@ -42,7 +43,7 @@ const PopularMenu = () => {
       </div>
 
       {/* Scrollable Menu */}
-      <div className="hide-scrollbar flex snap-x snap-mandatory scroll-ps-4 gap-4 overflow-x-auto scroll-smooth px-4 md:scroll-ps-10 md:px-10 xl:w-[980px] xl:px-0">
+      <div className="hide-scrollbar flex snap-x snap-mandatory scroll-ps-4 gap-4 overflow-x-auto scroll-smooth px-4 md:scroll-ps-10 md:px-10  xl:px-0">
         {menuItems.map((item) => (
           <Link
             key={item.id}
@@ -58,8 +59,8 @@ const PopularMenu = () => {
                 className="object-cover"
               />
               <div className="absolute right-2 bottom-2 z-10">
-                <Button size="icon" className="rounded-full">
-                  <Plus className="h-4 w-4" />
+                <Button size="icon" className="rounded-xl h-10 w-10 bg-white p-2">
+                  <Plus className="h-5 w-5" />
                 </Button>
               </div>
             </Card>
@@ -73,6 +74,9 @@ const PopularMenu = () => {
             </CardContent>
           </Link>
         ))}
+      </div>
+      <div className="">
+        <CardList/>
       </div>
     </section>
   );

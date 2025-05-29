@@ -20,7 +20,6 @@ const Page = () => {
         </div>
 
         {/* Responsive Desktop Sidebar */}
-        {/* Responsive Desktop Sidebar */}
         <div
           className={`hide-scrollbar hidden w-full overflow-x-auto md:block lg:fixed lg:top-20 lg:h-[calc(100dvh-4rem)] lg:w-72 lg:overflow-y-auto lg:border-b-0`}
         >

@@ -185,157 +185,162 @@ const PickupDeliveryInfo = () => {
         </DialogContent>
       </Dialog>
 
-<div className="flex w-full gap-8 rounded-xl border border-gray-400 p-4">
-  {/* Map Image - visible on md and up */}
-  <div className="bg-transparent overflow-clip rounded-mercury-ui-md relative hidden h-[166px] w-[256px] shrink-0 md:block">
-<Image
-  alt="Metro Pizza - Green Valley map"
-  src="https://static-maps.ordersave.com/?styleKey=202504&width=256&height=166&zoomLevel=14.5&lat=36.0218229&lon=-115.0486843&w=640&q=80"
-  width={256}
-  height={166}
-  className="object-cover w-full h-full"
-/>  </div>
-
-  {/* Address and Time Info */}
-  <div className="flex w-full">
-    {/* Desktop View */}
-    <div className=" hidden w-full md:flex">
-      <div className="flex flex-col justify-between">
-        <div className="flex flex-col">
-          <div className="flex items-center gap-2">
-            <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
-              Pickup address
-            </p>
-            <span className="text-mercury-ui-text-primary">·</span>
-            <button className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-b border-mercury-ui-text-primary p-0">
-              Change
-            </button>
-          </div>
-          <h4 className="text-mercury-ui-title-lg md:text-mercury-ui-title-xl lg:text-mercury-ui-title-2xl text-mercury-ui-primary font-mercury-ui-primary hidden md:block">
-            1420 W Horizon Ridge Pkwy
-          </h4>
-          <p className="text-mercury-ui-text-base text-mercury-ui-secondary font-mercury-ui-secondary">
-            Metro Pizza - Green Valley
-          </p>
+      <div className="flex w-full gap-8 rounded-xl border border-gray-400 p-4">
+        {/* Map Image - visible on md and up */}
+        <div className="rounded-mercury-ui-md relative hidden h-[166px] w-[256px] shrink-0 overflow-clip bg-transparent md:block">
+          <Image
+            alt="Metro Pizza - Green Valley map"
+            src="https://static-maps.ordersave.com/?styleKey=202504&width=256&height=166&zoomLevel=14.5&lat=36.0218229&lon=-115.0486843&w=640&q=80"
+            width={256}
+            height={166}
+            className="h-full w-full object-cover"
+          />{" "}
         </div>
-        <div className="flex">
-          <div className="flex flex-col border-r pr-4">
-            <p className="text-mercury-ui-text-base text-mercury-ui-primary font-bold font-mercury-ui-secondary">
-              Pickup time
-            </p>
-            <div className="flex gap-1">
-              <div className="flex items-center gap-1">
-                <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
-                  May 30
-                </span>
-                <span className="text-mercury-ui-text-primary">·</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
-                  12:00 PM PDT
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="flex pl-4">
-            <div className="flex flex-col border-t pt-4 md:border-t-0 md:pt-0">
-              <div className="flex">
-                <p className="text-mercury-ui-text-base text-mercury-ui-primary font-bold font-mercury-ui-secondary hidden md:block">
-                  Closed
-                </p>
-              </div>
-              <div className="flex w-full items-center justify-between gap-2 md:justify-normal">
-                <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
-                  Opens at 11:00 AM PDT
-                </p>
-                <div className="block md:hidden">
-                  <span className="text-mercury-ui-text-base text-mercury-ui-primary font-bold font-mercury-ui-secondary">
-                    Opening&nbsp;
-                  </span>
-                  <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary">
-                    at 11:00 AM PDT
-                  </span>
+
+        {/* Address and Time Info */}
+        <div className="flex w-full">
+          {/* Desktop View */}
+          <div className="hidden w-full md:flex">
+            <div className="flex flex-col justify-between">
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                    Pickup address
+                  </p>
+                  <span className="text-mercury-ui-text-primary">·</span>
+                  <button className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0">
+                    Change
+                  </button>
                 </div>
-                <span className="hidden text-mercury-ui-text-primary md:block">·</span>
-                <button type="button">
-                  <div className="flex items-center gap-1">
-                    <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-b border-mercury-ui-text-primary p-0">
-                      See Hours
-                    </p>
-                  </div>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Mobile View */}
-    <div className="flex w-full md:hidden">
-      <div className="flex w-full flex-col gap-4">
-        <div className="flex w-full flex-col">
-          <div className="flex w-full justify-between">
-            <div className="flex gap-1">
-              <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary capitalize">
-                pickup
-              </p>
-              <span className="text-mercury-ui-text-primary">·</span>
-              <div className="flex items-center gap-1">
-                <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
-                  May 30
-                </span>
-                <span className="text-mercury-ui-text-primary">·</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
-                  12:00 PM PDT
-                </span>
-              </div>
-            </div>
-            <button className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-b border-mercury-ui-text-primary p-0">
-              Change
-            </button>
-          </div>
-          <p className="text-mercury-ui-text-base text-mercury-ui-primary font-bold font-mercury-ui-secondary">
-            1420 W Horizon Ridge Pkwy
-          </p>
-          <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
-            Metro Pizza - Green Valley
-          </p>
-        </div>
-        <div className="flex flex-col border-t pt-4">
-          <div className="flex">
-            <p className="text-mercury-ui-text-base text-mercury-ui-primary font-bold font-mercury-ui-secondary hidden md:block">
-              Closed
-            </p>
-          </div>
-          <div className="flex w-full items-center justify-between gap-2">
-            <p className="hidden md:block text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
-              Opens at 11:00 AM PDT
-            </p>
-            <div className="block md:hidden">
-              <span className="text-mercury-ui-text-base text-mercury-ui-primary font-bold font-mercury-ui-secondary">
-                Opening&nbsp;
-              </span>
-              <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary">
-                at 11:00 AM PDT
-              </span>
-            </div>
-            <span className="hidden text-mercury-ui-text-primary md:block">·</span>
-            <button type="button">
-              <div className="flex items-center gap-1">
-                <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-b border-mercury-ui-text-primary p-0">
-                  See Hours
+                <h4 className="text-mercury-ui-title-lg md:text-mercury-ui-title-xl lg:text-mercury-ui-title-2xl text-mercury-ui-primary font-mercury-ui-primary hidden md:block">
+                  1420 W Horizon Ridge Pkwy
+                </h4>
+                <p className="text-mercury-ui-text-base text-mercury-ui-secondary font-mercury-ui-secondary">
+                  Metro Pizza - Green Valley
                 </p>
               </div>
-            </button>
+              <div className="flex">
+                <div className="flex flex-col border-r pr-4">
+                  <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
+                    Pickup time
+                  </p>
+                  <div className="flex gap-1">
+                    <div className="flex items-center gap-1">
+                      <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                        May 30
+                      </span>
+                      <span className="text-mercury-ui-text-primary">·</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                        12:00 PM PDT
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex pl-4">
+                  <div className="flex flex-col border-t pt-4 md:border-t-0 md:pt-0">
+                    <div className="flex">
+                      <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary hidden font-bold md:block">
+                        Closed
+                      </p>
+                    </div>
+                    <div className="flex w-full items-center justify-between gap-2 md:justify-normal">
+                      <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
+                        Opens at 11:00 AM PDT
+                      </p>
+                      <div className="block md:hidden">
+                        <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
+                          Opening&nbsp;
+                        </span>
+                        <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary">
+                          at 11:00 AM PDT
+                        </span>
+                      </div>
+                      <span className="text-mercury-ui-text-primary hidden md:block">
+                        ·
+                      </span>
+                      <button type="button">
+                        <div className="flex items-center gap-1">
+                          <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0">
+                            See Hours
+                          </p>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile View */}
+          <div className="flex w-full md:hidden">
+            <div className="flex w-full flex-col gap-4">
+              <div className="flex w-full flex-col">
+                <div className="flex w-full justify-between">
+                  <div className="flex gap-1">
+                    <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary capitalize">
+                      pickup
+                    </p>
+                    <span className="text-mercury-ui-text-primary">·</span>
+                    <div className="flex items-center gap-1">
+                      <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                        May 30
+                      </span>
+                      <span className="text-mercury-ui-text-primary">·</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                        12:00 PM PDT
+                      </span>
+                    </div>
+                  </div>
+                  <button className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0">
+                    Change
+                  </button>
+                </div>
+                <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
+                  1420 W Horizon Ridge Pkwy
+                </p>
+                <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                  Metro Pizza - Green Valley
+                </p>
+              </div>
+              <div className="flex flex-col border-t pt-4">
+                <div className="flex">
+                  <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary hidden font-bold md:block">
+                    Closed
+                  </p>
+                </div>
+                <div className="flex w-full items-center justify-between gap-2">
+                  <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
+                    Opens at 11:00 AM PDT
+                  </p>
+                  <div className="block md:hidden">
+                    <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
+                      Opening&nbsp;
+                    </span>
+                    <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary">
+                      at 11:00 AM PDT
+                    </span>
+                  </div>
+                  <span className="text-mercury-ui-text-primary hidden md:block">
+                    ·
+                  </span>
+                  <button type="button">
+                    <div className="flex items-center gap-1">
+                      <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0">
+                        See Hours
+                      </p>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import {
   Oswald,
 } from "next/font/google";
 import "./globals.css";
+import Providers from "./Providers";
 
 const manrope = Manrope({
   weight: ["300", "400", "600", "700"],
@@ -65,7 +66,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${italiana.variable} ${manrope.variable} ${oswald.variable} ${inter.variable} ${openSans.variable} antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>{" "}
       </body>
     </html>
   );

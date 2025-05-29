@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import type { MenuItem } from "@/types/menu-item.types";
 
 import {
@@ -15,7 +15,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, Minus, Plus, X } from "lucide-react";
 import CardList from "./CardList";
-import { useSearchParams, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useCart } from "@/context/CartContext";
 
@@ -45,7 +45,6 @@ const menuItems: MenuItem[] = [
 
 const PopularMenu = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const {
     quantity,

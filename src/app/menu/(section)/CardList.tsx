@@ -1,43 +1,36 @@
 import React from "react";
 import { Heart, Plus } from "lucide-react";
+import type { MenuItem } from "@/types/menu-item.types";
 
 // Define the item type
-interface MenuItem {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  image: string;
-  likes?: number;
-}
 
 // Define the items array
 const items: MenuItem[] = [
   {
     id: 1,
     title: "Meatball Sub",
-    price: 11.75,
+    price: "11.75",
     description: "Our Meatball Sub served with Garlic Romano Fries",
     image: "/images/menu/img3.webp",
   },
   {
     id: 2,
     title: "Meatball Sub",
-    price: 11.75,
+    price: "11.75",
     description: "Our Meatball Sub served with Garlic Romano Fries",
     image: "/images/menu/img3.webp",
   },
   {
     id: 3,
     title: "Meatball Sub",
-    price: 11.75,
+    price: "11.75",
     description: "Our Meatball Sub served with Garlic Romano Fries",
     image: "/images/menu/img3.webp",
   },
   {
     id: 4,
     title: "Caesar Salad",
-    price: 7.25,
+    price: "7.25",
     description: "Fresh Caesar Salad with croutons",
     image: "https://via.placeholder.com/384x384.png?text=Caesar+Salad",
     likes: 9,
@@ -69,7 +62,7 @@ const CardList: React.FC = () => {
                 {item.title}
               </h3>
               <div className="flex items-center gap-x-1">
-                <p className="text-base font-bold">${item.price.toFixed(2)}</p>
+                <p className="text-base font-bold">${item.price}</p>
                 <span>·</span>
                 <button
                   aria-label="Like item"

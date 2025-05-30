@@ -43,7 +43,7 @@ const SidebarNav: FC = () => {
   };
 
   return (
-    <div className="font-inter sticky top-[112px] z-20 w-full pl-4 font-light md:pl-10 lg:w-auto lg:bg-transparent lg:px-0 lg:pt-4">
+    <div className="font-inter sticky top-[112px] z-20 w-full pl-4 text-gray-700  font-bold md:pl-10 lg:w-auto lg:bg-transparent lg:px-0 lg:pt-4">
       <nav className="flex h-full w-full flex-col gap-y-3 ">
         {/* Search Input */}
         <div className="sticky  z-10 bg-white  top-0 pb-2">
@@ -71,7 +71,7 @@ const SidebarNav: FC = () => {
           className={`
             flex gap-2 overflow-x-auto px-2 pb-2 hide-scrollbar
             md:overflow-x-auto md:whitespace-nowrap
-            lg:flex-col lg:overflow-y-auto lg:px-0
+            lg:flex-col lg:overflow-y-auto lg:px-0 font-bold
           `}
         >
           {filteredCategories.length > 0 ? (

@@ -42,7 +42,7 @@ const CardList = () => {
   return (
     <div id="appetizers"  className="grid grid-cols-1  gap-4 p-4 xl:p-0 lg:grid-cols-2">
       <div className="lg:col-span-2">
-        <h2 className="text-xl font-semibold md:text-2xl lg:text-3xl">
+        <h2 className="text-xl font-normal font-oswald md:text-2xl lg:text-3xl">
           Appetizers
         </h2>
       </div>
@@ -56,9 +56,9 @@ const CardList = () => {
         >
           <div className="flex flex-1 flex-col gap-y-2 p-4">
             <div className="flex flex-col gap-y-1">
-              <h3 className="line-clamp-2 text-base font-bold">{item.title}</h3>
+              <h3 className="line-clamp-2 text-base font-inter font-bold">{item.title}</h3>
               <div className="flex items-center gap-x-1">
-                <p className="text-base font-semibold">
+                <p className="text-base font-bold">
                   ${item.price.toFixed(2)}
                 </p>
                 <span>·</span>
@@ -71,7 +71,7 @@ const CardList = () => {
                 </button>
               </div>
             </div>
-            <p className="line-clamp-3 text-sm text-gray-600">
+            <p className="line-clamp-3 text-sm text-gray-600 font-manrope">
               {item.description}
             </p>
           </div>

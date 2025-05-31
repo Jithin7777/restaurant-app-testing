@@ -1,10 +1,22 @@
-import React from "react";
-import { Heart, Plus } from "lucide-react";
+"use client";
+
+import React, { useEffect } from "react";
+import { Heart, Minus, Plus, X } from "lucide-react";
 import type { MenuItem } from "@/types/menu-item.types";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
+import { useCart } from "@/context/CartContext";
+import { DialogTitle } from "@radix-ui/react-dialog";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
-// Define the item type
-
-// Define the items array
+// Dummy items array
 const items: MenuItem[] = [
   {
     id: 1,
@@ -12,33 +24,63 @@ const items: MenuItem[] = [
     price: "11.75",
     description: "Our Meatball Sub served with Garlic Romano Fries",
     image: "/images/menu/img3.webp",
+    likes: 12,
   },
   {
     id: 2,
-    title: "Meatball Sub",
-    price: "11.75",
-    description: "Our Meatball Sub served with Garlic Romano Fries",
+    title: "Chicken Wings",
+    price: "9.50",
+    description: "Crispy chicken wings with spicy sauce",
     image: "/images/menu/img3.webp",
+    likes: 7,
   },
   {
     id: 3,
-    title: "Meatball Sub",
-    price: "11.75",
-    description: "Our Meatball Sub served with Garlic Romano Fries",
+    title: "Garlic Bread",
+    price: "5.25",
+    description: "Toasted garlic bread with cheese",
     image: "/images/menu/img3.webp",
+    likes: 5,
   },
   {
     id: 4,
     title: "Caesar Salad",
     price: "7.25",
     description: "Fresh Caesar Salad with croutons",
-    image: "https://via.placeholder.com/384x384.png?text=Caesar+Salad",
+    image: "/images/menu/img3.webp",
     likes: 9,
   },
 ];
 
-// Define the CardList component
 const CardList: React.FC = () => {
+  const router = useRouter();
+  const {
+    quantity,
+    setQuantity,
+    increaseQty,
+    decreaseQty,
+    totalPrice,
+    selectedItem,
+    setSelectedItem,
+  } = useCart();
+
+  const isDialogOpen = !!selectedItem;
+
+  const handleItemOpen = (item: MenuItem) => {
+    setSelectedItem(item);
+    setQuantity(1);
+    router.push(`?item=${item.id}`, { scroll: false });
+  };
+
+  const closeDialog = () => {
+    setSelectedItem(null);
+    router.push("", { scroll: false });
+  };
+
+  useEffect(() => {
+    setSelectedItem(null);
+  }, []);
+
   return (
     <div
       id="appetizers"
@@ -49,13 +91,14 @@ const CardList: React.FC = () => {
           Appetizers
         </h2>
       </div>
+
       {items.map((item) => (
-        <a
-          key={item.id}
-          title={`Add ${item.title} to your cart`}
-          className="relative mt-5 flex h-full w-full flex-row justify-between overflow-hidden rounded-lg border border-gray-300 bg-white transition-shadow duration-300 hover:shadow-lg"
-          rel="nofollow"
-        >
+<div
+  key={item.id}
+  title={`Add ${item.title} to your cart`}
+  className="relative mt-5 flex md:h-[200px] w-full flex-row justify-between overflow-hidden rounded-lg border border-gray-300 bg-white transition-shadow duration-300 hover:shadow-lg cursor-pointer"
+  onClick={() => handleItemOpen(item)}
+>
           <div className="flex flex-1 flex-col gap-y-2 p-4">
             <div className="flex flex-col gap-y-1">
               <h3 className="line-clamp-2 text-base font-inter font-bold">
@@ -67,6 +110,7 @@ const CardList: React.FC = () => {
                 <button
                   aria-label="Like item"
                   className="flex items-center space-x-1 text-gray-500 hover:text-red-500 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <Heart className="w-4 h-4 fill-current" />
                   <p className="text-sm">{item.likes ?? 0}</p>
@@ -77,23 +121,114 @@ const CardList: React.FC = () => {
               {item.description}
             </p>
           </div>
+
           <div className="w-2/5 max-w-[180px] flex-shrink-0">
             <div className="relative h-full w-full overflow-hidden">
-              <img
+              <Image
                 src={item.image}
                 alt={item.title}
-                loading="lazy"
-                className="aspect-square h-full w-full object-cover"
+                fill
+                className="object-cover"
               />
             </div>
           </div>
-          <div className="absolute right-2 bottom-2">
+
+          <div className="absolute right-2 bottom-2 z-10">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white p-2 shadow-md hover:bg-gray-50 transition-colors">
               <Plus className="text-gray-700 w-5 h-5" />
             </div>
           </div>
-        </a>
+        </div>
       ))}
+
+      <Dialog open={isDialogOpen} onOpenChange={(open) => !open && closeDialog()}>
+        <DialogContent className="overflow-hidden bg-white p-0 sm:max-w-[650px] border border-gray-300">
+          <div className="relative h-[250px] sm:h-[330px] lg:h-[400px] w-full overflow-hidden rounded-xl">
+            {selectedItem && (
+              <Image
+                src={selectedItem.image}
+                alt={selectedItem.title}
+                fill
+                sizes="100vw"
+                className="object-cover"
+                priority
+              />
+            )}
+            <DialogHeader>
+              <DialogTitle className="sr-only">
+                {selectedItem?.title || "Selected Item"}
+              </DialogTitle>
+            </DialogHeader>
+            <DialogClose asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-3 right-3 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4 text-black" />
+              </Button>
+            </DialogClose>
+          </div>
+
+          <div className="p-4">
+            {selectedItem && (
+              <>
+                <h2 className="mt-2 text-lg sm:text-xl font-semibold text-gray-900">
+                  {selectedItem.title}
+                </h2>
+                <div className="mt-2 space-y-2">
+                  <p className="text-lg font-semibold text-gray-900">
+                    ${selectedItem.price}
+                  </p>
+                  <p className="text-muted-foreground flex items-center gap-1 text-sm">
+                    <Heart size={14} className="fill-red-500 text-red-500" />
+                    {selectedItem.likes ?? 0} likes
+                  </p>
+                </div>
+              </>
+            )}
+
+            <DialogFooter className="mt-4 flex flex-col sm:flex-row w-full gap-4 border-t border-gray-200 pt-4">
+              {/* Quantity Selector */}
+              <div className="flex w-full sm:w-auto justify-center sm:justify-start">
+                <div className="flex items-center justify-between gap-1 rounded-md border border-gray-300 bg-white w-full max-w-[150px]">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-10 flex-1"
+                    onClick={decreaseQty}
+                  >
+                    <Minus className="h-4 w-4 text-gray-600" />
+                  </Button>
+                  <span className="flex-1 text-center text-gray-800 select-none">
+                    {quantity}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-10 flex-1"
+                    onClick={increaseQty}
+                  >
+                    <Plus className="h-4 w-4 text-gray-600" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Add to Cart Button */}
+              <Button
+                className="flex-1 w-full bg-[#B90606] text-white hover:bg-[#a00505] px-6 py-3"
+                onClick={closeDialog}
+              >
+                <span className="flex justify-between w-full">
+                  <span>Add {quantity === 1 ? "item" : `${quantity} items`}</span>
+                  <span>{totalPrice}</span>
+                </span>
+              </Button>
+            </DialogFooter>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

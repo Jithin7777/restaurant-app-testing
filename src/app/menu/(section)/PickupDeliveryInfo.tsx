@@ -262,7 +262,7 @@ const PickupDeliveryInfo = () => {
                       </span>
                       <button type="button">
                         <div className="flex items-center gap-1">
-                          <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0">
+                          <p className="border-mercury-ui-text-primary border-b p-0">
                             See Hours
                           </p>
                         </div>
@@ -280,18 +280,18 @@ const PickupDeliveryInfo = () => {
               <div className="flex w-full flex-col">
                 <div className="flex w-full justify-between">
                   <div className="flex gap-1">
-                    <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary capitalize">
+                    <p className="font-manrope capitalize">
                       pickup
                     </p>
                     <span className="text-mercury-ui-text-primary">·</span>
                     <div className="flex items-center gap-1">
-                      <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                      <span className="font-manrope">
                         May 30
                       </span>
                       <span className="text-mercury-ui-text-primary">·</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                      <span className="font-manrope">
                         12:00 PM PDT
                       </span>
                     </div>
@@ -300,28 +300,28 @@ const PickupDeliveryInfo = () => {
                     Change
                   </button>
                 </div>
-                <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
+                <p className="font-inter text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
                   1420 W Horizon Ridge Pkwy
                 </p>
-                <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                <p className="font-manrope text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
                   Metro Pizza - Green Valley
                 </p>
               </div>
               <div className="flex flex-col border-t pt-4">
                 <div className="flex">
-                  <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary hidden font-bold md:block">
+                  <p className="font-manrope text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary hidden font-bold md:block">
                     Closed
                   </p>
                 </div>
                 <div className="flex w-full items-center justify-between gap-2">
-                  <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
+                  <p className="font-manrope text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
                     Opens at 11:00 AM PDT
                   </p>
                   <div className="block md:hidden">
-                    <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
+                    <span className="font-manrope text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
                       Opening&nbsp;
                     </span>
-                    <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary">
+                    <span className="font-manrope text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary">
                       at 11:00 AM PDT
                     </span>
                   </div>
@@ -330,7 +330,7 @@ const PickupDeliveryInfo = () => {
                   </span>
                   <button type="button">
                     <div className="flex items-center gap-1">
-                      <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0">
+                      <p className="font-manrope text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0">
                         See Hours
                       </p>
                     </div>

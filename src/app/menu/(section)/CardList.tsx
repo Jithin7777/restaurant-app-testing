@@ -84,7 +84,7 @@ const CardList: React.FC = () => {
   return (
     <div
       id="appetizers"
-      className="grid grid-cols-1 gap-4 lg:p-4 xl:p-0 lg:grid-cols-2"
+      className="grid grid-cols-1 md:gap-4 lg:p-4 xl:p-0 lg:grid-cols-2"
     >
       <div className="lg:col-span-2">
         <h2 className="text-xl font-normal font-oswald md:text-2xl lg:text-3xl">

@@ -52,9 +52,9 @@ const Navbar = () => {
           </Link>
         )}
 
-        <button className="rounded-none bg-[#CDAE64] px-4 py-2 text-black hover:opacity-90 md:mr-20">
+        <Link href='/menu' className="rounded-none bg-[#CDAE64] px-4 py-2 text-black hover:opacity-90 md:mr-20">
           ORDER NOW
-        </button>
+        </Link>
       </div>
 
       {/* Mobile Menu Icon */}
@@ -130,7 +130,7 @@ const Navbar = () => {
           ))}
 
           {/* Cart Icon in Mobile Sidebar (Only on /menu) */}
-          {isMenuPage && (
+          {/* {isMenuPage && (
             <Link
               href="/cart"
               className="py-2 text-white flex items-center gap-2"
@@ -139,14 +139,14 @@ const Navbar = () => {
               <ShoppingCart className="h-5 w-5" />
               Cart
             </Link>
-          )}
+          )} */}
 
-          <button
+          <Link href='/menu'
             className="mt-4 rounded-none bg-[#CDAE64] px-4 py-2 text-black hover:opacity-90"
             onClick={handleSidebarToggle}
           >
             ORDER NOW
-          </button>
+          </Link>
         </div>
       </div>
     </nav>

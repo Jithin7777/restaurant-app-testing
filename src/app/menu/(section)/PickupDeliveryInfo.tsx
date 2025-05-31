@@ -204,7 +204,7 @@ const PickupDeliveryInfo = () => {
             <div className="flex flex-col justify-between">
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                  <p className="text-mercury-ui-text-base font-manrope   text-mercury-ui-secondary">
                     Pickup address
                   </p>
                   <span className="text-mercury-ui-text-primary">·</span>
@@ -212,27 +212,27 @@ const PickupDeliveryInfo = () => {
                     Change
                   </button>
                 </div>
-                <h4 className="text-mercury-ui-title-lg md:text-mercury-ui-title-xl lg:text-mercury-ui-title-2xl text-mercury-ui-primary font-mercury-ui-primary hidden md:block">
+                <h2 className="font-bold text-2xl font-inter lg:text-mercury-ui-title-2xl text-mercury-ui-primary font-mercury-ui-primary hidden md:block">
                   1420 W Horizon Ridge Pkwy
-                </h4>
-                <p className="text-mercury-ui-text-base text-mercury-ui-secondary font-mercury-ui-secondary">
+                </h2>
+                <p className="font-manrope">
                   Metro Pizza - Green Valley
                 </p>
               </div>
               <div className="flex">
                 <div className="flex flex-col border-r pr-4">
-                  <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
+                  <p className="font-manrope text-mercury-ui-primary font-mercury-ui-secondary font-bold">
                     Pickup time
                   </p>
                   <div className="flex gap-1">
                     <div className="flex items-center gap-1">
-                      <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                      <span className="font-manrope ">
                         May 30
                       </span>
                       <span className="text-mercury-ui-text-primary">·</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                      <span className="font-manrope  text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
                         12:00 PM PDT
                       </span>
                     </div>
@@ -241,15 +241,15 @@ const PickupDeliveryInfo = () => {
                 <div className="flex pl-4">
                   <div className="flex flex-col border-t pt-4 md:border-t-0 md:pt-0">
                     <div className="flex">
-                      <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary hidden font-bold md:block">
+                      <p className="font-manrope text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary hidden font-bold md:block">
                         Closed
                       </p>
                     </div>
                     <div className="flex w-full items-center justify-between gap-2 md:justify-normal">
-                      <p className="text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
+                      <p className="font-manrope  text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
                         Opens at 11:00 AM PDT
                       </p>
-                      <div className="block md:hidden">
+                      <div className="block md:hidden font-manrope">
                         <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
                           Opening&nbsp;
                         </span>

@@ -141,94 +141,90 @@ const CardList: React.FC = () => {
         </div>
       ))}
 
-      <Dialog open={isDialogOpen} onOpenChange={(open) => !open && closeDialog()}>
-        <DialogContent className="overflow-hidden bg-white p-0 sm:max-w-[650px] border border-gray-300">
-          <div className="relative h-[250px] sm:h-[330px] lg:h-[400px] w-full overflow-hidden rounded-xl">
-            {selectedItem && (
-              <Image
-                src={selectedItem.image}
-                alt={selectedItem.title}
-                fill
-                sizes="100vw"
-                className="object-cover"
-                priority
-              />
-            )}
-            <DialogHeader>
-              <DialogTitle className="sr-only">
-                {selectedItem?.title || "Selected Item"}
-              </DialogTitle>
-            </DialogHeader>
-            <DialogClose asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-3 right-3 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white"
-                aria-label="Close"
-              >
-                <X className="h-4 w-4 text-black" />
-              </Button>
-            </DialogClose>
-          </div>
+<Dialog open={isDialogOpen} onOpenChange={(open) => !open && closeDialog()}>
+  <DialogContent className="bg-white p-0 sm:max-w-[650px] border border-gray-300 max-h-[90vh] flex flex-col overflow-hidden hide-scrollbar">
 
-          <div className="p-4">
-            {selectedItem && (
-              <>
-                <h2 className="mt-2 text-lg sm:text-xl font-semibold text-gray-900">
-                  {selectedItem.title}
-                </h2>
-                <div className="mt-2 space-y-2">
-                  <p className="text-lg font-semibold text-gray-900">
-                    ${selectedItem.price}
-                  </p>
-                  <p className="text-muted-foreground flex items-center gap-1 text-sm">
-                    <Heart size={14} className="fill-red-500 text-red-500" />
-                    {selectedItem.likes ?? 0} likes
-                  </p>
-                </div>
-              </>
-            )}
+    {/* Scrollable Content (image + details) */}
+    <div className="overflow-y-auto flex-1 hide-scrollbar">
+      {/* Image Section */}
+      <div className="relative h-[250px] sm:h-[330px] lg:h-[380px] w-full overflow-hidden">
+        {selectedItem && (
+          <Image
+            src={selectedItem.image}
+            alt={selectedItem.title}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+        )}
+        <DialogHeader>
+          <DialogTitle className="sr-only">
+            {selectedItem?.title || "Selected Item"}
+          </DialogTitle>
+        </DialogHeader>
+        <DialogClose asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            className=" fixed top-5 right-5 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white"
+            aria-label="Close"
+          >
+            <X className="h-4 w-4 text-black" />
+          </Button>
+        </DialogClose>
+      </div>
 
-            <DialogFooter className="mt-4 flex flex-col sm:flex-row w-full gap-4 border-t border-gray-200 pt-4">
-              {/* Quantity Selector */}
-              <div className="flex w-full sm:w-auto justify-center sm:justify-start">
-                <div className="flex items-center justify-between gap-1 rounded-md border border-gray-300 bg-white w-full max-w-[150px]">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-10 flex-1"
-                    onClick={decreaseQty}
-                  >
-                    <Minus className="h-4 w-4 text-gray-600" />
-                  </Button>
-                  <span className="flex-1 text-center text-gray-800 select-none">
-                    {quantity}
-                  </span>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-10 flex-1"
-                    onClick={increaseQty}
-                  >
-                    <Plus className="h-4 w-4 text-gray-600" />
-                  </Button>
-                </div>
-              </div>
+      {/* Item Details */}
+      <div className="p-4">
+        {selectedItem && (
+          <>
+            <h2 className="mt-2 text-lg sm:text-xl font-semibold text-gray-900">
+              {selectedItem.title}
+            </h2>
+            <div className="mt-2 space-y-2">
+              <p className="text-lg font-semibold text-gray-900">
+                ${selectedItem.price}
+              </p>
+              <p className="text-muted-foreground flex items-center gap-1 text-sm">
+                <Heart size={14} className="fill-red-500 text-red-500" />
+                {selectedItem.likes ?? 0} likes
+              </p>
+              <p>{selectedItem.description}</p>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
 
-              {/* Add to Cart Button */}
-              <Button
-                className="flex-1 w-full bg-[#B90606] text-white hover:bg-[#a00505] px-6 py-3"
-                onClick={closeDialog}
-              >
-                <span className="flex justify-between w-full">
-                  <span>Add {quantity === 1 ? "item" : `${quantity} items`}</span>
-                  <span>{totalPrice}</span>
-                </span>
-              </Button>
-            </DialogFooter>
-          </div>
-        </DialogContent>
-      </Dialog>
+    {/* Fixed Footer */}
+    <DialogFooter className="border-t border-gray-200 pt-4 px-4 pb-4 bg-white">
+      <div className="flex w-full sm:w-auto justify-center sm:justify-start mb-2 sm:mb-0">
+        <div className="flex items-center justify-between gap-1 rounded-md border border-gray-300 bg-white w-full max-w-[150px]">
+          <Button variant="ghost" size="icon" className="h-10 flex-1" onClick={decreaseQty}>
+            <Minus className="h-4 w-4 text-gray-600" />
+          </Button>
+          <span className="flex-1 text-center text-gray-800 select-none">
+            {quantity}
+          </span>
+          <Button variant="ghost" size="icon" className="h-10 flex-1" onClick={increaseQty}>
+            <Plus className="h-4 w-4 text-gray-600" />
+          </Button>
+        </div>
+      </div>
+
+      <Button
+        className="flex-1 w-full bg-[#B90606] text-white hover:bg-[#a00505] px-6 py-3"
+        onClick={closeDialog}
+      >
+        <span className="flex justify-between w-full">
+          <span>Add {quantity === 1 ? "item" : `${quantity} items`}</span>
+          <span>{totalPrice}</span>
+        </span>
+      </Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
     </div>
   );
 };

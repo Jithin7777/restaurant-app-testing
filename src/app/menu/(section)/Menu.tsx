@@ -9,7 +9,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogFooter,
-  DialogClose,
 } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,7 +17,6 @@ import CardList from "./CardList";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useCart } from "@/context/CartContext";
-import Link from "next/link";
 
 const menuItems: MenuItem[] = [
   {
@@ -112,15 +110,14 @@ const PopularMenu = () => {
                 priority={item.id === "1"}
               />
               <div className="absolute right-2 bottom-2 z-10">
-                <Link href={`${pathname}?item=${item.id}`} scroll={false}>
-                  <Button
-                    size="icon"
-                    className="h-10 w-10 rounded-xl bg-white p-2 hover:bg-gray-100"
-                    aria-label={`Add ${item.title} to cart`}
-                  >
-                    <Plus className="h-5 w-5 text-gray-800" />
-                  </Button>
-                </Link>
+                <Button
+                  size="icon"
+                  className="h-10 w-10 rounded-xl bg-white p-2 hover:bg-gray-100"
+                  aria-label={`Add ${item.title} to cart`}
+                  onClick={() => handleItemOpen(item)}
+                >
+                  <Plus className="h-5 w-5 text-gray-800" />
+                </Button>
               </div>
             </Card>
 

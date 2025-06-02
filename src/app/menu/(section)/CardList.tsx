@@ -28,11 +28,11 @@ const items: MenuItem[] = [
   },
   {
     id: 2,
-    title: "Chicken Wings",
-    price: "9.50",
-    description: "Crispy chicken wings with spicy sauce",
-    image: "/images/menu/img3.webp",
-    likes: 7,
+    title: "Fried Mozzarella",
+    price: "10.25",
+    description: "Thick wedges coated with our own seasoned breadcrumbs.",
+    image: "/images/menu/img4.webp",
+    likes: 50,
   },
   {
     id: 3,
@@ -84,7 +84,7 @@ const CardList: React.FC = () => {
   return (
     <div
       id="appetizers"
-      className="grid grid-cols-1 md:gap-4 lg:p-4 xl:p-0 lg:grid-cols-2"
+      className="grid grid-cols-1 md:gap-4   xl:p-0 lg:grid-cols-2"
     >
       <div className="lg:col-span-2">
         <h2 className="text-xl font-normal font-oswald md:text-2xl lg:text-3xl">

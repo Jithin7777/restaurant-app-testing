@@ -14,7 +14,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, Minus, Plus, X } from "lucide-react";
 import CardList from "./CardList";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useCart } from "@/context/CartContext";
 
@@ -45,7 +45,6 @@ const menuItems: MenuItem[] = [
 const PopularMenu = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   console.log(pathname);
 
   const {
@@ -73,14 +72,8 @@ const PopularMenu = () => {
     router.replace(pathname, { scroll: false });
   };
   useEffect(() => {
-    const itemId = searchParams.get("item");
-    if (itemId) {
-      const item = menuItems.find((item) => item.id === itemId);
-      if (item) {
-        setSelectedItem(item);
-      }
-    }
-  }, [searchParams]);
+    setSelectedItem(null);
+  }, []);
   return (
     <section
       id="popular"

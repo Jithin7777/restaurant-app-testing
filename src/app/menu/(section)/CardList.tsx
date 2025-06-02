@@ -142,7 +142,7 @@ const CardList: React.FC = () => {
       ))}
 
 <Dialog open={isDialogOpen} onOpenChange={(open) => !open && closeDialog()}>
-  <DialogContent className="bg-white p-0 sm:max-w-[650px] border border-gray-300 max-h-[90vh] flex flex-col overflow-hidden hide-scrollbar">
+  <DialogContent className="bg-white p-0 rounded-4xl sm:max-w-[650px] border border-gray-300 max-h-[90vh] flex flex-col overflow-hidden hide-scrollbar">
 
     {/* Scrollable Content (image + details) */}
     <div className="overflow-y-auto flex-1 hide-scrollbar">
@@ -191,6 +191,19 @@ const CardList: React.FC = () => {
                 {selectedItem.likes ?? 0} likes
               </p>
               <p>{selectedItem.description}</p>
+            </div>
+             {/* Special Requests Section */}
+            <div className="flex flex-col gap-4 mt-6 border-t-1 border-gray-300">
+              <h5 className="text-lg sm:text-xl font-semibold text-gray-900 mt-4 font-inter">Special Requests</h5>
+              <p className="text-sm text-gray-600 font-manrope">
+                We’ll try our best to accommodate requests, but can’t make changes that affect pricing.
+              </p>
+              <div className="flex w-full flex-col gap-y-1">
+                <textarea
+                  className="w-full flex-1 bg-transparent px-4 py-3 text-gray-900 transition-all rounded-md border border-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-0 focus:ring-red-500 focus:border-red-500"
+                  placeholder="Add special request"
+                ></textarea>
+              </div>
             </div>
           </>
         )}

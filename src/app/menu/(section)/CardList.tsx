@@ -298,7 +298,7 @@ const CardList: React.FC = () => {
                         <button
                           key={item.id}
                           aria-label={`${isExtraSelected ? "Remove" : "Add"} ${item.title} to order`}
-                          className=" flex w-full items-center gap-4 p-3 text-left hover:bg-gray-50"
+                          className=" flex w-full items-center gap-4  p-0 mt-3 md:mt-5 md:mt-0 text-left hover:bg-gray-50"
                           onClick={(e) => {
                             e.stopPropagation();
                             if (isExtraSelected) {

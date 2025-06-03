@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { Heart, Minus, Plus, PlusCircle, X } from "lucide-react";
+import { Heart, Minus, Plus, X } from "lucide-react";
 import type { MenuItem } from "@/types/menu-item.types";
 import {
   Dialog,
@@ -117,7 +117,6 @@ const CardList: React.FC = () => {
     setQuantity,
     increaseQty,
     decreaseQty,
-    totalPrice,
     selectedItem,
     setSelectedItem,
     addExtraItem,

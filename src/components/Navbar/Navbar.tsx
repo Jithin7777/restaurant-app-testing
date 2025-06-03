@@ -3,7 +3,6 @@
   import Image from "next/image";
   import React, { useState } from "react";
   import { usePathname } from "next/navigation";
-  import { ShoppingCart } from "lucide-react";
   import CartSheet from "../Navbar/CartSheet";
 
   const Navbar = () => {

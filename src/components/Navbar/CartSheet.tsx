@@ -8,7 +8,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ShoppingCart } from "lucide-react";
-import Image from "next/image";
 import { ArrowRight, Search, X } from "lucide-react";
 import {
   Dialog,

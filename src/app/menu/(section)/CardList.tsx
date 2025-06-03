@@ -53,20 +53,18 @@ const items: MenuItem[] = [
     goesWellWith: [
       {
         id: 101,
-        title: "Carrot ",
-        price: "7.95",
-        description: "Made in house, 8 Layers of Heaven!",
-        image:
-          "https://static-content.owner.com/funnel/images/4cc75d04-2ee8-43ac-8df8-dfdae7a729da?v=8571347525&w=3840&q=80&auto=format",
-      },
-      {
-        id: 102,
         title: "Garlic Knots",
         price: "7.00",
         description:
-          "Soft fresh baked garlic rolls topped with melted butter and Romano cheese.",
-        image:
-          "https://static-content.owner.com/menu-items/items/N899uzgT9rORcQf9HGJ5GcCZpdf7ELWA.png?v=6045735266&w=3840&q=80&auto=format",
+          "Soft fresh baked garlic rolls topped with melted butter and Romano cheese. Served with marinara sauce. Six per order.",
+        image: "/images/menu/img5.webp",
+      },
+      {
+        id: 102,
+        title: "Nuclear Fries",
+        price: "8.00",
+        description: "Another Metro Pizza original. Hot and spicy.",
+        image: "/images/menu/img6.webp",
       },
     ],
   },
@@ -80,21 +78,19 @@ const items: MenuItem[] = [
     likes: 75,
     goesWellWith: [
       {
-        id: 101,
-        title: "Carrot Cake",
-        price: "7.95",
-        description: "Made in house, 8 Layers of Heaven!",
-        image:
-          "https://static-content.owner.com/funnel/images/4cc75d04-2ee8-43ac-8df8-dfdae7a729da?v=8571347525&w=3840&q=80&auto=format",
+        id: 103,
+        title: "Nuclear Fries",
+        price: "8.00",
+        description: "Another Metro Pizza original. Hot and spicy.",
+        image: "/images/menu/img6.webp",
       },
       {
-        id: 102,
-        title: " Knots",
+        id: 104,
+        title: "Fried Mozzarella",
         price: "7.00",
-        description:
-          "Soft fresh baked garlic rolls topped with melted butter and Romano cheese.",
-        image:
-          "https://static-content.owner.com/menu-items/items/N899uzgT9rORcQf9HGJ5GcCZpdf7ELWA.png?v=6045735266&w=3840&q=80&auto=format",
+        description: "Thick wedges coated with our own seasoned breadcrumbs.",
+
+        image: "/images/menu/img4.webp",
       },
     ],
   },
@@ -105,6 +101,24 @@ const items: MenuItem[] = [
     description: "Another Metro Pizza original. Hot and spicy.",
     image: "/images/menu/img6.webp",
     likes: 18,
+    goesWellWith: [
+      {
+        id: 101,
+        title: "Garlic Knots",
+        price: "7.00",
+        description:
+          "Soft fresh baked garlic rolls topped with melted butter and Romano cheese. Served with marinara sauce. Six per order.",
+        image: "/images/menu/img5.webp",
+      },
+      {
+        id: 104,
+        title: "Fried Mozzarella",
+        price: "10.25",
+        description: "Thick wedges coated with our own seasoned breadcrumbs.",
+
+        image: "/images/menu/img4.webp",
+      },
+    ],
   },
 ];
 
@@ -286,7 +300,7 @@ const CardList: React.FC = () => {
                     </div>
                   </div>
                   {/* goes weel section */}
-                  <div className="mt-6 border-t bg-white border-gray-300">
+                  <div className="mt-6 border-t border-gray-300 bg-white">
                     <h5 className="mt-5 text-xl">Goes Well With</h5>
 
                     {selectedItem?.goesWellWith?.map((item) => {
@@ -298,7 +312,7 @@ const CardList: React.FC = () => {
                         <button
                           key={item.id}
                           aria-label={`${isExtraSelected ? "Remove" : "Add"} ${item.title} to order`}
-                          className=" flex w-full items-center gap-4  p-0 mt-3 md:mt-5 md:mt-0 text-left hover:bg-gray-50"
+                          className="mt-3 flex w-full items-center gap-4 p-0 text-left hover:bg-gray-50 md:mt-5"
                           onClick={(e) => {
                             e.stopPropagation();
                             if (isExtraSelected) {
@@ -309,7 +323,7 @@ const CardList: React.FC = () => {
                           }}
                         >
                           <span
-                            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${isExtraSelected ? "bg-gray-500" : "bg-red-500"} text-white`}
+                            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${isExtraSelected ? "bg-gray-500" : "bg-[#B90606]"} text-white`}
                           >
                             {isExtraSelected ? (
                               <Minus className="h-4 w-4" />
@@ -343,6 +357,16 @@ const CardList: React.FC = () => {
                       );
                     })}
                   </div>{" "}
+                  <div className="flex flex-col gap-4 border-t border-gray-300 mt-5">
+                    <div className="mt-8 gap-4">
+                      <h5 className="md:text-2xl text-xl ">Pay With Points</h5>
+                    </div>
+                    <div className="ml-4 ">
+                      <p className="font-semibold">
+                        <button className="underline underline-offset-8 text-gray-600 hover:text-gray-700">Sign in</button> pay With Points
+                      </p>{" "}
+                    </div>
+                  </div>
                 </>
               )}
             </div>

@@ -9,6 +9,9 @@ interface CartContextType {
   selectedItem: MenuItem | null;
   setSelectedItem: (item: MenuItem | null) => void;
   totalPrice: string;
+  addExtraItem: (item: MenuItem) => void;
+  removeExtraItem: (itemId: number) => void;
+  extraItems: MenuItem[];
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -16,6 +19,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [extraItems, setExtraItems] = useState<MenuItem[]>([]);
 
   const increaseQty = () => setQuantity((prev) => prev + 1);
   const decreaseQty = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
@@ -25,6 +29,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     : 0;
 
   const totalPrice = (parsedPrice * quantity).toFixed(2);
+  // const extrasTotal = extraItems.reduce(
+  //   (acc, item) => acc + parseFloat(item.price.replace("$", "")),
+  //   0,
+  // );
+
+  const addExtraItem = (item: MenuItem) => {
+    setExtraItems((prev) => [...prev, item]);
+  };
+
+  const removeExtraItem = (itemId: number) => {
+    setExtraItems((prev) => prev.filter((item) => item.id !== itemId));
+  };
 
   return (
     <CartContext.Provider
@@ -36,6 +52,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         selectedItem,
         setSelectedItem,
         totalPrice,
+        addExtraItem,
+        removeExtraItem,
+        extraItems,
       }}
     >
       {children}

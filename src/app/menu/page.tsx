@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 import React from "react";
 import SidebarNav from "./(section)/SidebarNav";
 import PickupDeliveryInfo from "./(section)/PickupDeliveryInfo";

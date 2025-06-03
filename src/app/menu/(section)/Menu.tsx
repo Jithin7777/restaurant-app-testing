@@ -64,6 +64,8 @@ const PopularMenu = () => {
     router.push(`${pathname}?item=${item.id}`, { scroll: false }); // Add ?item= to the URL
   };
 
+  
+
   const closeDialog = () => {
     setSelectedItem(null);
     console.log("Closing dialog, current pathname:", pathname);
@@ -120,7 +122,7 @@ const PopularMenu = () => {
               </h3>
               <p className="text-muted-foreground flex items-center gap-1 text-sm font-bold">
                 ${item.price} ·{" "}
-                <Heart size={14} className="fill-red-500 text-red-500" />
+                <Heart size={14} className=" text-red-500" />
                 {item.likes}
               </p>
             </CardContent>

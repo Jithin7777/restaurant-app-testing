@@ -184,6 +184,8 @@ const PickupDeliveryInfo = () => {
           </div>
         </DialogContent>
       </Dialog>
+       
+        {/* Address and Time Info */}
 
       <div className="flex w-full gap-8 rounded-xl border border-gray-400 p-4">
         {/* Map Image - visible on md and up */}
@@ -197,7 +199,6 @@ const PickupDeliveryInfo = () => {
           />{" "}
         </div>
 
-        {/* Address and Time Info */}
         <div className="flex w-full">
           {/* Desktop View */}
           <div className="hidden w-full md:flex">

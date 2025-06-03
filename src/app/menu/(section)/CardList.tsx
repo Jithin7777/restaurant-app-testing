@@ -30,18 +30,16 @@ const items: MenuItem[] = [
         id: 101,
         title: "Garlic Knots",
         price: "7.00",
-        description: "Soft fresh baked garlic rolls topped with melted butter and Romano cheese. Served with marinara sauce. Six per order.",
-        image:
-"/images/menu/img5.webp",     
- },
+        description:
+          "Soft fresh baked garlic rolls topped with melted butter and Romano cheese. Served with marinara sauce. Six per order.",
+        image: "/images/menu/img5.webp",
+      },
       {
         id: 102,
         title: "Nuclear Fries",
         price: "8.00",
-        description:
-          "Another Metro Pizza original. Hot and spicy.",
-        image:
-"/images/menu/img6.webp",     
+        description: "Another Metro Pizza original. Hot and spicy.",
+        image: "/images/menu/img6.webp",
       },
     ],
   },
@@ -186,7 +184,7 @@ const CardList: React.FC = () => {
                 <span>·</span>
                 <button
                   aria-label="Like item"
-                  className="flex items-center space-x-1 text-gray-500 transition-colors "
+                  className="flex items-center space-x-1 text-gray-500 transition-colors"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Heart className="h-4 w-4 text-red-500" />
@@ -266,7 +264,7 @@ const CardList: React.FC = () => {
                       ${selectedItem.price}
                     </p>
                     <p className="text-muted-foreground flex items-center gap-1 text-sm">
-                      <Heart size={14} className=" text-red-500" />
+                      <Heart size={14} className="text-red-500" />
                       {selectedItem.likes ?? 0} likes
                     </p>
                     <p>{selectedItem.description}</p>
@@ -288,7 +286,7 @@ const CardList: React.FC = () => {
                     </div>
                   </div>
                   {/* goes weel section */}
-                  <div className="mt-5 border-t border-gray-300">
+                  <div className="mt-6 border-t bg-white border-gray-300">
                     <h5 className="mt-5 text-xl">Goes Well With</h5>
 
                     {selectedItem?.goesWellWith?.map((item) => {
@@ -297,10 +295,10 @@ const CardList: React.FC = () => {
                       );
 
                       return (
-                        <Button
+                        <button
                           key={item.id}
                           aria-label={`${isExtraSelected ? "Remove" : "Add"} ${item.title} to order`}
-                          className="mt-10 flex w-full items-center gap-4 p-3 text-left hover:bg-gray-50"
+                          className=" flex w-full items-center gap-4 p-3 text-left hover:bg-gray-50"
                           onClick={(e) => {
                             e.stopPropagation();
                             if (isExtraSelected) {
@@ -320,14 +318,14 @@ const CardList: React.FC = () => {
                             )}
                           </span>
                           <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-md">
-  <Image
-    src={item.image}
-    alt={item.title}
-    fill
-    className="object-cover"
-    loading="lazy"
-  />
-</div>
+                            <Image
+                              src={item.image}
+                              alt={item.title}
+                              fill
+                              className="object-cover"
+                              loading="lazy"
+                            />
+                          </div>
                           <div className="flex min-w-0 flex-grow flex-col gap-1">
                             <div className="flex justify-between gap-2">
                               <p className="truncate text-base font-semibold text-gray-900">
@@ -341,7 +339,7 @@ const CardList: React.FC = () => {
                               {item.description}
                             </p>
                           </div>
-                        </Button>
+                        </button>
                       );
                     })}
                   </div>{" "}

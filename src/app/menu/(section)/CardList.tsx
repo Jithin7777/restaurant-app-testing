@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 // Dummy items array
 const items: MenuItem[] = [
   {
-    id: 1,
+    id: "4",
     title: "Meatball Sub",
     price: "11.75",
     description: "Our Meatball Sub served with Garlic Romano Fries",
@@ -27,7 +27,7 @@ const items: MenuItem[] = [
     likes: 12,
     goesWellWith: [
       {
-        id: 101,
+        id: "101",
         title: "Garlic Knots",
         price: "7.00",
         description:
@@ -35,7 +35,7 @@ const items: MenuItem[] = [
         image: "/images/menu/img5.webp",
       },
       {
-        id: 102,
+        id: "102",
         title: "Nuclear Fries",
         price: "8.00",
         description: "Another Metro Pizza original. Hot and spicy.",
@@ -44,7 +44,7 @@ const items: MenuItem[] = [
     ],
   },
   {
-    id: 2,
+    id: "5",
     title: "Fried Mozzarella",
     price: "10.25",
     description: "Thick wedges coated with our own seasoned breadcrumbs.",
@@ -52,7 +52,7 @@ const items: MenuItem[] = [
     likes: 50,
     goesWellWith: [
       {
-        id: 101,
+        id: "101",
         title: "Garlic Knots",
         price: "7.00",
         description:
@@ -60,7 +60,7 @@ const items: MenuItem[] = [
         image: "/images/menu/img5.webp",
       },
       {
-        id: 102,
+        id: "102",
         title: "Nuclear Fries",
         price: "8.00",
         description: "Another Metro Pizza original. Hot and spicy.",
@@ -69,7 +69,7 @@ const items: MenuItem[] = [
     ],
   },
   {
-    id: 3,
+    id: "6",
     title: "Garlic Knots",
     price: "7.00",
     description:
@@ -78,14 +78,14 @@ const items: MenuItem[] = [
     likes: 75,
     goesWellWith: [
       {
-        id: 103,
+        id: "103",
         title: "Nuclear Fries",
         price: "8.00",
         description: "Another Metro Pizza original. Hot and spicy.",
         image: "/images/menu/img6.webp",
       },
       {
-        id: 104,
+        id: "104",
         title: "Fried Mozzarella",
         price: "7.00",
         description: "Thick wedges coated with our own seasoned breadcrumbs.",
@@ -95,7 +95,7 @@ const items: MenuItem[] = [
     ],
   },
   {
-    id: 4,
+    id: "7",
     title: "Nuclear Fries",
     price: "8.00",
     description: "Another Metro Pizza original. Hot and spicy.",
@@ -103,7 +103,7 @@ const items: MenuItem[] = [
     likes: 18,
     goesWellWith: [
       {
-        id: 101,
+        id: "101",
         title: "Garlic Knots",
         price: "7.00",
         description:
@@ -111,7 +111,7 @@ const items: MenuItem[] = [
         image: "/images/menu/img5.webp",
       },
       {
-        id: 104,
+        id: "104",
         title: "Fried Mozzarella",
         price: "10.25",
         description: "Thick wedges coated with our own seasoned breadcrumbs.",
@@ -316,7 +316,7 @@ const CardList: React.FC = () => {
                           onClick={(e) => {
                             e.stopPropagation();
                             if (isExtraSelected) {
-                              removeExtraItem(Number(item.id));
+                              removeExtraItem(String(item.id));
                             } else {
                               handleAddExtraItem(item);
                             }
@@ -357,13 +357,16 @@ const CardList: React.FC = () => {
                       );
                     })}
                   </div>{" "}
-                  <div className="flex flex-col gap-4 border-t border-gray-300 mt-5">
+                  <div className="mt-5 flex flex-col gap-4 border-t border-gray-300">
                     <div className="mt-8 gap-4">
-                      <h5 className="md:text-2xl text-xl ">Pay With Points</h5>
+                      <h5 className="text-xl md:text-2xl">Pay With Points</h5>
                     </div>
-                    <div className="ml-4 ">
+                    <div className="ml-4">
                       <p className="font-semibold">
-                        <button className="underline underline-offset-8 text-gray-600 hover:text-gray-700">Sign in</button> pay With Points
+                        <button className="text-gray-600 underline underline-offset-8 hover:text-gray-700">
+                          Sign in
+                        </button>{" "}
+                        pay With Points
                       </p>{" "}
                     </div>
                   </div>

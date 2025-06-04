@@ -76,6 +76,7 @@ const PopularMenu = () => {
   useEffect(() => {
     setSelectedItem(null);
   }, []);
+  
   return (
     <section
       id="popular"
@@ -86,6 +87,7 @@ const PopularMenu = () => {
           Popular
         </h2>
       </div>
+      
 
       {/* Scrollable Menu */}
       <div className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth">

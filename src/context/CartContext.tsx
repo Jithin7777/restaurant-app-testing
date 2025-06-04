@@ -10,7 +10,7 @@ interface CartContextType {
   setSelectedItem: (item: MenuItem | null) => void;
   totalPrice: string;
   addExtraItem: (item: MenuItem) => void;
-  removeExtraItem: (itemId: number) => void;
+  removeExtraItem: (itemId: string) => void;
   extraItems: MenuItem[];
 }
 
@@ -38,7 +38,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setExtraItems((prev) => [...prev, item]);
   };
 
-  const removeExtraItem = (itemId: number) => {
+  
+
+  const removeExtraItem = (itemId: string) => {
     setExtraItems((prev) => prev.filter((item) => item.id !== itemId));
   };
 

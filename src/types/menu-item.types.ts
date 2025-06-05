@@ -5,7 +5,7 @@ export interface MenuItem {
   description?: string;
   likes?: number;
   image: string;
-  goesWellWith?: GoesWellItem[]; // Add this optional field
+  goesWellWith?: GoesWellItem[]; 
 }
 
 export interface GoesWellItem {

@@ -52,7 +52,7 @@ const items: MenuItem[] = [
     likes: 50,
     goesWellWith: [
       {
-        id: "101",
+        id: "103",
         title: "Garlic Knots",
         price: "7.00",
         description:
@@ -60,7 +60,7 @@ const items: MenuItem[] = [
         image: "/images/menu/img5.webp",
       },
       {
-        id: "102",
+        id: "104",
         title: "Nuclear Fries",
         price: "8.00",
         description: "Another Metro Pizza original. Hot and spicy.",
@@ -78,14 +78,14 @@ const items: MenuItem[] = [
     likes: 75,
     goesWellWith: [
       {
-        id: "103",
+        id: "105",
         title: "Nuclear Fries",
         price: "8.00",
         description: "Another Metro Pizza original. Hot and spicy.",
         image: "/images/menu/img6.webp",
       },
       {
-        id: "104",
+        id: "106",
         title: "Fried Mozzarella",
         price: "7.00",
         description: "Thick wedges coated with our own seasoned breadcrumbs.",
@@ -103,7 +103,7 @@ const items: MenuItem[] = [
     likes: 18,
     goesWellWith: [
       {
-        id: "101",
+        id: "107",
         title: "Garlic Knots",
         price: "7.00",
         description:
@@ -111,7 +111,7 @@ const items: MenuItem[] = [
         image: "/images/menu/img5.webp",
       },
       {
-        id: "104",
+        id: "108",
         title: "Fried Mozzarella",
         price: "10.25",
         description: "Thick wedges coated with our own seasoned breadcrumbs.",
@@ -134,18 +134,19 @@ const CardList: React.FC = () => {
     addExtraItem,
     extraItems,
     removeExtraItem,
+    addToCart,
   } = useCart();
 
   const isDialogOpen = !!selectedItem;
 
   const handleItemOpen = (item: MenuItem) => {
     setSelectedItem(item);
-    setQuantity(1);
+    setQuantity(1); // Reset quantity to 1
     router.push(`?item=${item.id}`, { scroll: false });
   };
-
   const closeDialog = () => {
     setSelectedItem(null);
+    setQuantity(1); // Reset quantity
     router.push("", { scroll: false });
   };
 
@@ -403,7 +404,12 @@ const CardList: React.FC = () => {
 
             <Button
               className="w-full flex-1 bg-[#B90606] px-6 py-3 text-white hover:bg-[#a00505]"
-              onClick={closeDialog}
+              onClick={() => {
+                if (selectedItem) {
+                  addToCart(selectedItem, quantity, extraItems);
+                }
+                closeDialog();
+              }}
             >
               <span className="flex w-full justify-between">
                 <span>

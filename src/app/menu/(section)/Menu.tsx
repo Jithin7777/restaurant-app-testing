@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import type { MenuItem } from "@/types/menu-item.types";
-
 import {
   Dialog,
   DialogContent,
@@ -18,6 +17,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useCart } from "@/context/CartContext";
 
+// Move menuItems outside component for clarity
 const menuItems: MenuItem[] = [
   {
     id: "1",
@@ -45,7 +45,6 @@ const menuItems: MenuItem[] = [
 const PopularMenu = () => {
   const router = useRouter();
   const pathname = usePathname();
-  console.log(pathname);
 
   const {
     quantity,
@@ -55,28 +54,37 @@ const PopularMenu = () => {
     totalPrice,
     selectedItem,
     setSelectedItem,
+    addToCart,
   } = useCart();
   const isDialogOpen = !!selectedItem;
 
-  const handleItemOpen = (item: MenuItem) => {
-    setSelectedItem(item); // Open the dialog by setting item
-    setQuantity(1); // Reset quantity
-    router.push(`${pathname}?item=${item.id}`, { scroll: false }); // Add ?item= to the URL
-  };
+  // Handle opening dialog from URL param on initial load
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const itemId = params.get("item");
+    if (itemId) {
+      const foundItem = menuItems.find((item) => item.id === itemId);
+      if (foundItem) {
+        setSelectedItem(foundItem);
+        setQuantity(1);
+      }
+    } else {
+      setSelectedItem(null);
+    }
+  }, [pathname, setQuantity, setSelectedItem]);
 
-  
+  const handleItemOpen = (item: MenuItem) => {
+    setSelectedItem(item);
+    setQuantity(1);
+    router.push(`${pathname}?item=${item.id}`, { scroll: false });
+  };
 
   const closeDialog = () => {
     setSelectedItem(null);
-    console.log("Closing dialog, current pathname:", pathname);
-    console.log("Current search params:", window.location.search);
-
+    setQuantity(1);
     router.replace(pathname, { scroll: false });
   };
-  useEffect(() => {
-    setSelectedItem(null);
-  }, []);
-  
+
   return (
     <section
       id="popular"
@@ -87,7 +95,6 @@ const PopularMenu = () => {
           Popular
         </h2>
       </div>
-      
 
       {/* Scrollable Menu */}
       <div className="hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth">
@@ -123,8 +130,7 @@ const PopularMenu = () => {
                 {item.title}
               </h3>
               <p className="text-muted-foreground flex items-center gap-1 text-sm font-bold">
-                ${item.price} ·{" "}
-                <Heart size={14} className=" text-red-500" />
+                ${item.price} · <Heart size={14} className="text-red-500" />
                 {item.likes}
               </p>
             </CardContent>
@@ -142,9 +148,11 @@ const PopularMenu = () => {
         }}
       >
         <DialogContent
+          role="dialog"
+          aria-modal="true"
           aria-labelledby="dialog-title"
           aria-describedby="dialog-desc"
-          className="boder overflow-hidden border-gray-300 bg-white p-0 sm:max-w-[650px]"
+          className="overflow-hidden border-gray-300 bg-white p-0 sm:max-w-[650px]"
         >
           <div className="relative h-[250px] w-full overflow-hidden rounded-xl sm:h-[330px] lg:h-[400px]">
             {selectedItem && (
@@ -168,10 +176,7 @@ const PopularMenu = () => {
               size="icon"
               className="absolute top-3 right-3 z-10 h-8 w-8 rounded-full bg-white/80 hover:bg-white"
               aria-label="Close"
-              onClick={() => {
-                // Add item to cart here if needed
-                closeDialog();
-              }}
+              onClick={closeDialog}
             >
               <X className="h-4 w-4 text-black" />
             </Button>
@@ -179,7 +184,10 @@ const PopularMenu = () => {
 
           <div className="p-4">
             {selectedItem && (
-              <h2 className="mt-2 text-lg font-semibold text-gray-900 sm:text-xl">
+              <h2
+                id="dialog-title"
+                className="mt-2 text-lg font-semibold text-gray-900 sm:text-xl"
+              >
                 {selectedItem.title}
               </h2>
             )}
@@ -187,7 +195,10 @@ const PopularMenu = () => {
               <p className="text-lg font-semibold text-gray-900">
                 ${selectedItem?.price}
               </p>
-              <p className="text-muted-foreground flex items-center gap-1 text-sm">
+              <p
+                id="dialog-desc"
+                className="text-muted-foreground flex items-center gap-1 text-sm"
+              >
                 <Heart size={14} className="fill-red-500 text-red-500" />
                 {selectedItem?.likes} likes
               </p>
@@ -203,6 +214,7 @@ const PopularMenu = () => {
                     className="h-10 flex-1"
                     onClick={decreaseQty}
                     aria-label="Decrease quantity"
+                    disabled={quantity <= 1}
                   >
                     <Minus className="h-4 w-4 text-gray-600" />
                   </Button>
@@ -222,15 +234,21 @@ const PopularMenu = () => {
               </div>
 
               {/* Add to Cart Button */}
+
               <Button
                 className="w-full flex-1 bg-[#B90606] px-6 py-3 text-white hover:bg-[#a00505]"
-                onClick={closeDialog}
+                onClick={() => {
+                  if (selectedItem) {
+                    addToCart(selectedItem, quantity);
+                  }
+                  closeDialog();
+                }}
               >
                 <span className="flex w-full justify-between">
                   <span>
                     Add {quantity === 1 ? "item" : `${quantity} items`}
                   </span>
-                  <span>{totalPrice}</span>
+                  <span>{`$${Number(totalPrice).toFixed(2)}`}</span>
                 </span>
               </Button>
             </DialogFooter>

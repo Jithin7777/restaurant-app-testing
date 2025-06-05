@@ -7,7 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart } from "lucide-react";
+import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { ArrowRight, Search, X } from "lucide-react";
 import {
   Dialog,
@@ -17,11 +17,13 @@ import {
 } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "../ui/button";
+import { useCart } from "@/context/CartContext";
 
 const CartSheet = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState("pickup");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { cartItems, increaseCartQty, decreaseCartQty, quantity } = useCart();
 
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
@@ -64,7 +66,6 @@ const CartSheet = () => {
         side="right"
         className="mt-5 mb-5 flex h-[calc(100vh-35px)] w-full !max-w-[550px] transform flex-col rounded-4xl bg-white text-black transition-all duration-500 ease-in-out sm:!w-[500px] md:mr-2"
       >
-        {/* Header */}
         <SheetHeader
           className={`transition-opacity delay-100 duration-300 ${
             isOpen ? "opacity-100" : "opacity-0"
@@ -79,15 +80,12 @@ const CartSheet = () => {
           </SheetTitle>
         </SheetHeader>
 
-        {/* Main Content */}
         <div
           className={`flex-1 overflow-y-auto py-4 transition-opacity delay-150 duration-300 ${
             isOpen ? "opacity-100" : "opacity-0"
           }`}
         >
-          {/* Delivery Method Selector */}
           <div className="flex flex-col px-4 sm:px-6 md:px-10 xl:px-10">
-            {/* Mobile Tabs */}
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <Tabs defaultValue={selectedTab}>
                 <TabsList className="bg-muted mt-2 flex w-full max-w-xl gap-1 rounded-xl bg-[rgb(235,235,236)] p-1 py-6 sm:mt-0">
@@ -110,7 +108,6 @@ const CartSheet = () => {
 
               <DialogContent className="max-w-[100vw] overflow-hidden rounded-none p-0 md:max-w-2xl md:rounded-xl">
                 <div className="flex h-[90vh] flex-col bg-white md:h-[80vh]">
-                  {/* Header */}
                   <div className="flex items-center justify-between p-6 md:p-8">
                     <DialogHeader>
                       <DialogTitle className="text-xl md:text-2xl lg:text-3xl">
@@ -125,7 +122,6 @@ const CartSheet = () => {
                     </Button>
                   </div>
 
-                  {/* Inner tabs */}
                   <div className="px-6 pb-4 md:px-8">
                     <div className="flex rounded-lg bg-gray-100 p-1">
                       {["pickup", "delivery"].map((type) => (
@@ -142,7 +138,6 @@ const CartSheet = () => {
                     </div>
                   </div>
 
-                  {/* Main Content Section */}
                   {selectedTab === "pickup" ? (
                     <>
                       <div className="px-6 pb-4 md:px-8">
@@ -155,7 +150,6 @@ const CartSheet = () => {
                           />
                         </div>
                       </div>
-                      {/* Pickup content */}
 
                       <div className="max-h-[350px] overflow-y-auto px-6 sm:max-h-none md:px-8">
                         <fieldset className="space-y-4">
@@ -182,7 +176,6 @@ const CartSheet = () => {
                       </div>
                     </>
                   ) : (
-                    // Delivery content
                     <div className="flex h-full flex-col overflow-hidden">
                       <div className="flex flex-col px-6 md:px-8">
                         <div className="relative flex">
@@ -224,7 +217,6 @@ const CartSheet = () => {
             </Dialog>
           </div>
 
-          {/* Location Info */}
           <div className="mr-3 ml-2">
             <div className="mt-5 w-full rounded-md border border-gray-200 p-4">
               <div className="flex w-full justify-between">
@@ -247,13 +239,94 @@ const CartSheet = () => {
               <p className="text-gray-600">Metro Pizza - Tropicana</p>
             </div>
           </div>
-          {/* Empty Cart Message */}
-          <div className="flex flex-1 items-center justify-center">
-            <p className="text-gray-500">No items in your cart</p>
-          </div>
+
+          {cartItems.length === 0 ? (
+            <div className="flex flex-1 items-center justify-center">
+              <p className="text-gray-500">No items in your cart</p>
+            </div>
+          ) : (
+            <div className="space-y-4 overflow-y-auto px-4 py-4">
+              {cartItems.map((cartItem, index) => {
+                const mainItemPrice = parseFloat(cartItem.item.price);
+                const extrasTotal =
+                  cartItem.extras?.reduce(
+                    (acc, extra) => acc + parseFloat(extra.price),
+                    0,
+                  ) || 0;
+                const itemTotal =
+                  (mainItemPrice + extrasTotal) * cartItem.quantity;
+
+                return (
+                  <div
+                    key={index}
+                    className="flex items-start justify-between rounded-md border p-4 shadow-sm"
+                  >
+                    <div className="flex items-start gap-4">
+                      <img
+                        src={cartItem.item.image}
+                        alt={cartItem.item.title}
+                        className="h-16 w-16 rounded-md object-cover"
+                      />
+                      <div className="flex flex-col gap-1">
+                        <p className="font-semibold">{cartItem.item.title}</p>
+                        <p className="text-sm text-gray-500">
+                          Qty: {cartItem.quantity}
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          Price: ${mainItemPrice.toFixed(2)}
+                        </p>
+
+                        {/* Show extras if they exist */}
+                        {Array.isArray(cartItem.extras) &&
+                          cartItem.extras.length > 0 && (
+                            <div className="mt-2 space-y-1">
+                              <p className="text-sm font-medium">Extras:</p>
+                              {cartItem.extras.map((extra, idx) => (
+                                <div
+                                  key={idx}
+                                  className="ml-2 text-sm text-gray-500"
+                                >
+                                  • {extra.title} - $
+                                  {parseFloat(extra.price).toFixed(2)}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                      </div>
+                    </div>
+                    <div className="mb-2 flex w-full justify-center sm:mb-0 sm:w-auto sm:justify-start">
+                      <div className="flex w-full max-w-[150px] items-center justify-between gap-1 rounded-md border border-gray-300 bg-white">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-10 flex-1"
+                          onClick={() => decreaseCartQty(cartItem)}
+                        >
+                          <Minus className="h-4 w-4 text-gray-600" />
+                        </Button>
+                        <span className="flex-1 text-center text-gray-800 select-none">
+                          {cartItem.quantity}
+                        </span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-10 flex-1"
+                          onClick={() => increaseCartQty(cartItem)}
+                        >
+                          <Plus className="h-4 w-4 text-gray-600" />
+                        </Button>
+                      </div>
+                    </div>
+                    <p className="font-medium whitespace-nowrap">
+                      ${itemTotal.toFixed(2)}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
-        {/* Footer */}
         <div
           className={`transition-opacity delay-200 duration-300 ${
             isOpen ? "opacity-100" : "opacity-0"
@@ -262,7 +335,22 @@ const CartSheet = () => {
           <hr className="border-t border-gray-200" />
           <div className="mr-3 ml-3 flex justify-between py-4">
             <p className="text-lg">Subtotal</p>
-            <p className="text-lg">$0.00</p>
+            <p className="text-lg">
+              $
+              {cartItems
+                .reduce((total, cartItem) => {
+                  const mainItemPrice = parseFloat(cartItem.item.price);
+                  const extrasTotal =
+                    cartItem.extras?.reduce(
+                      (acc, extra) => acc + parseFloat(extra.price),
+                      0,
+                    ) || 0;
+                  const itemTotal =
+                    (mainItemPrice + extrasTotal) * cartItem.quantity;
+                  return total + itemTotal;
+                }, 0)
+                .toFixed(2)}
+            </p>
           </div>
           <div className="mr-3 ml-3">
             <Button

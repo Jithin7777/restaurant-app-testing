@@ -23,7 +23,13 @@ const CartSheet = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState("pickup");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { cartItems, increaseCartQty, decreaseCartQty } = useCart();
+  const {
+    cartItems,
+    increaseCartQty,
+    decreaseCartQty,
+    increaseExtraQty,
+    decreaseExtraQty,
+  } = useCart();
 
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
@@ -216,7 +222,6 @@ const CartSheet = () => {
               </DialogContent>
             </Dialog>
           </div>
-
           <div className="mr-3 ml-2">
             <div className="mt-5 w-full rounded-md border border-gray-200 p-4">
               <div className="flex w-full justify-between">
@@ -239,92 +244,140 @@ const CartSheet = () => {
               <p className="text-gray-600">Metro Pizza - Tropicana</p>
             </div>
           </div>
+          {cartItems.map((cartItem, index) => {
+            const mainItemPrice = parseFloat(cartItem.item.price);
+            const itemTotal = mainItemPrice * cartItem.quantity;
 
-          {cartItems.length === 0 ? (
-            <div className="flex flex-1 items-center justify-center">
-              <p className="text-gray-500">No items in your cart</p>
-            </div>
-          ) : (
-            <div className="space-y-4 overflow-y-auto px-4 py-4">
-              {cartItems.map((cartItem, index) => {
-                const mainItemPrice = parseFloat(cartItem.item.price);
-                const extrasTotal =
-                  cartItem.extras?.reduce(
-                    (acc, extra) => acc + parseFloat(extra.price),
-                    0,
-                  ) || 0;
-                const itemTotal =
-                  (mainItemPrice + extrasTotal) * cartItem.quantity;
-
-                return (
-                  <div
-                    key={index}
-                    className="flex items-start justify-between rounded-md border p-4 shadow-sm"
-                  >
-                    <div className="flex items-start gap-4">
-                      <img
-                        src={cartItem.item.image}
-                        alt={cartItem.item.title}
-                        className="h-16 w-16 rounded-md object-cover"
-                      />
-                      <div className="flex flex-col gap-1">
-                        <p className="font-semibold">{cartItem.item.title}</p>
-                        <p className="text-sm text-gray-500">
-                          Qty: {cartItem.quantity}
-                        </p>
-                        <p className="text-sm text-gray-500">
-                          Price: ${mainItemPrice.toFixed(2)}
-                        </p>
-
-                        {/* Show extras if they exist */}
-                        {Array.isArray(cartItem.extras) &&
-                          cartItem.extras.length > 0 && (
-                            <div className="mt-2 space-y-1">
-                              <p className="text-sm font-medium">Extras:</p>
-                              {cartItem.extras.map((extra, idx) => (
-                                <div
-                                  key={idx}
-                                  className="ml-2 text-sm text-gray-500"
-                                >
-                                  • {extra.title} - $
-                                  {parseFloat(extra.price).toFixed(2)}
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                      </div>
-                    </div>
-                    <div className="mb-2 flex w-full justify-center sm:mb-0 sm:w-auto sm:justify-start">
-                      <div className="flex w-full max-w-[150px] items-center justify-between gap-1 rounded-md border border-gray-300 bg-white">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-10 flex-1"
-                          onClick={() => decreaseCartQty(cartItem)}
-                        >
-                          <Minus className="h-4 w-4 text-gray-600" />
-                        </Button>
-                        <span className="flex-1 text-center text-gray-800 select-none">
-                          {cartItem.quantity}
-                        </span>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-10 flex-1"
-                          onClick={() => increaseCartQty(cartItem)}
-                        >
-                          <Plus className="h-4 w-4 text-gray-600" />
-                        </Button>
-                      </div>
-                    </div>
-                    <p className="font-medium whitespace-nowrap">
-                      ${itemTotal.toFixed(2)}
-                    </p>
+            return (
+              <div
+                key={`main-${index}`}
+                className="flex flex-col gap-4 px-4 py-3"
+              >
+                <div
+                  className="flex gap-4"
+                  role="button"
+                  title={`Click to edit ${cartItem.item.title}`}
+                >
+                  <div className="relative h-[46px] w-[46px] shrink-0 overflow-hidden rounded-md bg-gray-100">
+                    <img
+                      src={cartItem.item.image}
+                      alt={cartItem.item.title}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
-                );
-              })}
-            </div>
-          )}
+                  <div className="flex grow flex-col gap-1">
+                    <div className="flex flex-col gap-1">
+                      <p className="text-base font-medium text-gray-900">
+                        {cartItem.item.title}
+                      </p>
+                    </div>
+                    <div className="flex cursor-default items-center justify-between">
+                      <div className="w-[145px]">
+                        <div className="flex items-center gap-1 rounded-md border border-gray-200 bg-white">
+                          <button
+                            className="flex h-11 flex-1 items-center justify-center"
+                            title="Decrease quantity"
+                            onClick={() => decreaseCartQty(cartItem)}
+                          >
+                            <Minus className="h-4 w-4 text-gray-600" />
+                          </button>
+                          <span
+                            className="flex min-w-9 flex-1 items-center justify-center text-base font-medium text-gray-900"
+                            aria-label={`Quantity ${cartItem.quantity}`}
+                          >
+                            {cartItem.quantity}
+                          </span>
+                          <button
+                            className="flex h-11 flex-1 items-center justify-center"
+                            title="Increase quantity"
+                            onClick={() => increaseCartQty(cartItem)}
+                          >
+                            <Plus className="h-4 w-4 text-gray-600" />
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <p className="text-base font-medium text-gray-900">
+                          ${itemTotal.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Extras */}
+                {cartItem.extras?.map((extra, j) => {
+                  const extraPrice = parseFloat(extra.item.price);
+                  const extraTotal = extraPrice * extra.quantity;
+
+                  return (
+                    <div
+                      key={`extra-${index}-${j}`}
+                      className="ml-[62px] flex flex-col gap-4"
+                    >
+                      <div
+                        className="flex gap-4"
+                        role="button"
+                        title={`Click to edit ${extra.item.title}`}
+                      >
+                        <div className="relative h-[46px] w-[46px] shrink-0 overflow-hidden rounded-md bg-gray-100">
+                          <img
+                            src={extra.item.image || cartItem.item.image}
+                            alt={extra.item.title}
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="flex grow flex-col gap-1">
+                          <div className="flex flex-col gap-1">
+                            <p className="text-sm font-medium text-gray-900">
+                              {extra.item.title}
+                            </p>
+                          </div>
+                          <div className="flex cursor-default items-center justify-between">
+                            <div className="w-[145px]">
+                              <div className="flex items-center gap-1 rounded-md border border-gray-200 bg-white">
+                                <button
+                                  className="flex h-11 flex-1 items-center justify-center"
+                                  title="Decrease quantity"
+                                  onClick={() =>
+                                    decreaseExtraQty(cartItem, extra.item)
+                                  }
+                                >
+                                  <Minus className="h-4 w-4 text-gray-600" />
+                                </button>
+                                <span
+                                  className="flex min-w-9 flex-1 items-center justify-center text-sm font-medium text-gray-900"
+                                  aria-label={`Quantity ${extra.quantity}`}
+                                >
+                                  {extra.quantity}
+                                </span>
+                                <button
+                                  className="flex h-11 flex-1 items-center justify-center"
+                                  title="Increase quantity"
+                                  onClick={() =>
+                                    increaseExtraQty(cartItem, extra.item)
+                                  }
+                                >
+                                  <Plus className="h-4 w-4 text-gray-600" />
+                                </button>
+                              </div>
+                            </div>
+                            <div className="flex gap-2">
+                              <p className="text-sm font-medium text-gray-900">
+                                ${extraTotal.toFixed(2)}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}{" "}
         </div>
 
         <div
@@ -340,13 +393,17 @@ const CartSheet = () => {
               {cartItems
                 .reduce((total, cartItem) => {
                   const mainItemPrice = parseFloat(cartItem.item.price);
+                  const mainItemTotal = mainItemPrice * cartItem.quantity;
+
                   const extrasTotal =
                     cartItem.extras?.reduce(
-                      (acc, extra) => acc + parseFloat(extra.price),
+                      (acc, extra) =>
+                        acc + parseFloat(extra.item.price) * extra.quantity,
                       0,
                     ) || 0;
-                  const itemTotal =
-                    (mainItemPrice + extrasTotal) * cartItem.quantity;
+
+                  const itemTotal = mainItemTotal + extrasTotal;
+
                   return total + itemTotal;
                 }, 0)
                 .toFixed(2)}

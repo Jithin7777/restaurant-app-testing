@@ -137,15 +137,14 @@
             {/* Cart Icon in Mobile Sidebar (Only on /menu) */}
             {/* {isMenuPage && (
               <Link
-                href="/cart"
+                href=""
                 className="py-2 text-white flex items-center gap-2"
                 onClick={handleSidebarToggle}
               >
-                <ShoppingCart className="h-5 w-5" />
-                Cart
+                 <CartSheet />
               </Link>
-            )} */}
-
+            )}
+ */}
             <Link href='/menu'
               className="mt-4 rounded-none bg-[#CDAE64] px-4 py-2 text-black hover:opacity-90"
               onClick={handleSidebarToggle}

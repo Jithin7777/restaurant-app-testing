@@ -405,11 +405,16 @@ const CardList: React.FC = () => {
             <Button
               className="w-full flex-1 bg-[#B90606] px-6 py-3 text-white hover:bg-[#a00505]"
               onClick={() => {
-                if (selectedItem) {
-                  addToCart(selectedItem, quantity, extraItems);
-                }
-                closeDialog();
-              }}
+  if (selectedItem) {
+    const formattedExtras = extraItems.map((item) => ({
+      item,
+      quantity: 1,
+    }));
+    addToCart(selectedItem, quantity, formattedExtras);
+  }
+  closeDialog();
+}}
+
             >
               <span className="flex w-full justify-between">
                 <span>

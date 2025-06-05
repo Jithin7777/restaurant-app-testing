@@ -36,6 +36,14 @@ const CartSheet = () => {
     setIsDialogOpen(true);
   };
 
+  const totalCartCount = cartItems.reduce((total, cartItem) => {
+    const mainQty = cartItem.quantity;
+    const extrasQty =
+      cartItem.extras?.reduce((eTotal, extra) => eTotal + extra.quantity, 0) ||
+      0;
+    return total + mainQty + extrasQty;
+  }, 0);
+
   const locations = [
     {
       id: "nWqvW8vTEknD",
@@ -66,8 +74,15 @@ const CartSheet = () => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger>
-        <ShoppingCart className="h-6 w-6" />
-      </SheetTrigger>
+        <div className="relative">
+          <ShoppingCart className="h-7 w-7" />
+          {totalCartCount > 0 && (
+            <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-black  text-xs text-white">
+              {totalCartCount}
+            </span>
+          )}
+        </div>
+      </SheetTrigger>{" "}
       <SheetContent
         side="right"
         className="mt-5 mb-5 flex h-[calc(100vh-35px)] w-full !max-w-[550px] transform flex-col rounded-4xl bg-white text-black transition-all duration-500 ease-in-out sm:!w-[500px] md:mr-2"

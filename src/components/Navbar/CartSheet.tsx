@@ -19,8 +19,13 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "../ui/button";
 import { useCart } from "@/context/CartContext";
 
-const CartSheet = () => {
-  const [isOpen, setIsOpen] = useState(false);
+
+interface CartSheetProps {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}
+
+const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {  
   const [selectedTab, setSelectedTab] = useState("pickup");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const {
@@ -73,16 +78,18 @@ const CartSheet = () => {
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger>
-        <div className="relative">
-          <ShoppingCart className="h-7 w-7" />
-          {totalCartCount > 0 && (
-            <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-black  text-xs text-white">
-              {totalCartCount}
-            </span>
-          )}
-        </div>
-      </SheetTrigger>{" "}
+     <div className="hidden md:block">
+        <SheetTrigger>
+          <div className="relative">
+            <ShoppingCart className="h-7 w-7" />
+            {totalCartCount > 0 && (
+              <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-black  text-xs text-white">
+                {totalCartCount}
+              </span>
+            )}
+          </div>
+        </SheetTrigger>{" "}
+     </div>
       <SheetContent
         side="right"
         className="mt-5 mb-5 flex h-[calc(100vh-35px)] w-full !max-w-[550px] transform flex-col rounded-4xl bg-white text-black transition-all duration-500 ease-in-out sm:!w-[500px] md:mr-2"

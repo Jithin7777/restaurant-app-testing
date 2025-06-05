@@ -4,6 +4,7 @@
   import React, { useState } from "react";
   import { usePathname } from "next/navigation";
   import CartSheet from "../Navbar/CartSheet";
+import MobileCartButton from "../MobileCartButton";
 
   const Navbar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -45,17 +46,7 @@
             Contact
           </Link>
 
-          {/* Cart Icon only on /menu */}
-          {/* {isMenuPage && (
-            <Link href="" className={`${textColor} hover:text-[#CDAE64]`}>
-              <ShoppingCart className="h-6 w-6" />
-            </Link>
-          )} */}
-          {isMenuPage && (
-    <div className=''>
-      <CartSheet />
-    </div>
-  )}
+      {isMenuPage && <MobileCartButton />}
 
           <Link href='/menu' className="rounded-none bg-[#CDAE64] px-4 py-2 text-black hover:opacity-90 md:mr-20">
             ORDER NOW

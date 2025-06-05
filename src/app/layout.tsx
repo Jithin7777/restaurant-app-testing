@@ -10,6 +10,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import Providers from "./Providers";
+import MobileCartButton from "@/components/MobileCartButton";
 
 const manrope = Manrope({
   weight: ["300", "400", "600", "700"],
@@ -66,7 +67,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${italiana.variable} ${manrope.variable} ${oswald.variable} ${inter.variable} ${openSans.variable} antialiased`}
       >
-        <Providers>{children}</Providers>{" "}
+        <Providers>{children}
+          <MobileCartButton/>
+          </Providers>{" "}
       </body>
     </html>
   );

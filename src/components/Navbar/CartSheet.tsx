@@ -23,7 +23,7 @@ const CartSheet = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState("pickup");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { cartItems, increaseCartQty, decreaseCartQty, quantity } = useCart();
+  const { cartItems, increaseCartQty, decreaseCartQty } = useCart();
 
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);

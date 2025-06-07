@@ -29,7 +29,7 @@ addToCart: (
   decreaseCartQty: (item: CartItem) => void; 
   increaseExtraQty: (mainItem: CartItem, extra: MenuItem) => void;
 decreaseExtraQty: (mainItem: CartItem, extra: MenuItem) => void;
-
+subtotal: number;
 
 }
 
@@ -253,6 +253,26 @@ const addToCart = (
   setExtraItems([]);
   setQuantity(1);
 };
+
+
+
+  const calculateSubtotal = () => {
+    return cartItems.reduce((total, cartItem) => {
+      const mainItemPrice = parseFloat(cartItem.item.price);
+      const mainItemTotal = mainItemPrice * cartItem.quantity;
+
+      const extrasTotal =
+        cartItem.extras?.reduce(
+          (acc, extra) =>
+            acc + parseFloat(extra.item.price) * extra.quantity,
+          0
+        ) || 0;
+
+      return total + mainItemTotal + extrasTotal;
+    }, 0);
+  };
+
+ const subtotal = calculateSubtotal();
   return (
     <CartContext.Provider
       value={{
@@ -272,6 +292,7 @@ const addToCart = (
         increaseCartQty,
          increaseExtraQty,
          decreaseExtraQty,
+         subtotal
       }}
     >
       {children}

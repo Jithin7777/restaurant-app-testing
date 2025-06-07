@@ -34,6 +34,7 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
     decreaseCartQty,
     increaseExtraQty,
     decreaseExtraQty,
+    subtotal,
   } = useCart();
 
   const handleTabClick = (tab: string) => {
@@ -41,7 +42,7 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
     setIsDialogOpen(true);
   };
 
-  const router=useRouter()
+  const router = useRouter();
 
   const totalCartCount = cartItems.reduce((total, cartItem) => {
     const mainQty = cartItem.quantity;
@@ -301,7 +302,7 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
                       </div>
                       <div className="flex cursor-default items-center justify-between">
                         <div className="w-[145px]">
-                          <div className="flex items-center gap-1 rounded-md border border-gray-200 bg-white">
+                          <div className="flex items-center gap-1 rounded-md border mt-3 border-gray-200 bg-white">
                             <button
                               className="flex h-11 flex-1 items-center justify-center"
                               title="Decrease quantity"
@@ -341,7 +342,7 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
                     return (
                       <div
                         key={`extra-${index}-${j}`}
-                        className="ml-[62px] flex flex-col gap-4"
+                        className=" flex flex-col gap-4"
                       >
                         <div
                           className="flex gap-4"
@@ -364,9 +365,9 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
                             </div>
                             <div className="flex cursor-default items-center justify-between">
                               <div className="w-[145px]">
-                                <div className="flex items-center gap-1 rounded-md border border-gray-200 bg-white">
+                                <div className="flex items-center gap-1  rounded-md border border-gray-200 bg-white">
                                   <button
-                                    className="flex h-11 flex-1 items-center justify-center"
+                                    className="flex h-11 flex-1 items-center justify-center "
                                     title="Decrease quantity"
                                     onClick={() =>
                                       decreaseExtraQty(cartItem, extra.item)
@@ -416,40 +417,20 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
           <hr className="border-t border-gray-200" />
           <div className="mr-3 ml-3 flex justify-between py-4">
             <p className="text-lg">Subtotal</p>
-            <p className="text-lg">
-              $
-              {cartItems
-                .reduce((total, cartItem) => {
-                  const mainItemPrice = parseFloat(cartItem.item.price);
-                  const mainItemTotal = mainItemPrice * cartItem.quantity;
-
-                  const extrasTotal =
-                    cartItem.extras?.reduce(
-                      (acc, extra) =>
-                        acc + parseFloat(extra.item.price) * extra.quantity,
-                      0,
-                    ) || 0;
-
-                  const itemTotal = mainItemTotal + extrasTotal;
-
-                  return total + itemTotal;
-                }, 0)
-                .toFixed(2)}
-            </p>
+            <p className="text-lg">${subtotal}</p>
           </div>
           <div className="mr-3 ml-3">
-           <Button
-  disabled={cartItems.length === 0}
-  onClick={()=>router.push("/payment")}
-  className={`mb-9 w-full rounded-md py-3 transition-colors ${
-    cartItems.length === 0
-      ? "bg-gray-200 text-gray-500"
-      : "bg-[#B90606] text-white hover:bg-[#a10505]"
-  }`}
->
-  Go To Checkout
-</Button>
-
+            <Button
+              disabled={cartItems.length === 0}
+              onClick={() => router.push("/payment")}
+              className={`mb-9 w-full rounded-md py-3 transition-colors ${
+                cartItems.length === 0
+                  ? "bg-gray-200 text-gray-500"
+                  : "bg-[#B90606] text-white hover:bg-[#a10505]"
+              }`}
+            >
+              Go To Checkout
+            </Button>
           </div>
         </div>
       </SheetContent>

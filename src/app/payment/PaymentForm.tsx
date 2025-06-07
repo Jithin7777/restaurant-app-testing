@@ -10,10 +10,10 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
-import { ArrowLeft, Clock, Minus, Plus, Store } from "lucide-react";
+import { ArrowLeft, Clock, Store } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
-import React, { use } from "react";
+import React from "react";
 import { useCart } from "@/context/CartContext";
 import CartItemsList from "./CartItemsList";
 

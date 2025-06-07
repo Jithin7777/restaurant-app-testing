@@ -1,9 +1,9 @@
 import React from "react";
 import { Minus, Plus } from "lucide-react";
-import { useCart } from "@/context/CartContext"; 
+import { useCart } from "@/context/CartContext";
 import type { CartItem } from "@/types/cart-item.type";
 
-const CartItemsList = () => {  
+const CartItemsList = () => {
   const {
     cartItems,
     increaseCartQty,
@@ -14,13 +14,13 @@ const CartItemsList = () => {
 
   return (
     <>
-      {cartItems.map((cartItem: CartItem) => {
+      {cartItems.map((cartItem: CartItem, index) => {
         const mainItemPrice = parseFloat(cartItem.item.price);
         const itemTotal = mainItemPrice * cartItem.quantity;
 
         return (
           <div
-            key={`main-${cartItem.item.id}`}
+            key={`main-${cartItem.item.id}-${index}`}
             className="flex flex-col gap-4 px-4 py-3"
           >
             {/* Main Item */}

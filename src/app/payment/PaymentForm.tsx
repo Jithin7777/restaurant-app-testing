@@ -10,15 +10,21 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
-import { ArrowLeft, Clock, Store } from "lucide-react";
-import * as Dialog from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
+import {
+  ArrowLeft,
+  ChevronRight,
+  Clock,
+  CreditCard,
+  Store,
+} from "lucide-react";
 import React from "react";
 import { useCart } from "@/context/CartContext";
 import CartItemsList from "./CartItemsList";
+import CouponDialog from "./CouponDialog";
+import OrderSummaryDrawer from "./OrderSummaryDrawer";
 
 const PaymentForm = () => {
-  const { subtotal } = useCart();
+  const { subtotal, cartItems } = useCart();
   return (
     <div className="grid bg-transparent px-4 pt-14 pb-20 lg:grid lg:grid-cols-[1fr_25rem] lg:px-2 lg:pt-0 lg:pb-0">
       <div className="mx-auto flex flex-col gap-8 sm:w-[31.25rem] lg:gap-10 lg:pt-16 lg:pb-20">
@@ -52,6 +58,50 @@ const PaymentForm = () => {
                   {" "}
                   <Clock /> Tomorrow by 11:45 AM PDT
                 </p>
+
+                <CouponDialog>
+                  <button
+                    type="button"
+                    className="flex w-full items-center gap-2 p-4 transition-colors hover:bg-gray-100 lg:hidden"
+                    aria-haspopup="dialog"
+                    aria-controls="coupon-dialog"
+                  >
+                    <CreditCard className="text-mercury-ui-primary h-5 w-5" />
+                    <span className="flex grow items-center justify-between">
+                      <span className="text-mercury-ui-secondary">
+                        Add coupon or gift card
+                      </span>
+                      <ChevronRight className="text-mercury-ui-secondary h-5 w-5" />
+                    </span>
+                  </button>
+                </CouponDialog>
+
+                <OrderSummaryDrawer>
+                  <button
+                    type="button"
+                    aria-haspopup="dialog"
+                    aria-expanded="false"
+                    aria-controls="cart-dialog"
+                    data-state="closed"
+                    className="w-full lg:hidden"
+                  >
+                    <span className="flex grow flex-row items-center gap-2 p-4">
+                      <CreditCard className="text-mercury-ui-primary h-5 w-5 shrink-0" />
+
+                      <span className="flex grow items-center justify-between">
+                        <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary">
+                          {cartItems.length}{" "}
+                          {cartItems.length === 1 ? "item" : "items"}
+                        </span>
+                        <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary flex gap-2">
+                          ${subtotal}
+                        </span>
+                      </span>
+
+                      <ChevronRight className="text-mercury-ui-secondary h-5 w-5 shrink-0" />
+                    </span>
+                  </button>
+                </OrderSummaryDrawer>
               </div>
               <div></div>
             </div>
@@ -340,114 +390,14 @@ const PaymentForm = () => {
                 </div>
 
                 <div className="flex justify-between">
-                  <Dialog.Root>
-                    {/* Trigger Button */}
-                    <Dialog.Trigger asChild>
-                      <div className="flex items-baseline gap-1">
-                        <button
-                          type="button"
-                          aria-haspopup="dialog"
-                          aria-expanded="false"
-                          aria-controls="coupon-dialog"
-                          data-state="closed"
-                          className="group font-mercury-ui-primary font-mercury-ui-button-weight bg-mercury-ui-button-tertiary border-mercury-ui-button-tertiary text-mercury-ui-button-tertiary relative flex items-center border-b p-0"
-                          aria-label="Add coupon or gift card"
-                        >
-                          Add coupon or gift card
-                        </button>
-                      </div>
-                    </Dialog.Trigger>
-
-                    {/* Overlay and Content */}
-                    <Dialog.Portal>
-                      <Dialog.Overlay className="fixed inset-0 z-20 bg-black/30" />
-
-                      <Dialog.Content
-                        id="coupon-dialog"
-                        className="rounded-t-mercury-ui-md data-[state=closed]:animate-slideOutDown md:animate-fadeIn md:data-[state=closed]:animate-fadeOut md:rounded-mercury-ui-md bg-mercury-ui-primary fixed inset-x-0 bottom-0 z-30 flex max-h-[95dvh] w-full flex-col overflow-hidden bg-white focus:outline-none md:inset-auto md:top-1/2 md:left-1/2 md:max-h-[80vh] md:w-[90vw] md:max-w-md md:-translate-x-1/2 md:-translate-y-1/2"
-                      >
-                        <div className="flex h-full max-h-[95dvh] w-full flex-col md:max-h-[80vh]">
-                          <div className="flex flex-grow flex-col gap-6 overflow-y-auto p-6 sm:p-8">
-                            {/* Header with Title and Close */}
-                            <div className="flex items-center justify-between gap-3">
-                              <Dialog.Title className="text-mercury-ui-title-base md:text-mercury-ui-title-lg lg:text-mercury-ui-title-xl text-mercury-ui-primary font-mercury-ui-primary">
-                                Add code
-                              </Dialog.Title>
-                              <Dialog.Close asChild>
-                                <button
-                                  aria-label="Close Dialog"
-                                  className="focus:outline-mercury-ui-text-primary/10 focus:ring-mercury-ui-text-primary rounded-full border focus:ring-[1.5px] focus:outline-2"
-                                >
-                                  <span className="bg-mercury-ui-secondary flex h-8 w-8 items-center justify-center rounded-full">
-                                    <X className="text-mercury-ui-secondary h-4 w-4" />
-                                  </span>
-                                </button>
-                              </Dialog.Close>
-                            </div>
-
-                            {/* Input field */}
-                            <div className="flex flex-col gap-2">
-                              <label htmlFor="coupon-input" className="sr-only">
-                                Promo Code or Gift Card
-                              </label>
-                              <Input
-                                id="coupon-input"
-                                placeholder="Promo Code or Gift Card"
-                                className="w-full rounded-lg border px-4 py-6 focus:ring-[1.5px] focus:outline-none"
-                                aria-label="Promo Code or Gift Card"
-                                name="coupon-gift-card-input"
-                              />
-                              <span
-                                className="text-mercury-ui-text-sm text-mercury-ui-secondary font-mercury-ui-secondary"
-                                id="coupon-gift-card-input-helper-text"
-                              />
-                            </div>
-
-                            {/* Done button */}
-                            <Button
-                              type="button"
-                              aria-label="Done"
-                              className="group relative flex min-h-12 items-center justify-center rounded-xl bg-[#B90606] px-4 py-3 transition-all ease-in-out hover:rounded-[calc(var(--mercury-ui-border-radius-control)*1.2)]"
-                            >
-                              <span className="absolute inset-0 bg-black/[0.04] opacity-0 transition-opacity group-hover:opacity-100" />
-                              <span className="flex flex-1 items-center justify-center gap-x-2">
-                                <span className="flex flex-row items-center gap-x-[4px] text-white">
-                                  Done
-                                  <svg
-                                    aria-hidden="true"
-                                    className="h-4 w-4 translate-x-[-3px] opacity-50 transition-transform group-hover:translate-x-0 group-hover:opacity-100"
-                                    role="img"
-                                    viewBox="0 0 256 256"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <line
-                                      x1="70"
-                                      y1="128"
-                                      x2="216"
-                                      y2="128"
-                                      stroke="currentColor"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth="24"
-                                      className="origin-[216px_128px] scale-x-0 transition-transform group-hover:scale-x-100"
-                                    />
-                                    <polyline
-                                      points="144 56 216 128 144 200"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth="24"
-                                    />
-                                  </svg>
-                                </span>
-                              </span>
-                            </Button>
-                          </div>
-                        </div>
-                      </Dialog.Content>
-                    </Dialog.Portal>
-                  </Dialog.Root>
+                  <CouponDialog>
+                    <button
+                      type="button"
+                      className="flex items-center gap-2 transition-colors"
+                    >
+                      Add coupon or gift card
+                    </button>
+                  </CouponDialog>
                   <p></p>
                 </div>
               </div>
@@ -462,7 +412,7 @@ const PaymentForm = () => {
             </div>
           </section>
 
-          <div>
+          <div className="flex-1 overflow-y-auto pb-4">
             <CartItemsList />{" "}
           </div>
         </div>

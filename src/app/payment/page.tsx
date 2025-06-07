@@ -1,10 +1,12 @@
-import React from 'react'
-import PaymentForm from './PaymentForm'
+import React from "react";
+import PaymentForm from "./PaymentForm";
 
 const page = () => {
   return (
-    <div><PaymentForm/></div>
-  )
-}
+    <div>
+      <PaymentForm />
+    </div>
+  );
+};
 
-export default page
+export default page;

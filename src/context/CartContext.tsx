@@ -30,6 +30,7 @@ addToCart: (
   increaseExtraQty: (mainItem: CartItem, extra: MenuItem) => void;
 decreaseExtraQty: (mainItem: CartItem, extra: MenuItem) => void;
 
+
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);

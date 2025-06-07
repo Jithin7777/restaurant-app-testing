@@ -18,6 +18,7 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "../ui/button";
 import { useCart } from "@/context/CartContext";
+import { useRouter } from "next/navigation";
 
 interface CartSheetProps {
   isOpen: boolean;
@@ -39,6 +40,8 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
     setSelectedTab(tab);
     setIsDialogOpen(true);
   };
+
+  const router=useRouter()
 
   const totalCartCount = cartItems.reduce((total, cartItem) => {
     const mainQty = cartItem.quantity;
@@ -435,12 +438,18 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
             </p>
           </div>
           <div className="mr-3 ml-3">
-            <Button
-              disabled
-              className="mb-9 w-full rounded-md bg-gray-200 py-3 text-gray-500 transition-colors hover:bg-gray-300"
-            >
-              Go To Checkout
-            </Button>
+           <Button
+  disabled={cartItems.length === 0}
+  onClick={()=>router.push("/payment")}
+  className={`mb-9 w-full rounded-md py-3 transition-colors ${
+    cartItems.length === 0
+      ? "bg-gray-200 text-gray-500"
+      : "bg-[#B90606] text-white hover:bg-[#a10505]"
+  }`}
+>
+  Go To Checkout
+</Button>
+
           </div>
         </div>
       </SheetContent>

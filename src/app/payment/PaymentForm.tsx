@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Accordion,
   AccordionContent,
@@ -8,12 +10,15 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
-import { ArrowLeft, Clock, Store } from "lucide-react";
+import { ArrowLeft, Clock, Minus, Plus, Store } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
-import React from "react";
+import React, { use } from "react";
+import { useCart } from "@/context/CartContext";
+import CartItemsList from "./CartItemsList";
 
 const PaymentForm = () => {
+  const { subtotal } = useCart();
   return (
     <div className="grid bg-transparent px-4 pt-14 pb-20 lg:grid lg:grid-cols-[1fr_25rem] lg:px-2 lg:pt-0 lg:pb-0">
       <div className="mx-auto flex flex-col gap-8 sm:w-[31.25rem] lg:gap-10 lg:pt-16 lg:pb-20">
@@ -289,7 +294,7 @@ const PaymentForm = () => {
                   </div>
                   <div className="flex">
                     <p className="flex flex-row gap-2 text-base font-semibold">
-                      $11.00
+                      ${subtotal.toFixed(2)}
                     </p>
                   </div>
                 </div>
@@ -388,7 +393,7 @@ const PaymentForm = () => {
                               <Input
                                 id="coupon-input"
                                 placeholder="Promo Code or Gift Card"
-                                className="  rounded-lg w-full border px-4 py-6 focus:ring-[1.5px] focus:outline-none"
+                                className="w-full rounded-lg border px-4 py-6 focus:ring-[1.5px] focus:outline-none"
                                 aria-label="Promo Code or Gift Card"
                                 name="coupon-gift-card-input"
                               />
@@ -402,7 +407,7 @@ const PaymentForm = () => {
                             <Button
                               type="button"
                               aria-label="Done"
-                              className="group rounded-xl relative flex min-h-12 items-center justify-center bg-[#B90606] px-4 py-3 transition-all ease-in-out hover:rounded-[calc(var(--mercury-ui-border-radius-control)*1.2)]"
+                              className="group relative flex min-h-12 items-center justify-center rounded-xl bg-[#B90606] px-4 py-3 transition-all ease-in-out hover:rounded-[calc(var(--mercury-ui-border-radius-control)*1.2)]"
                             >
                               <span className="absolute inset-0 bg-black/[0.04] opacity-0 transition-opacity group-hover:opacity-100" />
                               <span className="flex flex-1 items-center justify-center gap-x-2">
@@ -457,7 +462,9 @@ const PaymentForm = () => {
             </div>
           </section>
 
-          <div></div>
+          <div>
+            <CartItemsList />{" "}
+          </div>
         </div>
       </div>
     </div>

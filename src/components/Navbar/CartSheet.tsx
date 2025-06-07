@@ -405,7 +405,8 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
                   })}
                 </div>
               );
-            })
+            }
+          )
           )}
         </div>
 

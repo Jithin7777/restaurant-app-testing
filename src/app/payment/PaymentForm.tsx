@@ -52,7 +52,7 @@ const PaymentForm = () => {
             </div>
             <div className="border-t bg-[#B906060D] p-4 text-center">
               <p className="text-sm text-[#B90606]">
-                You're saving <span className="font-bold">$1.21</span> by
+                You&apos;re saving <span className="font-bold">$1.21</span> by
                 ordering directly from us vs. other websites{" "}
               </p>
             </div>

@@ -17,7 +17,7 @@ interface Props {
 }
 
 export default function OrderSummaryDrawer({ children }: Props) {
-  const { subtotal, cartItems } = useCart();
+  const { subtotal } = useCart();
   return (
     <Dialog.Root>
       {/* Use passed-in trigger */}

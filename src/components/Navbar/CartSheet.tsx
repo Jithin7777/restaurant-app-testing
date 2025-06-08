@@ -336,7 +336,7 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
 
                   {/* Extras */}
                   {cartItem.extras?.map((extra, j) => {
-                    const extraPrice = parseFloat(extra.item.price);
+                    const extraPrice = parseFloat(extra.item?.price);
                     const extraTotal = extraPrice * extra.quantity;
 
                     return (
@@ -347,12 +347,12 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
                         <div
                           className="flex gap-4"
                           role="button"
-                          title={`Click to edit ${extra.item.title}`}
+                          title={`Click to edit ${extra.item?.title}`}
                         >
                           <div className="relative h-[46px] w-[46px] shrink-0 overflow-hidden rounded-md bg-gray-100">
                             <img
-                              src={extra.item.image || cartItem.item.image}
-                              alt={extra.item.title}
+                              src={extra.item?.image || cartItem.item?.image}
+                              alt={extra.item?.title}
                               className="h-full w-full object-cover"
                               loading="lazy"
                             />
@@ -360,7 +360,7 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
                           <div className="flex grow flex-col gap-1">
                             <div className="flex flex-col gap-1">
                               <p className="text-sm font-medium text-gray-900">
-                                {extra.item.title}
+                                {extra.item?.title}
                               </p>
                             </div>
                             <div className="flex cursor-default items-center justify-between">

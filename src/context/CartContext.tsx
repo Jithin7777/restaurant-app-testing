@@ -144,12 +144,23 @@ const decreaseExtraQty = (mainItem: CartItem, extra: MenuItem) => {
     return prev.map((ci) => {
       const isSameItem =
         ci.item.id === mainItem.item.id &&
-        JSON.stringify((ci.extras ?? []).map((e) => e.item.id).sort()) ===
-          JSON.stringify((mainItem.extras ?? []).map((e) => e.item.id).sort());
+        JSON.stringify(
+          (ci.extras ?? [])
+            .filter((e) => e && e.item && e.item.id)
+            .map((e) => e.item.id)
+            .sort()
+        ) ===
+        JSON.stringify(
+          (mainItem.extras ?? [])
+            .filter((e) => e && e.item && e.item.id)
+            .map((e) => e.item.id)
+            .sort()
+        );
 
       if (!isSameItem) return ci;
 
       const updatedExtras = (ci.extras || [])
+        .filter((e) => e && e.item && e.item.id)
         .map((e) =>
           e.item.id === extra.id
             ? { ...e, quantity: e.quantity - 1 }
@@ -264,7 +275,7 @@ const addToCart = (
       const extrasTotal =
         cartItem.extras?.reduce(
           (acc, extra) =>
-            acc + parseFloat(extra.item.price) * extra.quantity,
+            acc + parseFloat(extra.item?.price) * extra.quantity,
           0
         ) || 0;
 

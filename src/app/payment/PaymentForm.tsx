@@ -55,15 +55,14 @@ const PaymentForm = () => {
             <div className="overflow-clip rounded-xl border bg-transparent">
               <div className="flex flex-col">
                 <div className="flex flex-col py-2">
-                  <p className="flex flex-row items-center gap-2 px-4 py-2">
-                    <Store />
-                    <span>Pick up from</span>{" "}
-                    <a href="">
-                      {" "}
-                      <span className="text-base font-bold">
-                        1420 W Horizon Ridge Pkwy, Henderson
+                  <p className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary flex flex-wrap items-start gap-2 px-4 py-2">
+                    <span className="flex flex-row items-start gap-2">
+                      <Store className="h-5 w-5 shrink-0" />
+
+                      <span>
+                        Pick up from <b>1420 W Horizon Ridge Pkwy, Henderson</b>
                       </span>
-                    </a>
+                    </span>
                   </p>
                   <p className="flex flex-row items-center gap-2 px-4 py-2">
                     {" "}

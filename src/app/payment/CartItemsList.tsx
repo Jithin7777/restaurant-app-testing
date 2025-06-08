@@ -21,7 +21,7 @@ const CartItemsList = () => {
         return (
           <div
             key={`main-${cartItem.item.id}-${index}`}
-            className="flex flex-col gap-4 px-4 py-3"
+            className="flex flex-col gap-4 px-4 py-3 bg-white rounded-xl mt-5"
           >
             {/* Main Item */}
             <div

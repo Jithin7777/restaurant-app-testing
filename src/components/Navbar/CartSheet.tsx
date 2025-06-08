@@ -95,8 +95,9 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
       </div>
       <SheetContent
         side={isMobile? "bottom" :"right"}
-        className="mt-5 mb-5 flex h-[calc(100vh-35px)] w-full !max-w-[550px] transform flex-col rounded-4xl bg-white text-black transition-all duration-500 ease-in-out sm:!w-[500px] md:mr-2"
-      >
+ className={`mt-5 md:mb-5 transform flex flex-col bg-white text-black transition-all duration-500 ease-in-out
+    ${isMobile ? "h-[90vh] w-full   rounded-t-3xl px-4" : "h-[calc(100vh-35px)] !max-w-[550px] sm:!w-[500px] rounded-4xl md:mr-2"}`
+    }      >
         <SheetHeader
           className={`transition-opacity delay-100 duration-300 ${
             isOpen ? "opacity-100" : "opacity-0"

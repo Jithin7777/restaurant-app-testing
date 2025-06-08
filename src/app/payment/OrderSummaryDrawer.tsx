@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 
 interface Props {
-  children: React.ReactNode; 
+  children: React.ReactNode;
 }
 
 export default function OrderSummaryDrawer({ children }: Props) {
@@ -90,13 +90,13 @@ export default function OrderSummaryDrawer({ children }: Props) {
           <div className="flex-1 overflow-y-auto pt-4">
             <CartItemsList />
           </div>
-          <Button className="group relative py-3 mt-5 mb-5 flex min-h-12 items-center justify-center bg-[#B90606] px-4  text-white transition-all ease-in-out">
+          <Button className="group relative mt-5 mb-5 flex min-h-12 items-center justify-center bg-[#B90606] px-4 py-3 text-white transition-all ease-in-out">
             <span className="rounded-mercury-ui-control pointer-events-none absolute inset-0 bg-black/[0.04] opacity-0 transition-opacity group-hover:rounded-[calc(var(--mercury-ui-border-radius-control)*1.2)] group-hover:opacity-100 hover:rounded-[calc(var(--mercury-ui-border-radius-control)*1.2)]"></span>
 
             <span className="flex flex-1 items-center justify-center gap-x-2">
               <span className="flex flex-row items-center gap-x-[4px]">
                 Done
-                <ChevronRight className="mt-1 h-5 w-5" />
+                <ChevronRight className="h-5 w-5" />
               </span>
             </span>
           </Button>

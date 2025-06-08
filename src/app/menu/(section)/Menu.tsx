@@ -17,7 +17,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useCart } from "@/context/CartContext";
 
-// Move menuItems outside component for clarity
 const menuItems: MenuItem[] = [
   {
     id: "1",
@@ -152,7 +151,7 @@ const PopularMenu = () => {
           aria-modal="true"
           aria-labelledby="dialog-title"
           aria-describedby="dialog-desc"
-          className="overflow-hidden border-gray-300 bg-white p-0 sm:max-w-[650px]"
+          className="overflow-hidden  border-gray-300 bg-white p-0 sm:max-w-[650px]"
         >
           <div className="relative h-[250px] w-full overflow-hidden rounded-xl sm:h-[330px] lg:h-[400px]">
             {selectedItem && (

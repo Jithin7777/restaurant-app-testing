@@ -19,6 +19,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "../ui/button";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
+import useIsMobile from "@/hooks/UseIsMobile";
 
 interface CartSheetProps {
   isOpen: boolean;
@@ -26,6 +27,7 @@ interface CartSheetProps {
 }
 
 const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
+  const isMobile = useIsMobile(); 
   const [selectedTab, setSelectedTab] = useState("pickup");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const {
@@ -92,7 +94,7 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
         </SheetTrigger>{" "}
       </div>
       <SheetContent
-        side="right"
+        side={isMobile? "bottom" :"right"}
         className="mt-5 mb-5 flex h-[calc(100vh-35px)] w-full !max-w-[550px] transform flex-col rounded-4xl bg-white text-black transition-all duration-500 ease-in-out sm:!w-[500px] md:mr-2"
       >
         <SheetHeader

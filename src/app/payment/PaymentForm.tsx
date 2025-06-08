@@ -15,6 +15,7 @@ import {
   ChevronRight,
   Clock,
   CreditCard,
+  MapPin,
   Store,
 } from "lucide-react";
 import React from "react";
@@ -24,8 +25,7 @@ import CouponDialog from "./CouponDialog";
 import OrderSummaryDrawer from "./OrderSummaryDrawer";
 
 const PaymentForm = () => {
-    const { subtotal, cartItems } = useCart();
-
+  const { subtotal, cartItems } = useCart();
 
   const totalCartCount = cartItems.reduce((total, cartItem) => {
     const mainQty = cartItem.quantity;
@@ -34,8 +34,6 @@ const PaymentForm = () => {
       0;
     return total + mainQty + extrasQty;
   }, 0);
-
-
 
   return (
     <div className="grid min-h-screen bg-transparent px-4 pt-14 pb-20 lg:grid lg:grid-cols-[1fr_25rem] lg:px-2 lg:pt-0 lg:pb-0">
@@ -299,24 +297,9 @@ const PaymentForm = () => {
                 aria-label="Powered by Owner Opens in new tab"
                 target="_blank"
                 href="https://owner.com"
+                className="flex items-center gap-1"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                  className="text-mercury-ui-primary mr-1 inline-flex h-5 w-5"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M12.353 10a2.353 2.353 0 1 1-4.706 0 2.353 2.353 0 0 1 4.706 0"
-                  ></path>
-                  <path
-                    fill="currentColor"
-                    fillRule="evenodd"
-                    d="M10 20c5.523 0 10-4.477 10-10S15.523 0 10 0 0 4.477 0 10s4.477 10 10 10m0-3.726s5-2.607 5-6.274a5 5 0 0 0-10 0c0 3.667 5 6.275 5 6.275"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
+                <MapPin className="text-mercury-ui-primary h-5 w-5" />
                 <span className="text-mercury-ui-text-sm text-mercury-ui-primary font-mercury-ui-secondary">
                   Powered by Owner
                 </span>

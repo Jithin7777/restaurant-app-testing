@@ -159,7 +159,7 @@ const PickupDeliveryInfo = () => {
                                 <div
                                   className={`h-full w-full rounded-full ${
                                     selectedLocation === location.id
-                                      ? "bg-gray-900"
+                                      ? "none"
                                       : "bg-transparent"
                                   }`}
                                 />

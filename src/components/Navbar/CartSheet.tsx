@@ -19,7 +19,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "../ui/button";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
-import useIsMobile from "@/hook/UseIsMobile";
+import useIsMobile from "@/hooks/UseIsMobile";
 
 interface CartSheetProps {
   isOpen: boolean;

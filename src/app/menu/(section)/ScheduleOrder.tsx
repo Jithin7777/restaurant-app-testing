@@ -43,8 +43,8 @@ export const ScheduleOrderDialog = () => {
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="w-[100vw] max-w-[100vw] rounded-lg bg-white p-0 sm:w-full sm:max-w-md md:max-w-2xl">
-          <div className="flex h-[90dvh] max-h-[600px] flex-col sm:h-[80vh]">
+        <DialogContent className="w-[100vw] max-w-[100vw] border-0 rounded-none md:rounded-lg bg-white p-0 sm:w-full sm:max-w-md md:max-w-2xl">
+          <div className="flex h-[100dvh] max-h-[100vh] flex-col sm:h-[80vh]">
             {/* Header */}
             <div className="flex items-center justify-between p-4 sm:p-6">
               <DialogHeader>

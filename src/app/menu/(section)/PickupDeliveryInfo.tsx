@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScheduleOrderDialog } from "./ScheduleOrder";
 
 const PickupDeliveryInfo = () => {
   const [selectedTab, setSelectedTab] = useState("pickup");
@@ -150,7 +151,7 @@ const PickupDeliveryInfo = () => {
                             </div>
                             <div className="relative flex items-center gap-4">
                               <div
-                                className={`relative h-6 w-6 flex-shrink-0 rounded-full focus-within:outline  focus-within:outline-offset-2 focus-within:outline-gray-900 ${
+                                className={`relative h-6 w-6 flex-shrink-0 rounded-full focus-within:outline focus-within:outline-offset-2 focus-within:outline-gray-900 ${
                                   selectedLocation === location.id
                                     ? "border-[8.75px] border-gray-900"
                                     : "border-2 border-gray-300"
@@ -189,25 +190,24 @@ const PickupDeliveryInfo = () => {
                                     tabIndex={0}
                                     style={{ outline: "none" }}
                                   >
-                                    <button
-                                      type="button"
+                                    <div
                                       role="radio"
                                       aria-checked="false"
-                                      className="w-full rounded-lg border border-gray-200 px-4 py-3 outline-offset-2 transition-colors hover:border-gray-300 focus:border-gray-900 focus:ring-[1.5px] focus:ring-gray-900 focus:outline f focus:outline-gray-900/10"
+                                      className="f w-full rounded-lg border border-gray-200 px-4 py-2 outline-offset-2 transition-colors hover:border-gray-300 focus:border-gray-900 focus:ring-[1.5px] focus:ring-gray-900 focus:outline focus:outline-gray-900/10"
                                       aria-label="Schedule your pickup"
                                       tabIndex={0}
                                     >
                                       <div className="bg-transparent">
                                         <div className="flex w-full items-center justify-between">
-                                          <div className="flex items-center gap-2 text-left">
-                                            <Calendar className="h-5 w-5 text-gray-900" />
-                                            <p className="font-medium text-gray-900">
-                                              Schedule your pickup
-                                            </p>
+                                          <div className="flex items-center text-left md:gap-2">
+                                            <span>
+                                              <Calendar className="h-6 w-6  text-gray-900" />
+                                            </span>
+                                            <ScheduleOrderDialog />
                                           </div>
                                         </div>
                                       </div>
-                                    </button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>

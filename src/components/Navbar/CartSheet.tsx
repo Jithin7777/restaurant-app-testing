@@ -19,17 +19,19 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "../ui/button";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
-import useIsMobile from "@/hooks/UseIsMobile";
+import useIsMobile from "@/hook/UseIsMobile";
 
 interface CartSheetProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  inNavbar?: boolean
 }
 
-const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
+const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen ,inNavbar}) => {
   const isMobile = useIsMobile(); 
   const [selectedTab, setSelectedTab] = useState("pickup");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  
   const {
     cartItems,
     increaseCartQty,
@@ -83,15 +85,17 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <div className="hidden md:block">
-        <SheetTrigger>
-          <div className="relative">
-            <ShoppingCart className="h-7 w-7" />
-            <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-xs text-white">
-              {totalCartCount}
-            </span>
-          </div>
-        </SheetTrigger>{" "}
+      <div className="hidden md:block ">
+        {inNavbar && (
+    <SheetTrigger>
+      <div className="relative">
+        <ShoppingCart className="h-7 w-7" />
+        <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-xs text-white">
+          {totalCartCount}
+        </span>
+      </div>
+    </SheetTrigger>
+  )}
       </div>
       <SheetContent
         side={isMobile? "bottom" :"right"}
@@ -113,24 +117,24 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen }) => {
         </SheetHeader>
 
         <div
-          className={`flex-1 overflow-y-auto py-4 transition-opacity delay-150 duration-300 ${
+          className={`flex-1 overflow-y-auto  transition-opacity delay-150 duration-300 ${
             isOpen ? "opacity-100" : "opacity-0"
           }`}
         >
           <div className="flex flex-col px-4 sm:px-6 md:px-10 xl:px-10">
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <Tabs defaultValue={selectedTab}>
-                <TabsList className="bg-muted mt-2 flex w-full max-w-xl gap-1 rounded-xl bg-[rgb(235,235,236)] p-1 py-6 sm:mt-0">
+                <TabsList className="bg-muted mt-2 flex w-full max-w-xl gap-1 rounded-xl bg-[rgb(235,235,236)] p-1 py-5  md:py-6 sm:mt-0">
                   <TabsTrigger
                     value="pickup"
-                    className="flex-1 py-5 text-lg data-[state=active]:bg-white data-[state=active]:text-black"
+                    className="flex-1 py-4 md:py-5 text-lg data-[state=active]:bg-white data-[state=active]:text-black"
                     onClick={() => handleTabClick("pickup")}
                   >
                     Pickup
                   </TabsTrigger>
                   <TabsTrigger
                     value="delivery"
-                    className="flex-1 py-5 text-lg data-[state=active]:bg-white data-[state=active]:text-black"
+                    className="flex-1 py-4 md:py-5 text-lg data-[state=active]:bg-white data-[state=active]:text-black"
                     onClick={() => handleTabClick("delivery")}
                   >
                     Delivery

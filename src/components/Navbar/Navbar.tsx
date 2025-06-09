@@ -48,7 +48,7 @@ const Navbar = () => {
         </Link>
 
         {isMenuPage && (
-          <CartSheet isOpen={isCartOpen} setIsOpen={setIsCartOpen} />
+          <CartSheet isOpen={isCartOpen} setIsOpen={setIsCartOpen} inNavbar={true} />
         )}
 
         <Link

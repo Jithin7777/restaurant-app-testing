@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, Search, X } from "lucide-react";
+import { ArrowRight, Calendar, Search, X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -10,14 +10,21 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const PickupDeliveryInfo = () => {
   const [selectedTab, setSelectedTab] = useState("pickup");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
+  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const [expandedLocation, setExpandedLocation] = useState<string | null>(null);
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
     setIsDialogOpen(true);
+  };
+
+  const handleLocationSelect = (id: string) => {
+    setSelectedLocation(id);
+    setExpandedLocation(expandedLocation === id ? null : id);
   };
 
   const locations = [
@@ -118,25 +125,96 @@ const PickupDeliveryInfo = () => {
                   </div>
                 </div>
                 {/* Pickup content */}
-
                 <div className="max-h-[350px] overflow-y-auto px-6 sm:max-h-none md:px-8">
                   <fieldset className="space-y-4">
                     {locations.map((location) => (
                       <div key={location.id} className="space-y-4">
-                        <button className="flex w-full items-center justify-between gap-4 py-4 text-left">
-                          <div className="flex-1">
-                            <p className="font-medium">{location.name}</p>
-                            <p className="text-sm text-gray-500">
-                              {location.status}
-                            </p>
-                            <p className="text-sm text-gray-500">
-                              {location.address}
-                            </p>
-                          </div>
-                          <div className="flex h-6 w-6 items-center justify-center rounded-full border border-gray-300">
-                            <div className="h-3 w-3 rounded-full bg-transparent" />
-                          </div>
-                        </button>
+                        <div className="flex flex-col">
+                          <button
+                            className="flex w-full items-center justify-between gap-2 py-4 text-left focus:outline-none"
+                            role="radio"
+                            aria-checked={selectedLocation === location.id}
+                            onClick={() => handleLocationSelect(location.id)}
+                          >
+                            <div className="flex flex-col gap-1">
+                              <label htmlFor={location.id}>
+                                <p className="font-medium text-gray-900">
+                                  {location.name}
+                                </p>
+                              </label>
+                              <p className="text-sm text-gray-500">
+                                {location.status}
+                              </p>
+                              <p className="text-sm text-gray-500">
+                                {location.address}
+                              </p>
+                            </div>
+                            <div className="relative flex items-center gap-4">
+                              <div
+                                className={`relative h-6 w-6 flex-shrink-0 rounded-full focus-within:outline  focus-within:outline-offset-2 focus-within:outline-gray-900 ${
+                                  selectedLocation === location.id
+                                    ? "border-[8.75px] border-gray-900"
+                                    : "border-2 border-gray-300"
+                                }`}
+                              >
+                                <div
+                                  className={`h-full w-full rounded-full ${
+                                    selectedLocation === location.id
+                                      ? "bg-gray-900"
+                                      : "bg-transparent"
+                                  }`}
+                                />
+                                <input
+                                  className="sr-only"
+                                  type="radio"
+                                  checked={selectedLocation === location.id}
+                                  onChange={() =>
+                                    handleLocationSelect(location.id)
+                                  }
+                                  name="location"
+                                  id={location.id}
+                                />
+                              </div>
+                            </div>{" "}
+                          </button>
+
+                          {expandedLocation === location.id && (
+                            <div className="overflow-hidden pb-4">
+                              <div>
+                                <div className="bg-transparent">
+                                  <div
+                                    role="group"
+                                    dir="ltr"
+                                    className="flex w-full flex-col gap-2 py-[2px]"
+                                    aria-label="Select scheduled or as soon as possible"
+                                    tabIndex={0}
+                                    style={{ outline: "none" }}
+                                  >
+                                    <button
+                                      type="button"
+                                      role="radio"
+                                      aria-checked="false"
+                                      className="w-full rounded-lg border border-gray-200 px-4 py-3 outline-offset-2 transition-colors hover:border-gray-300 focus:border-gray-900 focus:ring-[1.5px] focus:ring-gray-900 focus:outline f focus:outline-gray-900/10"
+                                      aria-label="Schedule your pickup"
+                                      tabIndex={0}
+                                    >
+                                      <div className="bg-transparent">
+                                        <div className="flex w-full items-center justify-between">
+                                          <div className="flex items-center gap-2 text-left">
+                                            <Calendar className="h-5 w-5 text-gray-900" />
+                                            <p className="font-medium text-gray-900">
+                                              Schedule your pickup
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
                         <hr className="border-gray-200" />
                       </div>
                     ))}
@@ -174,8 +252,12 @@ const PickupDeliveryInfo = () => {
             )}
             <div className="p-6 md:p-8">
               <button
-                disabled
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-gray-200 px-4 py-3 text-gray-500"
+                disabled={!selectedLocation}
+                className={`flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 ${
+                  selectedLocation
+                    ? "bg-[#B90606] text-white"
+                    : "bg-gray-200 text-gray-500"
+                }`}
               >
                 <span>View Menu</span>
                 <ArrowRight className="h-4 w-4" />
@@ -184,8 +266,8 @@ const PickupDeliveryInfo = () => {
           </div>
         </DialogContent>
       </Dialog>
-       
-        {/* Address and Time Info */}
+
+      {/* Address and Time Info */}
 
       <div className="flex w-full gap-8 rounded-xl border border-gray-400 p-4">
         {/* Map Image - visible on md and up */}
@@ -205,7 +287,7 @@ const PickupDeliveryInfo = () => {
             <div className="flex flex-col justify-between">
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <p className="text-mercury-ui-text-base font-manrope   text-mercury-ui-secondary">
+                  <p className="text-mercury-ui-text-base font-manrope text-mercury-ui-secondary">
                     Pickup address
                   </p>
                   <span className="text-mercury-ui-text-primary">·</span>
@@ -213,12 +295,10 @@ const PickupDeliveryInfo = () => {
                     Change
                   </button>
                 </div>
-                <h2 className="font-bold text-2xl font-inter lg:text-mercury-ui-title-2xl text-mercury-ui-primary font-mercury-ui-primary hidden md:block">
+                <h2 className="font-inter lg:text-mercury-ui-title-2xl text-mercury-ui-primary font-mercury-ui-primary hidden text-2xl font-bold md:block">
                   1420 W Horizon Ridge Pkwy
                 </h2>
-                <p className="font-manrope">
-                  Metro Pizza - Green Valley
-                </p>
+                <p className="font-manrope">Metro Pizza - Green Valley</p>
               </div>
               <div className="flex">
                 <div className="flex flex-col border-r pr-4">
@@ -227,13 +307,11 @@ const PickupDeliveryInfo = () => {
                   </p>
                   <div className="flex gap-1">
                     <div className="flex items-center gap-1">
-                      <span className="font-manrope ">
-                        May 30
-                      </span>
+                      <span className="font-manrope">May 30</span>
                       <span className="text-mercury-ui-text-primary">·</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className="font-manrope  text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
+                      <span className="font-manrope text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
                         12:00 PM PDT
                       </span>
                     </div>
@@ -247,10 +325,10 @@ const PickupDeliveryInfo = () => {
                       </p>
                     </div>
                     <div className="flex w-full items-center justify-between gap-2 md:justify-normal">
-                      <p className="font-manrope  text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
+                      <p className="font-manrope text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
                         Opens at 11:00 AM PDT
                       </p>
-                      <div className="block md:hidden font-manrope">
+                      <div className="font-manrope block md:hidden">
                         <span className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
                           Opening&nbsp;
                         </span>
@@ -281,20 +359,14 @@ const PickupDeliveryInfo = () => {
               <div className="flex w-full flex-col">
                 <div className="flex w-full justify-between">
                   <div className="flex gap-1">
-                    <p className="font-manrope capitalize">
-                      pickup
-                    </p>
+                    <p className="font-manrope capitalize">pickup</p>
                     <span className="text-mercury-ui-text-primary">·</span>
                     <div className="flex items-center gap-1">
-                      <span className="font-manrope">
-                        May 30
-                      </span>
+                      <span className="font-manrope">May 30</span>
                       <span className="text-mercury-ui-text-primary">·</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className="font-manrope">
-                        12:00 PM PDT
-                      </span>
+                      <span className="font-manrope">12:00 PM PDT</span>
                     </div>
                   </div>
                   <button className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0">

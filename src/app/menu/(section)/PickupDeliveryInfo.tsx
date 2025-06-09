@@ -185,7 +185,7 @@ const PickupDeliveryInfo = () => {
                                   <div
                                     role="group"
                                     dir="ltr"
-                                    className="flex w-full flex-col gap-2 py-[2px]"
+                                    className="flex w-full flex-col gap-2 "
                                     aria-label="Select scheduled or as soon as possible"
                                     tabIndex={0}
                                     style={{ outline: "none" }}
@@ -199,9 +199,9 @@ const PickupDeliveryInfo = () => {
                                     >
                                       <div className="bg-transparent">
                                         <div className="flex w-full items-center justify-between">
-                                          <div className="flex items-center text-left md:gap-2">
+                                          <div className="flex items-center text-left gap-0 md:gap-2">
                                             <span>
-                                              <Calendar className="h-6 w-6  text-gray-900" />
+                                              <Calendar className="h-6 w-6   text-gray-900" />
                                             </span>
                                             <ScheduleOrderDialog />
                                           </div>

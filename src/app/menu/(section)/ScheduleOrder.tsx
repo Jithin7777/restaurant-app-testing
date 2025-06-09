@@ -38,7 +38,7 @@ export const ScheduleOrderDialog = () => {
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)} className="w-full md:w-auto">
+      <Button onClick={() => setIsOpen(true)} className="w-full md:w-auto shadow-none ">
         Schedule your pickup
       </Button>
 
@@ -132,7 +132,7 @@ export const ScheduleOrderDialog = () => {
             </div>
 
             {/* Footer */}
-            <div className="border-t p-4 sm:p-6">
+            <div className="border-t p-4 sm:p-6 ">
               <Button
                 disabled={!selectedTime}
                 className={`w-full gap-2 p-4 text-sm sm:p-6 sm:text-base ${

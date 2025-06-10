@@ -11,12 +11,14 @@ import {
 } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScheduleOrderDialog } from "./ScheduleOrder";
+import { useRouter } from "next/navigation";
 
 const PickupDeliveryInfo = () => {
   const [selectedTab, setSelectedTab] = useState("pickup");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [expandedLocation, setExpandedLocation] = useState<string | null>(null);
+  const router = useRouter();
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
     setIsDialogOpen(true);
@@ -27,10 +29,18 @@ const PickupDeliveryInfo = () => {
     setExpandedLocation(expandedLocation === id ? null : id);
   };
 
+  const handleViewMenu = () => {
+    if (selectedLocation) {
+      setIsDialogOpen(false); 
+      router.push("/menu"); 
+    }
+  };
+
   const locations = [
     {
       id: "nWqvW8vTEknD",
       name: "Metro Pizza - Green Valley",
+      slug: "green-valley",
       status: "Closed until 11:00 AM PDT",
       address: "1420 W Horizon Ridge Pkwy, Henderson, NV 89012, USA",
     },
@@ -53,6 +63,10 @@ const PickupDeliveryInfo = () => {
       address: "6720 Sky Pointe Dr, Las Vegas, NV 89131, USA",
     },
   ];
+
+  const selectedLocationObj = locations.find(
+    (loc) => loc.id === selectedLocation,
+  );
 
   return (
     <div className="flex flex-col gap-4 px-4 sm:px-6 md:px-10 xl:px-10">
@@ -185,7 +199,7 @@ const PickupDeliveryInfo = () => {
                                   <div
                                     role="group"
                                     dir="ltr"
-                                    className="flex w-full flex-col gap-2 "
+                                    className="flex w-full flex-col gap-2"
                                     aria-label="Select scheduled or as soon as possible"
                                     tabIndex={0}
                                     style={{ outline: "none" }}
@@ -199,9 +213,9 @@ const PickupDeliveryInfo = () => {
                                     >
                                       <div className="bg-transparent">
                                         <div className="flex w-full items-center justify-between">
-                                          <div className="flex items-center text-left gap-0 md:gap-2">
+                                          <div className="flex items-center gap-0 text-left md:gap-2">
                                             <span>
-                                              <Calendar className="h-6 w-6   text-gray-900" />
+                                              <Calendar className="h-6 w-6 text-gray-900" />
                                             </span>
                                             <ScheduleOrderDialog />
                                           </div>
@@ -252,6 +266,7 @@ const PickupDeliveryInfo = () => {
             <div className="p-6 md:p-8">
               <button
                 disabled={!selectedLocation}
+                onClick={handleViewMenu}
                 className={`flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 ${
                   selectedLocation
                     ? "bg-[#B90606] text-white"
@@ -295,9 +310,12 @@ const PickupDeliveryInfo = () => {
                   </button>
                 </div>
                 <h2 className="font-inter lg:text-mercury-ui-title-2xl text-mercury-ui-primary font-mercury-ui-primary hidden text-2xl font-bold md:block">
-                  1420 W Horizon Ridge Pkwy
+                  {selectedLocationObj?.address?.split(",")[0]}
                 </h2>
-                <p className="font-manrope">Metro Pizza - Green Valley</p>
+                <p className="font-manrope">
+                  Metro Pizza{" "}
+                  {selectedLocationObj?.name.replace("Metro Pizza", "")}
+                </p>
               </div>
               <div className="flex">
                 <div className="flex flex-col border-r pr-4">
@@ -356,16 +374,16 @@ const PickupDeliveryInfo = () => {
           <div className="flex w-full md:hidden">
             <div className="flex w-full flex-col gap-4">
               <div className="flex w-full flex-col">
-                <div className="flex w-full justify-between">
-                  <div className="flex gap-1">
+                <div className="flex w-full justify-between items-center text-sm">
+                  <div className="flex gap-1 ">
                     <p className="font-manrope capitalize">pickup</p>
                     <span className="text-mercury-ui-text-primary">·</span>
                     <div className="flex items-center gap-1">
                       <span className="font-manrope">May 30</span>
                       <span className="text-mercury-ui-text-primary">·</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <span className="font-manrope">12:00 PM PDT</span>
+                    <div className="flex items-center ">
+                      <span className="font-manrope ">12:00 PM PDT</span>
                     </div>
                   </div>
                   <button className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0">
@@ -373,10 +391,11 @@ const PickupDeliveryInfo = () => {
                   </button>
                 </div>
                 <p className="font-inter text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary font-bold">
-                  1420 W Horizon Ridge Pkwy
+                  {selectedLocationObj?.address?.split(",")[0]}{" "}
                 </p>
                 <p className="font-manrope text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary">
-                  Metro Pizza - Green Valley
+                  Metro Pizza{" "}
+                  {selectedLocationObj?.name.replace("Metro Pizza", "")}{" "}
                 </p>
               </div>
               <div className="flex flex-col border-t pt-4">
@@ -386,7 +405,7 @@ const PickupDeliveryInfo = () => {
                   </p>
                 </div>
                 <div className="flex w-full items-center justify-between gap-2">
-                  <p className="font-manrope text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
+                  <p className="font-manrope  text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
                     Opens at 11:00 AM PDT
                   </p>
                   <div className="block md:hidden">

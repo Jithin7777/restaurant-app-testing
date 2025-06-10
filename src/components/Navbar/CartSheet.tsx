@@ -430,7 +430,7 @@ const CartSheet: React.FC<CartSheetProps> = ({ isOpen, setIsOpen ,inNavbar}) => 
           <div className="mr-3 ml-3">
             <Button
               disabled={cartItems.length === 0}
-              onClick={() => router.push("/payment")}
+              onClick={() => router.push("/checkout")}
               className={`mb-9 w-full rounded-md py-3 transition-colors ${
                 cartItems.length === 0
                   ? "bg-gray-200 text-gray-500"

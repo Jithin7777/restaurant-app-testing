@@ -18,9 +18,9 @@ const Navbar = () => {
   const textColor = isMenuPage ? "text-black" : "text-white";
 
   return (
-    <nav className="fixed -top-10 left-0 z-50 flex w-full items-center justify-between bg-transparent px-5">
+    <nav className="fixed -top-10 left-0 z-50 flex w-full items-center justify-between bg-transparent px-2 md:px-5">
       <div
-        className={`relative ${isMenuPage ? "h-40 w-40 md:h-44 md:w-44" : "h-40 w-40 md:h-60 md:w-60"} md:ml-20`}
+        className={`relative ${isMenuPage ? "h-40 w-40 md:h-44 md:w-44 " : "h-40 w-40 md:h-60 md:w-60"} md:ml-20 `}
       >
         <Image
           src="/images/nav/logo1.webp"

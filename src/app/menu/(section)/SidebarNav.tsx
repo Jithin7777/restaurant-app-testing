@@ -46,7 +46,7 @@ const SidebarNav: FC = () => {
     <div className="font-inter sticky top-[112px] z-20 w-full pl-4 text-gray-700  font-bold md:pl-10 lg:w-auto lg:bg-transparent lg:px-0 lg:pt-4">
       <nav className="flex h-full w-full flex-col gap-y-3 ">
         {/* Search Input */}
-        <div className="sticky  z-10 bg-white  top-0 pb-2">
+        <div className="sticky  z-10 bg-white  top-0 md:pb-2">
           <div className="relative flex justify-center">
             <input
               type="text"

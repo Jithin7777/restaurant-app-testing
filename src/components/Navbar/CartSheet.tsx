@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -59,10 +59,12 @@ const CartSheet: React.FC<CartSheetProps> = ({
     return total + mainQty + extrasQty;
   }, 0);
 
-  const locations = [
+const locations = useMemo(
+  () => [
     {
       id: "nWqvW8vTEknD",
       name: "Metro Pizza - Green Valley",
+      slug: "green-valley",
       status: "Closed until 11:00 AM PDT",
       address: "1420 W Horizon Ridge Pkwy, Henderson, NV 89012, USA",
     },
@@ -84,8 +86,9 @@ const CartSheet: React.FC<CartSheetProps> = ({
       status: "Closed until 11:00 AM PDT",
       address: "6720 Sky Pointe Dr, Las Vegas, NV 89131, USA",
     },
-  ];
-
+  ],
+  []
+);
 
 
     // const selectedLocationObj = locations.find(

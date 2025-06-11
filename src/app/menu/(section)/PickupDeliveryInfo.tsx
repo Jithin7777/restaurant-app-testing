@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import {
   Dialog,
@@ -16,7 +16,9 @@ const PickupDeliveryInfo = () => {
   const [expandedLocation, setExpandedLocation] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const locations = [
+
+const locations = useMemo(
+  () => [
     {
       id: "nWqvW8vTEknD",
       name: "Metro Pizza - Green Valley",
@@ -42,7 +44,9 @@ const PickupDeliveryInfo = () => {
       status: "Closed until 11:00 AM PDT",
       address: "6720 Sky Pointe Dr, Las Vegas, NV 89131, USA",
     },
-  ];
+  ],
+  []
+);
 
   const selectedLocationObj = locations.find(
     (loc) => loc.id === selectedLocation,

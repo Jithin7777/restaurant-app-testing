@@ -23,9 +23,20 @@ import { useCart } from "@/context/CartContext";
 import CartItemsList from "./CartItemsList";
 import CouponDialog from "./CouponDialog";
 import OrderSummaryDrawer from "./OrderSummaryDrawer";
+import { useLocation } from "@/context/LocationContext";
 
-const PaymentForm = () => {
+const PaymentForm: React.FC = () => {
   const { subtotal, cartItems } = useCart();
+  const { selectedLocation, locations } = useLocation();
+
+  const selectedLocationObj = locations.find(
+    (loc) => loc.id === selectedLocation,
+  );
+
+  const fullAddress = selectedLocationObj?.address || "No address selected";
+  const shortAdress = fullAddress.split(",").slice(0, 2).join(",");
+
+  // const name = selectedLocationObj?.name || "No name selected";
 
   const totalCartCount = cartItems.reduce((total, cartItem) => {
     const mainQty = cartItem.quantity;
@@ -60,7 +71,7 @@ const PaymentForm = () => {
                       <Store className="h-5 w-5 shrink-0" />
 
                       <span>
-                        Pick up from <b>1420 W Horizon Ridge Pkwy, Henderson</b>
+                        Pick up from <b>{shortAdress}</b>
                       </span>
                     </span>
                   </p>

@@ -120,6 +120,32 @@ const items: MenuItem[] = [
       },
     ],
   },
+  {
+    id: "8",
+    title: "Garlic Bread",
+    price: "6.50",
+    description: "With melted Mozzarella cheese.",
+    image: "/images/menu/img7.webp",
+    likes: 6,
+    goesWellWith: [
+      {
+        id: "107",
+        title: "Garlic Knots",
+        price: "7.00",
+        description:
+          "Soft fresh baked garlic rolls topped with melted butter and Romano cheese. Served with marinara sauce. Six per order.",
+        image: "/images/menu/img5.webp",
+      },
+      {
+        id: "108",
+        title: "Carrot Cake",
+        price: "7.95",
+        description: "Made in house, 8 Layers of Heaven ! ",
+
+        image: "/images/menu/img9.webp",
+      },
+    ],
+  },
 ];
 
 const CardList: React.FC = () => {
@@ -174,7 +200,7 @@ const CardList: React.FC = () => {
   return (
     <div
       id="appetizers"
-      className="grid grid-cols-1 md:gap-4 lg:grid-cols-2 xl:p-0"
+      className="grid grid-cols-1 md:gap-2 lg:grid-cols-2 xl:p-0"
     >
       <div className="lg:col-span-2">
         <h2 className="font-oswald text-xl font-normal md:text-2xl lg:text-3xl">
@@ -186,7 +212,7 @@ const CardList: React.FC = () => {
         <div
           key={item.id}
           title={`Add ${item.title} to your cart`}
-          className="relative mt-5 flex w-full cursor-pointer flex-row justify-between overflow-hidden rounded-lg border border-gray-300 bg-white transition-shadow duration-300 hover:shadow-lg md:h-[200px]"
+          className="relative mt-2 flex w-full cursor-pointer flex-row justify-between overflow-hidden rounded-lg border border-gray-300 bg-white transition-shadow duration-300 hover:shadow-lg md:h-[200px]"
           onClick={() => handleItemOpen(item)}
         >
           <div className="flex flex-1 flex-col gap-y-2 p-4">
@@ -235,11 +261,11 @@ const CardList: React.FC = () => {
         open={isDialogOpen}
         onOpenChange={(open) => !open && closeDialog()}
       >
-        <DialogContent className="hide-scrollbar flex max-h-[90vh] flex-col overflow-hidden rounded-4xl border border-gray-300 bg-white p-0 sm:max-w-[650px]">
+        <DialogContent className="hide-scrollbar flex max-h-[90vh] flex-col overflow-hidden border border-gray-300 bg-white p-0 sm:max-w-[650px] md:rounded-4xl">
           {/* Scrollable Content (image + details) */}
           <div className="hide-scrollbar flex-1 overflow-y-auto">
             {/* Image Section */}
-            <div className="relative h-[250px] w-full overflow-hidden sm:h-[330px] lg:h-[380px]">
+            <div className="relative h-[250px] overflow-hidden sm:h-[330px] lg:h-[380px]">
               {selectedItem && (
                 <Image
                   src={selectedItem.image}
@@ -405,23 +431,22 @@ const CardList: React.FC = () => {
             <Button
               className="w-full flex-1 bg-[#B90606] px-6 py-3 text-white hover:bg-[#a00505]"
               onClick={() => {
-  if (selectedItem) {
-    const formattedExtras = extraItems.map((item) => ({
-      item,
-      quantity: 1,
-    }));
-    addToCart(selectedItem, quantity, formattedExtras);
-  }
-  closeDialog();
-}}
-
+                if (selectedItem) {
+                  const formattedExtras = extraItems.map((item) => ({
+                    item,
+                    quantity: 1,
+                  }));
+                  addToCart(selectedItem, quantity, formattedExtras);
+                }
+                closeDialog();
+              }}
             >
               <span className="flex w-full justify-between">
                 <span>
                   Add{" "}
                   {totalItemCount === 1 ? "item" : `${totalItemCount} items`}
                 </span>
-                <span>${grandTotal}</span>
+                <span>${Number(grandTotal || 0).toFixed(2)}</span>{" "}
               </span>
             </Button>
           </DialogFooter>

@@ -19,7 +19,6 @@ const Navbar = () => {
 
   return (
     <nav className="fixed -top-10 left-0 z-50 flex w-full items-center justify-between bg-transparent px-5">
-      {/* Logo */}
       <div
         className={`relative ${isMenuPage ? "h-40 w-40 md:h-44 md:w-44" : "h-40 w-40 md:h-60 md:w-60"} md:ml-20`}
       >
@@ -48,7 +47,11 @@ const Navbar = () => {
         </Link>
 
         {isMenuPage && (
-          <CartSheet isOpen={isCartOpen} setIsOpen={setIsCartOpen} inNavbar={true} />
+          <CartSheet
+            isOpen={isCartOpen}
+            setIsOpen={setIsCartOpen}
+            inNavbar={true}
+          />
         )}
 
         <Link

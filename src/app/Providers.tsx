@@ -1,5 +1,6 @@
 "use client";
 import { CartProvider } from "@/context/CartContext";
+import { LocationProvider } from "@/context/LocationContext";
 import type { FC } from "react";
 import { Toaster } from "react-hot-toast";
 
@@ -10,8 +11,8 @@ interface ProvidersProps {
 const Providers: FC<ProvidersProps> = ({ children }) => {
   return (
     <CartProvider>
-      {children}
-      <Toaster position="top-right" />
+      <LocationProvider> {children}</LocationProvider>
+      <Toaster position="top-center" />
     </CartProvider>
   );
 };

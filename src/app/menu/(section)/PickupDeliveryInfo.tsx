@@ -2,51 +2,20 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import {
-  Dialog,
-} from "@/components/ui/dialog";
+import { Dialog } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter } from "next/navigation";
 import LocationDialogContent from "./LocationDialogContent";
+import { useLocation } from "@/context/LocationContext";
 
 const PickupDeliveryInfo = () => {
   const [selectedTab, setSelectedTab] = useState("pickup");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [expandedLocation, setExpandedLocation] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-const locations = useMemo(
-  () => [
-    {
-      id: "nWqvW8vTEknD",
-      name: "Metro Pizza - Green Valley",
-      slug: "green-valley",
-      status: "Closed until 11:00 AM PDT",
-      address: "1420 W Horizon Ridge Pkwy, Henderson, NV 89012, USA",
-    },
-    {
-      id: "sCxs2Rm88CU2",
-      name: "Metro Pizza - Tropicana",
-      status: "Closed until 11:00 AM PDT",
-      address: "1395 E Tropicana Ave, Las Vegas, NV 89119, USA",
-    },
-    {
-      id: "9qdPXDuXyKA0",
-      name: "Metro Pizza - Decatur",
-      status: "Closed until 11:00 AM PDT",
-      address: "4001 S Decatur Blvd, Las Vegas, NV 89103, USA",
-    },
-    {
-      id: "FcuzBPk5UhUP",
-      name: "Metro Pizza - Northwest",
-      status: "Closed until 11:00 AM PDT",
-      address: "6720 Sky Pointe Dr, Las Vegas, NV 89131, USA",
-    },
-  ],
-  []
-);
+  const { selectedLocation, setSelectedLocation, locations } = useLocation();
 
   const selectedLocationObj = locations.find(
     (loc) => loc.id === selectedLocation,

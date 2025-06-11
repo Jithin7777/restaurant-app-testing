@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -8,15 +8,14 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
-import {
-  Dialog,
-} from "@/components/ui/dialog";
+import { Dialog } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "../ui/button";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import useIsMobile from "@/hooks/UseIsMobile";
 import LocationDialogContent from "@/app/menu/(section)/LocationDialogContent";
+import { useLocation } from "@/context/LocationContext";
 
 interface CartSheetProps {
   isOpen: boolean;
@@ -32,8 +31,8 @@ const CartSheet: React.FC<CartSheetProps> = ({
   const isMobile = useIsMobile();
   const [selectedTab, setSelectedTab] = useState("pickup");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
-    const [expandedLocation, setExpandedLocation] = useState<string | null>(null);
+  const [expandedLocation, setExpandedLocation] = useState<string | null>(null);
+  const { selectedLocation, setSelectedLocation, locations } = useLocation();
 
   const {
     cartItems,
@@ -59,74 +58,38 @@ const CartSheet: React.FC<CartSheetProps> = ({
     return total + mainQty + extrasQty;
   }, 0);
 
-const locations = useMemo(
-  () => [
-    {
-      id: "nWqvW8vTEknD",
-      name: "Metro Pizza - Green Valley",
-      slug: "green-valley",
-      status: "Closed until 11:00 AM PDT",
-      address: "1420 W Horizon Ridge Pkwy, Henderson, NV 89012, USA",
-    },
-    {
-      id: "sCxs2Rm88CU2",
-      name: "Metro Pizza - Tropicana",
-      status: "Closed until 11:00 AM PDT",
-      address: "1395 E Tropicana Ave, Las Vegas, NV 89119, USA",
-    },
-    {
-      id: "9qdPXDuXyKA0",
-      name: "Metro Pizza - Decatur",
-      status: "Closed until 11:00 AM PDT",
-      address: "4001 S Decatur Blvd, Las Vegas, NV 89103, USA",
-    },
-    {
-      id: "FcuzBPk5UhUP",
-      name: "Metro Pizza - Northwest",
-      status: "Closed until 11:00 AM PDT",
-      address: "6720 Sky Pointe Dr, Las Vegas, NV 89131, USA",
-    },
-  ],
-  []
-);
+  // const selectedLocationObj = locations.find(
+  //   (loc) => loc.id === selectedLocation
+  // );
 
+  // Load selected location from localStorage on mount
+  useEffect(() => {
+    const storedLocation = localStorage.getItem("selectedLocation");
+    if (storedLocation) {
+      setSelectedLocation(storedLocation);
+    }
+  }, []);
 
-    // const selectedLocationObj = locations.find(
-    //   (loc) => loc.id === selectedLocation
-    // );
-  
-    // Load selected location from localStorage on mount
-    useEffect(() => {
-      const storedLocation = localStorage.getItem("selectedLocation");
-      if (storedLocation) {
-        setSelectedLocation(storedLocation);
-      }
-    }, []);
-  
-    // Save selected location to localStorage whenever it changes
-    useEffect(() => {
-      if (selectedLocation) {
-        localStorage.setItem("selectedLocation", selectedLocation);
-      } else {
-        localStorage.removeItem("selectedLocation");
-      }
-    }, [selectedLocation]);
-  
-  
-    const handleLocationSelect = (id: string) => {
-      setSelectedLocation(id);
-      setExpandedLocation(expandedLocation === id ? null : id);
-    };
-  
-    const handleViewMenu = () => {
-      if (selectedLocation) {
-        setIsDialogOpen(false);
-        router.push("/menu");
-      }
-    };
-  
-  
-  
+  // Save selected location to localStorage whenever it changes
+  useEffect(() => {
+    if (selectedLocation) {
+      localStorage.setItem("selectedLocation", selectedLocation);
+    } else {
+      localStorage.removeItem("selectedLocation");
+    }
+  }, [selectedLocation]);
+
+  const handleLocationSelect = (id: string) => {
+    setSelectedLocation(id);
+    setExpandedLocation(expandedLocation === id ? null : id);
+  };
+
+  const handleViewMenu = () => {
+    if (selectedLocation) {
+      setIsDialogOpen(false);
+      router.push("/menu");
+    }
+  };
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -211,12 +174,26 @@ const locations = useMemo(
                     <span className="text-gray-600">11:45 AM PDT</span>
                   </div>
                 </div>
-                <button className="border-b border-black p-0 text-blue-600">
+                <button
+                  className="text-mercury-ui-text-base border-b p-0 text-black"
+                  onClick={() => setIsDialogOpen(true)}
+                >
                   Change
                 </button>
               </div>
-              <p className="font-bold">1395 East Tropicana Ave</p>
-              <p className="text-gray-600">Metro Pizza - Tropicana</p>
+              {selectedLocation && (
+                <>
+                  <p className="font-bold">
+                    {locations
+                      .find((loc) => loc.id === selectedLocation)
+                      ?.address.split(",")[0] || "Address not available"}
+                  </p>
+                  <p className="text-gray-600">
+                    {locations.find((loc) => loc.id === selectedLocation)
+                      ?.name || "Name not available"}
+                  </p>
+                </>
+              )}
             </div>
           </div>
           {cartItems.length === 0 ? (

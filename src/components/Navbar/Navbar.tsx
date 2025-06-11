@@ -24,7 +24,7 @@ const Navbar = () => {
         className={`relative ${isMenuPage ? "h-40 w-40 md:h-44 md:w-44" : "h-40 w-40 md:h-60 md:w-60"} md:ml-20`}
       >
         <Image
-          src="/images/nav/logo.png"
+          src="/images/nav/logo1.webp"
           alt="Logo"
           fill
           className="object-contain"

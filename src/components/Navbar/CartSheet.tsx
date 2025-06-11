@@ -88,9 +88,9 @@ const CartSheet: React.FC<CartSheetProps> = ({
 
 
 
-    const selectedLocationObj = locations.find(
-      (loc) => loc.id === selectedLocation
-    );
+    // const selectedLocationObj = locations.find(
+    //   (loc) => loc.id === selectedLocation
+    // );
   
     // Load selected location from localStorage on mount
     useEffect(() => {

@@ -1,41 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { ArrowRight, Calendar, Search, X } from "lucide-react";
 import {
   Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
 } from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ScheduleOrderDialog } from "./ScheduleOrder";
 import { useRouter } from "next/navigation";
+import LocationDialogContent from "./LocationDialogContent";
 
 const PickupDeliveryInfo = () => {
   const [selectedTab, setSelectedTab] = useState("pickup");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [expandedLocation, setExpandedLocation] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const handleTabClick = (tab: string) => {
-    setSelectedTab(tab);
-    setIsDialogOpen(true);
-  };
-
-  const handleLocationSelect = (id: string) => {
-    setSelectedLocation(id);
-    setExpandedLocation(expandedLocation === id ? null : id);
-  };
-
-  const handleViewMenu = () => {
-    if (selectedLocation) {
-      setIsDialogOpen(false); 
-      router.push("/menu"); 
-    }
-  };
-
   const locations = [
     {
       id: "nWqvW8vTEknD",
@@ -68,6 +48,57 @@ const PickupDeliveryInfo = () => {
     (loc) => loc.id === selectedLocation,
   );
 
+  // Load selected location from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedLocation = localStorage.getItem("selectedLocation");
+      console.log("Loaded from localStorage:", storedLocation);
+
+      if (storedLocation) {
+        // Verify the location exists
+        const locationExists = locations.some(
+          (loc) => loc.id === storedLocation,
+        );
+        console.log("Location exists:", locationExists);
+
+        if (locationExists) {
+          setSelectedLocation(storedLocation);
+        } else {
+          console.log("Location not found in list, clearing storage");
+          localStorage.removeItem("selectedLocation");
+        }
+      }
+      setIsLoading(false);
+    }
+  }, [locations]); // Add locations to dependencies
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && !isLoading) {
+      console.log("Saving to localStorage:", selectedLocation);
+      if (selectedLocation) {
+        localStorage.setItem("selectedLocation", selectedLocation);
+      } else {
+        localStorage.removeItem("selectedLocation");
+      }
+    }
+  }, [selectedLocation, isLoading]);
+  const handleTabClick = (tab: string) => {
+    setSelectedTab(tab);
+    setIsDialogOpen(true);
+  };
+
+  const handleLocationSelect = (id: string) => {
+    setSelectedLocation(id);
+    setExpandedLocation(expandedLocation === id ? null : id);
+  };
+
+  const handleViewMenu = () => {
+    if (selectedLocation) {
+      setIsDialogOpen(false);
+      router.push("/menu");
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4 px-4 sm:px-6 md:px-10 xl:px-10">
       {/* Mobile Tabs */}
@@ -90,195 +121,16 @@ const PickupDeliveryInfo = () => {
             </TabsTrigger>
           </TabsList>
         </Tabs>
-
-        <DialogContent className="max-w-[100vw] overflow-hidden rounded-none p-0 md:max-w-2xl md:rounded-xl">
-          <div className="flex h-[90vh] flex-col bg-white md:h-[80vh]">
-            {/* Header */}
-            <div className="flex items-center justify-between p-6 md:p-8">
-              <DialogHeader>
-                <DialogTitle className="text-xl md:text-2xl lg:text-3xl">
-                  Select location
-                </DialogTitle>
-              </DialogHeader>
-              <button
-                onClick={() => setIsDialogOpen(false)}
-                className="rounded-full border p-2"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Inner tabs */}
-            <div className="px-6 pb-4 md:px-8">
-              <div className="flex rounded-lg bg-gray-100 p-1">
-                {["pickup", "delivery"].map((type) => (
-                  <button
-                    key={type}
-                    className={`flex flex-1 items-center justify-center gap-2 rounded-md py-3 ${
-                      selectedTab === type ? "bg-white shadow" : ""
-                    }`}
-                    onClick={() => setSelectedTab(type)}
-                  >
-                    <span className="capitalize">{type}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Main Content Section */}
-            {selectedTab === "pickup" ? (
-              <>
-                <div className="px-6 pb-4 md:px-8">
-                  <div className="relative">
-                    <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                    <input
-                      type="search"
-                      placeholder="Find the closest location for your order"
-                      className="w-full rounded-lg border border-gray-200 py-3 pr-4 pl-10 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    />
-                  </div>
-                </div>
-                {/* Pickup content */}
-                <div className="max-h-[350px] overflow-y-auto px-6 sm:max-h-none md:px-8">
-                  <fieldset className="space-y-4">
-                    {locations.map((location) => (
-                      <div key={location.id} className="space-y-4">
-                        <div className="flex flex-col">
-                          <button
-                            className="flex w-full items-center justify-between gap-2 py-4 text-left focus:outline-none"
-                            role="radio"
-                            aria-checked={selectedLocation === location.id}
-                            onClick={() => handleLocationSelect(location.id)}
-                          >
-                            <div className="flex flex-col gap-1">
-                              <label htmlFor={location.id}>
-                                <p className="font-medium text-gray-900">
-                                  {location.name}
-                                </p>
-                              </label>
-                              <p className="text-sm text-gray-500">
-                                {location.status}
-                              </p>
-                              <p className="text-sm text-gray-500">
-                                {location.address}
-                              </p>
-                            </div>
-                            <div className="relative flex items-center gap-4">
-                              <div
-                                className={`relative h-6 w-6 flex-shrink-0 rounded-full focus-within:outline focus-within:outline-offset-2 focus-within:outline-gray-900 ${
-                                  selectedLocation === location.id
-                                    ? "border-[8.75px] border-gray-900"
-                                    : "border-2 border-gray-300"
-                                }`}
-                              >
-                                <div
-                                  className={`h-full w-full rounded-full ${
-                                    selectedLocation === location.id
-                                      ? "none"
-                                      : "bg-transparent"
-                                  }`}
-                                />
-                                <input
-                                  className="sr-only"
-                                  type="radio"
-                                  checked={selectedLocation === location.id}
-                                  onChange={() =>
-                                    handleLocationSelect(location.id)
-                                  }
-                                  name="location"
-                                  id={location.id}
-                                />
-                              </div>
-                            </div>{" "}
-                          </button>
-
-                          {expandedLocation === location.id && (
-                            <div className="overflow-hidden pb-4">
-                              <div>
-                                <div className="bg-transparent">
-                                  <div
-                                    role="group"
-                                    dir="ltr"
-                                    className="flex w-full flex-col gap-2"
-                                    aria-label="Select scheduled or as soon as possible"
-                                    tabIndex={0}
-                                    style={{ outline: "none" }}
-                                  >
-                                    <div
-                                      role="radio"
-                                      aria-checked="false"
-                                      className="f w-full rounded-lg border border-gray-200 px-4 py-2 outline-offset-2 transition-colors hover:border-gray-300 focus:border-gray-900 focus:ring-[1.5px] focus:ring-gray-900 focus:outline focus:outline-gray-900/10"
-                                      aria-label="Schedule your pickup"
-                                      tabIndex={0}
-                                    >
-                                      <div className="bg-transparent">
-                                        <div className="flex w-full items-center justify-between">
-                                          <div className="flex items-center gap-0 text-left md:gap-2">
-                                            <span>
-                                              <Calendar className="h-6 w-6 text-gray-900" />
-                                            </span>
-                                            <ScheduleOrderDialog />
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                        <hr className="border-gray-200" />
-                      </div>
-                    ))}
-                  </fieldset>
-                </div>
-              </>
-            ) : (
-              // Delivery content
-              <div className="flex h-full flex-col overflow-hidden">
-                <div className="flex flex-col px-6 md:px-8">
-                  <div className="relative flex">
-                    <div className="relative flex w-full flex-col gap-y-1">
-                      <div className="relative">
-                        <Search className="absolute top-1/2 left-4 -translate-y-1/2 text-gray-400" />
-                        <input
-                          type="search"
-                          placeholder="Delivery address"
-                          className="w-full rounded-lg border border-gray-300 bg-white py-3 pr-4 pl-10 focus:ring focus:outline-none"
-                          name="delivery-location"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4">
-                    <input
-                      type="text"
-                      placeholder="Apartment / Unit number"
-                      className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 focus:ring focus:outline-none"
-                      name="unit-number"
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-            <div className="p-6 md:p-8">
-              <button
-                disabled={!selectedLocation}
-                onClick={handleViewMenu}
-                className={`flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 ${
-                  selectedLocation
-                    ? "bg-[#B90606] text-white"
-                    : "bg-gray-200 text-gray-500"
-                }`}
-              >
-                <span>View Menu</span>
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-        </DialogContent>
+        <LocationDialogContent
+          selectedTab={selectedTab}
+          onTabChange={handleTabClick}
+          selectedLocation={selectedLocation}
+          onLocationSelect={handleLocationSelect}
+          expandedLocation={expandedLocation}
+          locations={locations}
+          onClose={() => setIsDialogOpen(false)}
+          onViewMenu={handleViewMenu}
+        />{" "}
       </Dialog>
 
       {/* Address and Time Info */}
@@ -305,7 +157,10 @@ const PickupDeliveryInfo = () => {
                     Pickup address
                   </p>
                   <span className="text-mercury-ui-text-primary">·</span>
-                  <button className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0">
+                  <button
+                    className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0"
+                    onClick={() => setIsDialogOpen(true)}
+                  >
                     Change
                   </button>
                 </div>
@@ -374,19 +229,22 @@ const PickupDeliveryInfo = () => {
           <div className="flex w-full md:hidden">
             <div className="flex w-full flex-col gap-4">
               <div className="flex w-full flex-col">
-                <div className="flex w-full justify-between items-center text-sm">
-                  <div className="flex gap-1 ">
+                <div className="flex w-full items-center justify-between text-sm">
+                  <div className="flex gap-1">
                     <p className="font-manrope capitalize">pickup</p>
                     <span className="text-mercury-ui-text-primary">·</span>
                     <div className="flex items-center gap-1">
                       <span className="font-manrope">May 30</span>
                       <span className="text-mercury-ui-text-primary">·</span>
                     </div>
-                    <div className="flex items-center ">
-                      <span className="font-manrope ">12:00 PM PDT</span>
+                    <div className="flex items-center">
+                      <span className="font-manrope">12:00 PM PDT</span>
                     </div>
                   </div>
-                  <button className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0">
+                  <button
+                    className="text-mercury-ui-text-base text-mercury-ui-primary font-mercury-ui-secondary border-mercury-ui-text-primary border-b p-0"
+                    onClick={() => setIsDialogOpen(true)}
+                  >
                     Change
                   </button>
                 </div>
@@ -405,7 +263,7 @@ const PickupDeliveryInfo = () => {
                   </p>
                 </div>
                 <div className="flex w-full items-center justify-between gap-2">
-                  <p className="font-manrope  text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
+                  <p className="font-manrope text-mercury-ui-text-base font-mercury-ui-secondary text-mercury-ui-secondary hidden md:block">
                     Opens at 11:00 AM PDT
                   </p>
                   <div className="block md:hidden">

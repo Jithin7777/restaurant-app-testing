@@ -129,7 +129,7 @@ const items: MenuItem[] = [
     likes: 6,
     goesWellWith: [
       {
-        id: "107",
+        id: "109",
         title: "Garlic Knots",
         price: "7.00",
         description:
@@ -137,7 +137,7 @@ const items: MenuItem[] = [
         image: "/images/menu/img5.webp",
       },
       {
-        id: "108",
+        id: "110",
         title: "Carrot Cake",
         price: "7.95",
         description: "Made in house, 8 Layers of Heaven ! ",
@@ -146,6 +146,33 @@ const items: MenuItem[] = [
       },
     ],
   },
+    {
+    id: "9",
+    title: "Fries",
+    price: "6.50",
+    description: "",
+    image: "/images/menu/img8.webp",
+    likes: 6,
+    goesWellWith: [
+      {
+        id: "111",
+        title: "Garlic Knots",
+        price: "7.00",
+        description:
+          "Soft fresh baked garlic rolls topped with melted butter and Romano cheese. Served with marinara sauce. Six per order.",
+        image: "/images/menu/img5.webp",
+      },
+      {
+        id: "112",
+        title: "Carrot Cake",
+        price: "7.95",
+        description: "Made in house, 8 Layers of Heaven ! ",
+
+        image: "/images/menu/img9.webp",
+      },
+    ],
+  },
+
 ];
 
 const CardList: React.FC = () => {
@@ -233,18 +260,19 @@ const CardList: React.FC = () => {
                 </button>
               </div>
             </div>
-            <p className="font-manrope line-clamp-3 text-sm text-gray-600">
-              {item.description}
-            </p>
+           <p className="font-manrope line-clamp-2 text-sm text-gray-600 min-h-[2.5rem]">
+  {item.description || " "}
+</p>
+
           </div>
 
-          <div className="w-2/5 max-w-[180px] flex-shrink-0">
+          <div  className="w-36 md:w-5/5 max-w-[180px] flex-shrink-0">
             <div className="relative h-full w-full overflow-hidden">
               <Image
                 src={item.image}
                 alt={item.title}
                 fill
-                className="object-cover"
+                className="object-cover rounded-l-xl"
               />
             </div>
           </div>

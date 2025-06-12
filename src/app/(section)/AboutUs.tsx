@@ -8,14 +8,14 @@ const AboutUs = () => {
           About Us
         </h2>
       </div>
-      <div className="grid grid-cols-1 items-start gap-0 md:grid-cols-2">
+      <div className="grid grid-cols-2 items-start gap-0 md:grid-cols-2">
         <div className="mb-0 p-0">
-          <h1 className="font-italiana mx-auto bg-gradient-to-b from-[#CCAD64] to-[#191616] bg-clip-text text-[130px] font-normal text-transparent sm:text-[120px] md:text-[200px] lg:text-[300px] xl:text-[320px]">
+          <h1 className="font-italiana mx-auto mt-10 md:mt-0 bg-gradient-to-b from-[#CCAD64] to-[#191616] bg-clip-text text-[70px] font-normal text-transparent sm:text-[120px] md:text-[200px] lg:text-[300px] xl:text-[320px]">
             Layla
           </h1>
         </div>
 
-        <div className="mb-24 flex items-start justify-start p-0">
+        <div className="md:mb-24 flex items-start justify-start p-0">
           <img
             src="/images/about-us/img.png"
             alt="About us"

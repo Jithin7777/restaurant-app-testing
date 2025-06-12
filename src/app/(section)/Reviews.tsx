@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Reviews = () => {
   return (
-    <section className="relative overflow-hidden bg-black px-4 py-16 md:px-12">
+    <section className="relative overflow-hidden bg-black px-4 py-3 md:py-16 md:px-12">
       <div
         className="absolute top-0 left-0 z-0 h-full w-1/3 rotate-180 bg-cover bg-center"
         style={{ backgroundImage: `url('/images/reviews/bg.png')` }}
@@ -14,7 +14,7 @@ const Reviews = () => {
         Reviews
       </h2>
 
-      <div className="relative z-10 grid grid-cols-1 gap-20 sm:grid-cols-2 md:grid-cols-3">
+      <div className="relative z-10 grid grid-cols-1 gap-5 md:gap-20 sm:grid-cols-2 md:grid-cols-3">
         {/* Review 1 */}
         <div className="h-[350px] border border-[#BC995D] bg-black p-6 text-white shadow-md">
           <div className="mb-4 flex items-center gap-4">

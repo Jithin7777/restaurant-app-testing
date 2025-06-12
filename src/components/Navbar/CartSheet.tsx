@@ -124,7 +124,7 @@ const CartSheet: React.FC<CartSheetProps> = ({
         </SheetHeader>
 
         <div
-          className={`flex-1 overflow-y-auto transition-opacity delay-150 duration-300 ${
+          className={`flex-1 overflow-y-auto transition-opacity delay-150 duration-300 hide-scrollbar px-2 ${
             isOpen ? "opacity-100" : "opacity-0"
           }`}
         >

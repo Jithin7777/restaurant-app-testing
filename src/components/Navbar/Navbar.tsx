@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
-import CartSheet from "./CartSheet";
+import CartSheet from "../cart/CartSheet";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

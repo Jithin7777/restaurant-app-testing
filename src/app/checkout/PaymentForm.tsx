@@ -423,7 +423,7 @@ const PaymentForm: React.FC = () => {
             </div>
           </section>
 
-          <div className="flex-1 overflow-y-auto pb-4">
+          <div className="flex-1 overflow-y-auto pb-4 ">
             <CartItemsList />{" "}
           </div>
         </div>

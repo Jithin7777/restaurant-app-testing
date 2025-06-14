@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 
@@ -9,7 +10,7 @@ html, body {
 }
 
 .font-oswald {
-  font-family: var(--font-oswald); 
+  font-family: var(--font-oswald);
 }
 
 .font-inter {
@@ -41,14 +42,13 @@ html, body {
   padding-left: 10px;
 }
 
-
 /* menu */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .hide-scrollbar {
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .no-scrollbar {
@@ -58,5 +58,3 @@ html, body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
-

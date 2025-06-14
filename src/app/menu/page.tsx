@@ -16,7 +16,7 @@ const Page = () => {
 
       {/* Main Content Area */}
       <div className="hide-scrollbar mt-48 flex flex-1 flex-col md:mt-20 lg:flex-row">
-        {/* Mobile Sidebar (search fixed, categories scrollable) */}
+        {/* Mobile Sidebar  */}
         <div className="fixed top-0 z-40 w-full bg-gray-50 px-4 py-2 pt-24 md:hidden">
           <SidebarNav />
         </div>

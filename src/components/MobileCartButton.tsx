@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useCart } from "@/context/CartContext";
-import CartSheet from "./Navbar/CartSheet";
+import CartSheet from "./cart/CartSheet";
 import { Button } from "./ui/button";
 
 const MobileCartButton = () => {

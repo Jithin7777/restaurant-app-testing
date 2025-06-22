@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from "lucide-react";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const TableReservation = () => {
   return (
@@ -30,13 +31,15 @@ const TableReservation = () => {
         </p>
 
         <div className="flex justify-center md:justify-start">
-          <button
-            style={{ border: "1px solid #D5A859" }}
-            className="bg-gold flex items-center gap-2 px-6 py-3 text-white uppercase transition hover:bg-yellow-600"
-          >
-            Book Now
-            <ArrowRightIcon className="h-5 w-5 text-white" />
-          </button>
+          <Link href={"/table-booking"}>
+            <button
+              style={{ border: "1px solid #D5A859" }}
+              className="bg-gold flex items-center gap-2 px-6 py-3 text-white uppercase transition hover:bg-yellow-600"
+            >
+              Book Now
+              <ArrowRightIcon className="h-5 w-5 text-white" />
+            </button>
+          </Link>
         </div>
       </div>
     </section>

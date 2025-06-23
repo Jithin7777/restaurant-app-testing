@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Script from "next/script";
 
 // Define the SimplybookWidget config interface
@@ -46,17 +46,61 @@ declare global {
 }
 
 const TableBookingV2 = () => {
+  const [scriptReady, setScriptReady] = useState(false);
+
+  const initializeWidget = () => {
+    if (typeof window !== "undefined" && window.SimplybookWidget) {
+      new window.SimplybookWidget({
+        widget_type: "iframe",
+        url: "https://laylarestaurant.simplybook.me",
+        theme: "clean",
+        theme_settings: {
+          timeline_show_end_time: "0",
+          timeline_modern_display: "as_slots",
+          hide_company_label: "1",
+          timeline_hide_unavailable: "1",
+          hide_past_days: "0",
+          sb_base_color: "#cb8d75",
+          btn_color_1: "#f8ad31,#fc591e,#fc591e",
+          link_color: "#cb8d75",
+          display_item_mode: "block",
+          body_bg_color: "#ffffff",
+          sb_review_image: "",
+          dark_font_color: "#403733",
+          light_font_color: "#ffffff",
+          sb_company_label_color: "#ffffff",
+          hide_img_mode: "1",
+          sb_busy: "#c7b3b3",
+          sb_available: "#2b212b",
+        },
+        timeline: "modern",
+        datepicker: "top_calendar",
+        is_rtl: false,
+        app_config: {
+          clear_session: 0,
+          allow_switch_to_ada: 0,
+          predefined: [],
+        },
+        container_id: "sbw_sxnuk6",
+      });
+    }
+  };
+
   useEffect(() => {
-    // The widget initialization 
-    return () => {
-      if (typeof window !== "undefined" && window.SimplybookWidget) {
-        window.SimplybookWidget = undefined;
-      }
-    };
+    if (scriptReady) {
+      initializeWidget(); // Init widget on script load
+    }
+  }, [scriptReady]);
+
+  useEffect(() => {
+    // If the script was already loaded before navigation
+    if (typeof window !== "undefined" && window.SimplybookWidget) {
+      initializeWidget(); // Re-initialize when component mounts
+    }
   }, []);
 
   useEffect(() => {
-    // Add custom CSS to fix widget width and make it responsive
+    // Add custom CSS
     const style = document.createElement("style");
     style.id = "simplybook-custom-styles";
     style.innerHTML = `
@@ -83,7 +127,6 @@ const TableBookingV2 = () => {
         }
       }
       
-      /* Fix for any potential overlay issues */
       .simplybook-widget-container {
         width: 100% !important;
         max-width: 100% !important;
@@ -109,46 +152,11 @@ const TableBookingV2 = () => {
           src="//widget.simplybook.it/v2/widget/widget.js"
           strategy="afterInteractive"
           onLoad={() => {
-            if (typeof window !== "undefined" && window.SimplybookWidget) {
-              new window.SimplybookWidget({
-                widget_type: "iframe",
-                url: "https://laylarestaurant.simplybook.me",
-                theme: "clean",
-                theme_settings: {
-                  timeline_show_end_time: "0",
-                  timeline_modern_display: "as_slots",
-                  hide_company_label: "1",
-                  timeline_hide_unavailable: "1",
-                  hide_past_days: "0",
-                  sb_base_color: "#cb8d75",
-                  btn_color_1: "#f8ad31,#fc591e,#fc591e",
-                  link_color: "#cb8d75",
-                  display_item_mode: "block",
-                  body_bg_color: "#ffffff",
-                  sb_review_image: "",
-                  dark_font_color: "#403733",
-                  light_font_color: "#ffffff",
-                  sb_company_label_color: "#ffffff",
-                  hide_img_mode: "1",
-                  sb_busy: "#c7b3b3",
-                  sb_available: "#2b212b",
-                },
-                timeline: "modern",
-                datepicker: "top_calendar",
-                is_rtl: false,
-                app_config: {
-                  clear_session: 0,
-                  allow_switch_to_ada: 0,
-                  predefined: [],
-                },
-                container_id: "sbw_sxnuk6",
-              });
-            }
+            setScriptReady(true);
           }}
         />
       </div>
-    </div>
-  );
+    </div>  );
 };
 
 export default TableBookingV2;

@@ -6,20 +6,13 @@ import Hero from "./(section)/Hero";
 import TableBookingV2 from "./(section)/TableBooking";
 
 const Page = () => {
-  const [showWidget, setShowWidget] = useState(false);
-
-
   return (
     <div>
       <Navbar />
 
-      <Hero onBookNowClick={() => setShowWidget(true)} />
+      <Hero />
 
-      {showWidget && (
-        <>
-          <TableBookingV2  />
-        </>
-      )}
+      <TableBookingV2 />
     </div>
   );
 };

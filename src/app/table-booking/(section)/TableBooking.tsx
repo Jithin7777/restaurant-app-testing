@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import Script from "next/script";
 
-
 // Define the SimplybookWidget config interface
 interface SimplybookWidgetConfig {
   widget_type: string;
@@ -46,12 +45,10 @@ declare global {
   }
 }
 
-const TableBookingV2 = () => { 
-  
+const TableBookingV2 = () => {
   useEffect(() => {
-    // The widget initialization will be handled by the script itself
+    // The widget initialization 
     return () => {
-      // Clean up when component unmounts
       if (typeof window !== "undefined" && window.SimplybookWidget) {
         window.SimplybookWidget = undefined;
       }
@@ -96,7 +93,6 @@ const TableBookingV2 = () => {
     document.head.appendChild(style);
 
     return () => {
-      // Clean up custom styles when component unmounts
       const customStyle = document.getElementById("simplybook-custom-styles");
       if (customStyle) {
         customStyle.remove();
@@ -105,10 +101,9 @@ const TableBookingV2 = () => {
   }, []);
 
   return (
-    <div className="w-full px-4  md:px-8">
-      <div className="mx-auto flex w-full max-w-7xl flex-col items-center">
-       
-        <div   className="w-full "></div>
+    <div className="w-full">
+      <div className="mx-auto flex w-full flex-col items-center">
+        <div className="w-full" id="sbw_sxnuk6"></div>
         <Script
           id="simplybook-widget"
           src="//widget.simplybook.it/v2/widget/widget.js"

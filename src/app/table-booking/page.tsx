@@ -4,15 +4,19 @@ import React from "react";
 import Navbar from "@/components/Navbar/Navbar";
 import Hero from "./(section)/Hero";
 import TableBookingV2 from "./(section)/TableBooking";
+import Footer from "@/components/Footer";
 
 const Page = () => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      <Hero />
+      <main className="flex-grow">
+        <Hero />
+        <TableBookingV2 />
+      </main>
 
-      <TableBookingV2 />
+      <Footer />
     </div>
   );
 };

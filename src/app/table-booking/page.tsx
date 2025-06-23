@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "@/components/Navbar/Navbar";
 import Hero from "./(section)/Hero";
 import TableBookingV2 from "./(section)/TableBooking";

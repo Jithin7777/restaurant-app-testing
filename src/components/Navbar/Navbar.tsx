@@ -32,35 +32,38 @@ const Navbar = () => {
       </div>
 
       {/* Desktop Nav Links */}
-      <div className="hidden items-center gap-8 space-x-10 md:flex">
-        <Link href="/" className={textColor}>
-          Home
-        </Link>
-        <Link href="/menu" className={textColor}>
-          Menu
-        </Link>
-        <Link href="/about" className={textColor}>
-          About
-        </Link>
-        <Link href="/contact" className={textColor}>
-          Contact
-        </Link>
+<div className="hidden items-center gap-8 space-x-10 md:flex">
+  <Link href="/" className={`${textColor} hover:text-[#CDAE64] transition-colors duration-200`}>
+    Home
+  </Link>
+  <Link href="/menu" className={`${textColor} hover:text-[#CDAE64] transition-colors duration-200`}>
+    Menu
+  </Link>
+  <Link href="/about" className={`${textColor} hover:text-[#CDAE64] transition-colors duration-200`}>
+    About
+  </Link>
+  <Link href="/contact" className={`${textColor} hover:text-[#CDAE64] transition-colors duration-200`}>
+    Contact
+  </Link>
+  <Link href="/table-booking" className={`${textColor} hover:text-[#CDAE64] transition-colors duration-200`}>
+    Table Booking
+  </Link>
 
-        {isMenuPage && (
-          <CartSheet
-            isOpen={isCartOpen}
-            setIsOpen={setIsCartOpen}
-            inNavbar={true}
-          />
-        )}
+  {isMenuPage && (
+    <CartSheet
+      isOpen={isCartOpen}
+      setIsOpen={setIsCartOpen}
+      inNavbar={true}
+    />
+  )}
 
-        <Link
-          href="/menu"
-          className="rounded-none bg-[#CDAE64] px-4 py-2 text-black hover:opacity-90 md:mr-20"
-        >
-          ORDER NOW
-        </Link>
-      </div>
+  <Link
+    href="/menu"
+    className="rounded-none bg-[#CDAE64] px-4 py-2 text-black hover:opacity-90 md:mr-20"
+  >
+    ORDER NOW
+  </Link>
+</div>
 
       {/* Mobile Menu Icon */}
       <div className="flex items-center md:hidden">
@@ -119,12 +122,12 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="flex flex-col items-center py-3">
-          {["/", "/menu", "/about", "/contact"].map((path, idx) => (
+        <div className="flex flex-col items-start py-6 px-4 text-xl">
+          {["/", "/menu", "/about", "/contact",'/table-booking'].map((path, idx) => (
             <Link
               key={idx}
               href={path}
-              className="py-2 text-white"
+className="py-2 text-white hover:text-[#CDAE64] active:text-[#CDAE64] active:scale-95 transition-all duration-200"
               onClick={handleSidebarToggle}
             >
               {path === "/"

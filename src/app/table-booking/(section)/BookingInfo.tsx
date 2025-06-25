@@ -44,7 +44,7 @@ const BookingInfoSection = () => {
               <h2 className="mb-4 text-xl font-bold">Layla </h2>
               <p className="text-gray-700">
                 Layla is an authentic Tapas and Cocktail Bar located in the
-                heart of Huyton Village. We're aiming to bring a little corner
+                heart of Huyton Village. We&rsquo;re aiming to bring a little corner
                 of Spain to Huyton with our savory small-plates accompanied by a
                 warm welcome to our guests.
               </p>

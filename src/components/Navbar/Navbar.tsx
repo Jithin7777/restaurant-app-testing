@@ -14,9 +14,10 @@ const Navbar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const isMenuPage = pathname === "/menu";
-  const textColor = isMenuPage ? "text-black" : "text-white";
+  const isMenuPage = pathname === "/menu" 
+    const isTableBooking = pathname === "/table-booking" 
 
+  const textColor = isMenuPage || isTableBooking ? "text-black" : "text-white";
   return (
     <nav className="fixed -top-10 left-0 z-50 flex w-full items-center justify-between bg-transparent px-2 md:px-5">
       <div

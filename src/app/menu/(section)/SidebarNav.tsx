@@ -47,7 +47,7 @@ const SidebarNav: FC = () => {
     <div className="font-inter sticky top-[112px] z-20 w-full pl-4 text-gray-700 font-bold md:pl-10 lg:w-auto lg:bg-transparent lg:px-0 lg:pt-4">
       <nav className="flex h-full w-full flex-col gap-y-3">
         {/* Search Input - Fixed positioning */}
-        <div className="fixed z-10 pt-28 md:bg-white top-0  px-4 md:px-0">
+        <div className="lg:fixed z-10 lg:pt-28 md:bg-white top-0  px-4 md:px-0">
           <div className="relative w-full max-w-md mx-auto">
             <div className="relative">
               <input

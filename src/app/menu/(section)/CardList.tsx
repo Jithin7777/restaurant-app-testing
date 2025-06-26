@@ -225,16 +225,18 @@ const CardList: React.FC = () => {
   const totalItemCount = quantity + extraItems.length;
 
   return (
-    <div
-      id="appetizers"
-      className="grid grid-cols-1 md:gap-2 lg:grid-cols-2 xl:p-0"
-    >
-      <div className="lg:col-span-2">
-        <h2 className="font-oswald text-xl font-normal md:text-2xl lg:text-3xl">
+    <div >
+       <h2 className="font-oswald mt-5 text-xl font-normal md:text-2xl lg:text-3xl">
           Appetizers
         </h2>
-      </div>
+     
 
+    <div
+      id="appetizers"
+      className="grid w-full mt-5 sm:grid-cols-2 sm:gap-2 md:grid-cols-2 lg:grid-cols-2 xl:p-0"
+    >
+      
+       
       {items.map((item) => (
         <div
           key={item.id}
@@ -266,7 +268,7 @@ const CardList: React.FC = () => {
 
           </div>
 
-          <div  className="w-36 md:w-5/5 max-w-[180px] flex-shrink-0">
+          <div  className="w-36 md:w-40 sm:w-2/4 m xl:w-full max-w-[180px] flex-shrink-0">
             <div className="relative h-full w-full overflow-hidden">
               <Image
                 src={item.image}
@@ -481,6 +483,7 @@ const CardList: React.FC = () => {
         </DialogContent>
       </Dialog>
     </div>
+     </div>
   );
 };
 
